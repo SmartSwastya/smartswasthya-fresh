@@ -1,0 +1,36 @@
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.glass-box {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+body {
+  padding: 40px;
+}
+body.modal-open {
+  overflow: hidden;
+}
+.card {
+  width: 100%;
+  height: auto;
+  min-width: 250px;
+  min-height: 150px;
+  padding: 20px;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

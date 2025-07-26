@@ -1,0 +1,191 @@
+task_id,title,description
+TASK001,Setup base FastAPI project,Initialize FastAPI project with standard folder structure
+TASK002,Create users table,Define and migrate core users model
+TASK003,Implement user registration,Create signup route with validation
+TASK004,Add email verification,Send OTP and verify email logic
+TASK005,Implement login flow,Add password hashing and JWT token generation
+TASK006,Create dashboard UI,Build base dashboard interface for Smart Users
+TASK007,Add profile popup modal,Enable modal with live edit/save
+TASK008,Integrate mobile verification,Skip if mobile already verified via Fast2SMS
+TASK009,Create user activity logger,Track login/logout and basic user actions
+TASK010,Setup Docker environment,Build Dockerfile and docker-compose for dev
+TASK011,Add SQLite test DB,Support local SQLite for fast testing
+TASK012,Build logic folder,Split complex functions into logic/ modules
+TASK013,Implement sync tool (v1),Basic scp-based sync logic with file listing
+TASK014,Build dev-bucket UI,Create UI to show assigned tasks to devs
+TASK015,Create task model,"Define dev_tasks with title, description, assigned_to"
+TASK016,Seed initial tasks,Auto-insert system tasks (SYS001–SYS010)
+TASK017,Fetch task by ID,Build logic to retrieve task by task_id
+TASK018,Enable file download per task,Link download button with ZIP package
+TASK019,Create submission handler,Support ZIP + optional notes upload
+TASK020,Mark task complete,Update status on successful upload
+TASK021,Implement feedback model,Track dev feedback per task
+TASK022,Build progress bar widget,UI element for task completion % per dev
+TASK023,Create admin review route,Allow admin to review and approve dev uploads
+TASK024,Implement admin approval logic,Update task status post approval
+TASK025,Auto sync uploaded files,Push submitted files to correct logic path
+TASK026,Check route duplication,Scan for route conflict and report
+TASK027,Add route tag scanner,Group routes with FastAPI tags
+TASK028,Sync logic files via Celery,Use Celery to background sync logic changes
+TASK029,Track developer login,Log dev sessions and time spent
+TASK030,Daily snapshot backup,Create daily ZIP snapshot of logic folder
+TASK031,Build logic tree viewer,Display nested logic folder structure visually
+TASK032,Check unused models,Detect models not referenced in any logic
+TASK033,Show model-logic map,Map which logic uses which model
+TASK034,Check unused routes,Detect routes not referenced in frontend
+TASK035,Sync DB migrations,Trigger alembic upgrades after logic sync
+TASK036,Lock file on edit,Prevent multiple devs editing same logic file
+TASK037,Enable Google login,OAuth-based restricted Gmail login
+TASK038,Superadmin dashboard,UI for overall task and dev tracking
+TASK039,Enable tagging system,Add tags for logic classification
+TASK040,Route to logic mapper,Tool to auto-link route → logic function
+TASK041,Logic conflict detector,Scan logic for conflicting function names
+TASK042,Create offline installer,Build full installer ZIP with Python/Node deps
+TASK043,Mark task priority,Allow admin to tag urgent tasks
+TASK044,Auto assign tasks,Distribute tasks evenly across devs
+TASK045,Track function coverage,Mark how many functions have tests
+TASK046,Setup test folder,Prepare unit testing infra for logic
+TASK047,Scan test coverage,Report test % per logic file
+TASK048,Tag external dependencies,Show where 3rd party libs used
+TASK049,Scan logic usage of DB,Show which logic files hit which models
+TASK050,Build DB model viewer,UI to navigate all models + relationships
+TASK051,Sync logic changes to test,Mirror synced logic to test folder for CI
+TASK052,Build analytics summary,Overall dev contribution & progress view
+TASK053,Developer profile modal,Show recent uploads + badges
+TASK054,Detect logic bloat,Mark logic files >500 lines for review
+TASK055,Suggest logic refactor,Recommend splitting heavy logic
+TASK056,Scan for old logic style,Detect v1-style legacy logic usage
+TASK057,Track logic function reuse,Show reused functions across files
+TASK058,Enable smart filter in UI,Filter tasks by type
+TASK059,Allow dev comments,Feedback option inside logic popup
+TASK060,Enable live task timer,Track how much time each dev spends
+TASK061,Generate progress CSV,Auto-export dev progress CSV
+TASK062,Sync user_docs folder,Auto sync user document logic changes
+TASK063,Auto alert for task delay,Notify admin if task inactive 7+ days
+TASK064,Allow logic rollback,Restore previous version of logic
+TASK065,Sync scanned logic to DB,Save function list to DB after scan
+TASK066,Track scan date,Log when logic/functions last scanned
+TASK067,Enable search by function,Search box to jump to function in logic
+TASK068,Detect logic duplicates,Find similar code blocks across logic
+TASK069,Add logic complexity score,Compute logic based on branching
+TASK070,Show Git-style diff,Display before/after on logic updates
+TASK071,Add logic tags to DB,Each logic tagged for classification
+TASK072,Export tagged logic,Download all logic with a specific tag
+TASK073,Compare logic versions,Show timeline of changes
+TASK074,Add logic status (active/legacy),Mark old logic as legacy
+TASK075,Enable logic lock override,Admin can force unlock logic
+TASK076,Setup error trace viewer,Display recent error logs for logic
+TASK077,Sync static files (CSS/JS),Copy updated frontend files to test
+TASK078,Enable logic preview popup,Quick preview of logic content
+TASK079,Add UI file validator,Validate ZIPs for missing/extra files
+TASK080,Setup Celery retry logic,Retry background sync on failure
+TASK081,Add dev-level badges,Assign 'Fast Finisher'
+TASK082,Add logic file version,Maintain logic file history
+TASK083,Track test success/fail,Link logic to test pass status
+TASK084,Enable Docker rebuild,Rebuild containers post logic sync
+TASK085,Track broken migrations,Log Alembic errors if any
+TASK086,Visualize route coverage,Route → logic → model path
+TASK087,Track user activity in Dev Bucket,Log UI usage
+TASK088,Tag untracked logic,Detect logic not mapped to any task
+TASK089,Auto suggest task based on commit,AI-based auto assignment
+TASK090,Enable dark mode toggle,Switch dashboard to dark theme
+TASK091,Enable UI localization,Translate UI to Hindi
+TASK092,Track logic by folder group,Cluster logic under services
+TASK093,Add notification center,Show sync/submit/task alerts
+TASK094,Enable logic lint checker,Auto format + suggest corrections
+TASK095,Mark required files per task,Define expected upload content
+TASK096,Enable direct logic edit in browser,VS Code-style editor in modal
+TASK097,Setup build notifier,Notify when ZIP uploaded successfully
+TASK098,Export Dev Task Summary,CSV export for admin tracking
+TASK099,Setup upload API for bot,Programmatic task submit endpoint
+TASK100,Enable chunked ZIP upload,Support partial uploads for large files
+TASK101,Scan for circular imports,Mark files with cyclic dependencies
+TASK102,Enable nested task view,Show subtasks per master task
+TASK103,Setup task dependency map,Link dependent tasks
+TASK104,Allow task reassignment,Admin can move task to another dev
+TASK105,Mark cross-linked logic,Logic used in more than one feature
+TASK106,Enable logic owner attribution,Mark original creator in file
+TASK107,Enable project-wide logic view,Full visual map of all logic
+TASK108,Setup plugin-like extensions,Enable dynamic loading of new logic
+TASK109,Add metadata parser,Pull info from docstrings
+TASK110,Scan logic for sensitive info,Detect hardcoded keys/passwords
+TASK111,Add AI code review option,Optional Copilot-style suggestions
+TASK112,Enable logic block comments,Inline review system
+TASK113,Enable zip structure validator,Detect folder mismatch in ZIP
+TASK114,Export logic list to Excel,One-click Excel export
+TASK115,Highlight logic change history,Git-style timeline
+TASK116,Add logic tags (public/internal),Restrict visibility
+TASK117,Enable group upload,Team-based submit flow
+TASK118,Track unused DB tables,Compare models vs actual usage
+TASK119,Add logic index page,Search all logic quickly
+TASK120,Tag logic by route,Attach logic to specific route
+TASK121,Enable logic QR share,Quick open via QR
+TASK122,Add model-logic conflict detector,Check for missing relationships
+TASK123,Add DB auto index suggester,Suggest DB indexes based on usage
+TASK124,Scan for slow queries,Find ORM logic causing lag
+TASK125,Create sync error dashboard,Track failed syncs
+TASK126,Auto-patch route conflicts,Fix same-path routes automatically
+TASK127,Enable AI logic summary,One-line logic description
+TASK128,Setup static asset cache,Prevent stale JS/CSS
+TASK129,Sync docker logs to UI,View recent log output
+TASK130,Enable ZIP previewer,Show contents before upload
+TASK131,Enable re-download option,Allow dev to redownload uploaded task
+TASK132,Track package.json deps,Sync frontend changes
+TASK133,Add service-based grouping,Group logic under Hospital/Lab/etc.
+TASK134,Enable logic copy tool,Quick duplicate and edit logic
+TASK135,Add logic test runner,One-click run test for logic
+TASK136,Auto lint + format pre-upload,Prevent messy code
+TASK137,Add celery task monitor,View active/retry/failed tasks
+TASK138,Enable context tagging,Show where logic is called
+TASK139,Add live stats on dev bucket,Show submissions/hour
+TASK140,Add schema auto sync,DB model → JSON schema push
+TASK141,Create post-submit checklist,Must pass before success
+TASK142,Scan logic for TODOs,Unfinished items
+TASK143,Mark critical logic files,Prevent deletion
+TASK144,Sync scan report to admin,Email summary
+TASK145,Auto mark deprecated logic,Based on age or tags
+TASK146,Create logic doc generator,Auto markdown for each file
+TASK147,Tag UI usage per logic,Used in modal/home/profile
+TASK148,Link Figma ID to UI tasks,Track UI from Figma
+TASK149,Enable priority override,Admin push logic to top
+TASK150,Enable flag for blocked task,Needs approval/clarity
+TASK151,Enable logic A/B testing,Try multiple versions
+TASK152,Setup end-to-end test tracker,Link tasks to Cypress/Playwright
+TASK153,Enable component reuse checker,Scan for redundant UI
+TASK154,Enable logic folder ownership,Lock per team
+TASK155,Add sync report preview,Before final submit
+TASK156,Add AI suggest missing files,Zip upload validator
+TASK157,Build modular test scaffold,Template for unit tests
+TASK158,Enable logic notify webhook,Ping on success
+TASK159,Add contribution heatmap,Calendar view
+TASK160,Add function-level annotation,Inline explanations
+TASK161,Enable error trace attach,Dev can attach traceback
+TASK162,Enable logic submission notes,Dev optional explanation
+TASK163,Enable code search by keyword,VS Code style
+TASK164,Enable logic export via API,For documentation use
+TASK165,Enable smart ZIP name validation,Check format
+TASK166,Enable logic inheritance map,Parent-child functions
+TASK167,Mark test-blocked logic,Awaiting test infra
+TASK168,Show sync history per logic,Past submit timeline
+TASK169,Enable ZIP → folder unpacker,Auto extract and compare
+TASK170,Track logic response time,From request to DB
+TASK171,Add zip checksum validator,Detect upload corruption
+TASK172,Enable celery job retry viewer,See retry count/reason
+TASK173,Enable API schema visualizer,FastAPI auto-doc
+TASK174,Enable broken route tracker,Dead endpoints
+TASK175,Enable sync summary alert,Popup after every task
+TASK176,Sync final logic to prod,Push to production after pass
+TASK177,Enable system audit log,Track all changes
+TASK178,Enable logic sync chain,Logic A depends on B etc.
+TASK179,Track rejected tasks,History of rejected uploads
+TASK180,Show global progress bar,Dev/Task % overall
+TASK181,Enable VCS sync option,Sync to GitHub/Gitea
+TASK182,Enable smart link to task,Open task from commit
+TASK183,Enable AI prompt assist,Auto fill ZIP reason
+TASK184,Enable legacy ZIP importer,Auto convert V1 zip
+TASK185,Enable component registry,UI component doc
+TASK186,Enable cloud sync toggle,Enable S3 sync
+TASK187,Enable fallback ZIP upload,Retry via browser
+TASK188,Enable logic tag bulk edit,Change tags via UI
+TASK189,Enable dev logic notes,Private notes per file
+TASK190,Final task: Review & QA,End-to-end review of system

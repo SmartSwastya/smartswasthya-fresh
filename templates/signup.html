@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Swasthya Seva - Signup{% endblock %}
+
+{% block content %}
+{% block js %}{{ js }}{% endblock %}
+<div class="max-w-md mx-auto bg-white/50 backdrop-blur-md p-6 mt-16 rounded-2xl shadow-lg border border-cyan-100">
+  <div class="flex justify-center mb-6">
+    <img src="/static/images/logo.png" alt="Smart Swasthya Logo" class="w-24 h-24 rounded-full">
+  </div>
+
+  <form id="signup-form" method="POST" action="/signup/" class="space-y-4">
+    <!-- ✅ Hidden user_type field -->
+    <input type="hidden" name="user_type" value="smartuser">
+    <div>
+      <label for="name" class="block font-semibold mb-1">🧑‍💼 Full Name</label>
+      <input type="text" id="name" name="full_name" class="input" placeholder="Enter your full name" required autocomplete="name" oninput="filterNameInput()" onkeypress="return isAlpha(event)">
+      <small id="nameError" class="text-red-500 text-sm hidden">Only alphabets (A-Z, a-z) are allowed.</small>
+    </div>
+
+    <div>
+      <label for="mobile" class="block font-semibold mb-1">📱 Mobile Number</label>
+      <input type="tel" id="mobile" name="mobile_number" class="input" placeholder="Enter 10-digit mobile number" required autocomplete="tel" maxlength="10" oninput="validateMobile()" onkeypress="return isNumber(event)">
+      <small id="mobileError" class="text-red-500 text-sm hidden">Enter exactly 10 digits (0–9 only).</small>
+    </div>
+
+    <div>
+      <label for="email" class="block font-semibold mb-1">📧 Email Address</label>
+      <input type="email" id="email" name="email" class="input" placeholder="Enter email (optional)" autocomplete="email" oninput="validateEmail()">
+      <small id="emailError" class="text-red-500 text-sm hidden">Please enter a valid email address.</small>
+    </div>
+
+    <div>
+      <label for="gender" class="block font-semibold mb-1">👫 Gender</label>
+      <select id="gender" name="gender" class="input" required>
+        <option value="" disabled selected>Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="user_type" class="block font-semibold mb-1">🧠 Be a Smart User First
+</label>
+      <select id="user_type" name="user_type" class="input" required>
+        <option value="smartuser">Smart User</option>
+      </select>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <button type="button" id="sendBtn" onclick="sendOTP()" class="btn">📨 Send OTP</button>
+      <span id="timer" class="text-sm text-gray-500"></span>
+    </div>
+
+    <div id="otpSection" class="hidden mt-4">
+      <label for="otpInput" class="block text-sm font-medium">🔢 Enter OTP</label>
+      <input type="text" id="otpInput" name="otp" placeholder="6-digit OTP" class="input mt-1" maxlength="6">
+    </div>
+
+    <div id="passwordSection" class="hidden mt-4 relative">
+      <label for="passwordInput" class="block text-sm font-medium">🔐 Create Password</label>
+      <input type="password" id="passwordInput" name="password" placeholder="Create a strong password" class="input mt-1 pr-10" required autocomplete="new-password">
+      <button type="button" onclick="togglePassword()" class="absolute right-3 top-9 text-gray-500">👁️</button>
+    </div>
+
+    <div class="mt-4">
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="termsCheckbox" required class="form-checkbox text-blue-600">
+        <span class="ml-2 text-sm">I accept the <a href="#" class="text-blue-600 underline">terms and conditions</a></span>
+      </label>
+    </div>
+
+    <div id="submitSection" class="hidden mt-4">
+      <button type="submit" class="btn w-full">✅ Verify & Signup</button>
+    </div>
+
+    <p class="text-center text-sm text-gray-600 mt-2">
+      Already registered?
+      <a href="/login" class="text-cyan-600 hover:underline">Login here</a>
+    </p>
+  </form>
+</div>
+
+<script>
+  let countdown;
+
+  function startTimer() {
+    let seconds = 60;
+    const timer = document.getElementById("timer");
+    const btn = document.getElementById("sendBtn");
+    btn.disabled = true;
+    countdown = setInterval(() => {
+      seconds--;
+      timer.textContent = `⏳ Resend in ${seconds}s`;
+      if (seconds <= 0) {
+        clearInterval(countdown);
+        timer.textContent = "";
+        btn.disabled = false;
+        btn.innerText = "🔁 Resend OTP";
+      }
+    }, 1000);
+  }
+
+  async function sendOTP() {
+    const mobile = document.getElementById("mobile").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const gender = document.getElementById("gender").value; // Get gender value
+    if (!mobile || mobile.length !== 10) {
+      alert("Please Enter Valid 10-digit Mobile Number ");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/otp?mobile=${mobile}&name=${encodeURIComponent(name)}&gender=${gender}`);
+      const text = await response.text();
+
+      try {
+        const data = JSON.parse(text);
+        if (data.status === "sent") {
+          alert("✅ OTP sent successfully!");
+          document.getElementById("otpSection").classList.remove("hidden");
+          document.getElementById("passwordSection").classList.remove("hidden");
+          document.getElementById("submitSection").classList.remove("hidden");
+          startTimer();
+        } else {
+          alert("❌ " + data.message);
+        }
+      } catch (parseErr) {
+        console.error("❌ JSON Parse Error:", text);
+        alert("❌ Server response error. Check console.");
+      }
+
+    } catch (error) {
+      console.error("❌ Fetch Failed:", error);
+      alert("❌ Could not send OTP due to server error.");
+    }
+  }
+
+  // ✅ YOUR PATCHED FUNCTION: verifyOTP()
+  async function verifyOTP() {
+    const name = document.getElementById("name").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const emailField = document.getElementById("email");
+    const email = emailField ? emailField.value.trim() : "";
+    const password = document.getElementById("passwordInput").value.trim();
+    const otp = document.getElementById("otpInput").value.trim();
+    const gender = document.getElementById("gender").value; // Get gender value
+
+    if (!otp || otp.length !== 6 || !password) {
+      return alert("❌ Please enter OTP and Password.");
+    }
+
+    const res = await fetch('/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, mobile, email, otp, password, gender })
+    });
+
+    const data = await res.json();
+    console.log("✅ Response from /verify:", data);
+
+    if (data.success) {
+      alert("🎉 Signup Successful! Redirecting...");
+      sessionStorage.setItem("fromSignup", "true");
+      window.location.href = data.redirect || "/awareness";
+
+      return;
+    }
+
+    alert("❌ " + (data.message || "Something went wrong"));
+  }
+</script>
+
+<style>
+  .input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+    transition: border-color 0.2s;
+  }
+  .input:focus {
+    border-color: #38a1db;
+    outline: none;
+  }
+  .btn {
+    background: linear-gradient(to right, #4dc0b5, #38a1db);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+  .btn:hover {
+    background: linear-gradient(to right, #38a1db, #4dc0b5);
+  }
+
+</style>
+
+<script>
+  // Block invalid characters while typing
+  function isAlpha(e) {
+    const char = String.fromCharCode(e.which);
+    if (!/^[a-zA-Z\s]$/.test(char)) {
+      return false;
+    }
+    return true;
+  }
+
+  // Remove invalid characters if pasted
+  function filterNameInput() {
+    const input = document.getElementById("name");
+    const error = document.getElementById("nameError");
+    const value = input.value;
+
+    // Allow only letters and spaces
+    const cleaned = value.replace(/[^a-zA-Z\s]/g, '');
+    input.value = cleaned;
+
+    // Show error if something was removed
+    if (value !== cleaned) {
+      error.classList.remove("hidden");
+    } else {
+      error.classList.add("hidden");
+    }
+  }
+
+ // Block any non-numeric key press
+  function isNumber(e) {
+    const char = String.fromCharCode(e.which);
+    return /^[0-9]$/.test(char);
+  }
+
+  // Clean pasted input and validate length
+  function validateMobile() {
+    const input = document.getElementById("mobile");
+    const error = document.getElementById("mobileError");
+    
+    // Remove all non-digit characters
+    input.value = input.value.replace(/[^0-9]/g, '');
+
+    // Show error if not exactly 10 digits
+    if (input.value.length !== 10) {
+      error.classList.remove("hidden");
+    } else {
+      error.classList.add("hidden");
+    }
+  }
+
+
+  function validateEmail() {
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("emailError");
+    const value = emailInput.value.trim();
+
+    // Only validate if the field is not empty
+    if (value === "") {
+      emailError.classList.add("hidden");
+      return;
+    }
+
+    // Simple email regex pattern
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailPattern.test(value)) {
+      emailError.classList.add("hidden");
+    } else {
+      emailError.classList.remove("hidden");
+    }
+  }
+</script>
+
+<script>
+  function togglePassword() {
+    const passwordInput = document.getElementById("passwordInput");
+    const icon = event.currentTarget;
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      icon.textContent = "🙈"; // icon when showing password
+    } else {
+      passwordInput.type = "password";
+      icon.textContent = "👁️"; // icon when hiding password
+    }
+  }
+</script>
+
+<script>
+document.getElementById("mobile").addEventListener("blur", async () => {
+  const mobileInput = document.getElementById("mobile");
+  const mobile = mobileInput.value.trim();
+  const sendBtn = document.getElementById("sendBtn");
+
+  if (mobile.length !== 10) return;
+
+  try {
+    const res = await fetch(`/check-mobile-exists?mobile=${mobile}`);
+    const data = await res.json();
+
+    if (data.exists) {
+      sendBtn.disabled = true;
+      alert("❌ This mobile number is already registered. Please login.");
+    } else {
+      sendBtn.disabled = false;
+    }
+  } catch (err) {
+    console.error("Error checking mobile existence:", err);
+    alert("⚠️ Could not validate mobile number. Please try again.");
+  }
+});
+</script>
+
+{% endblock %}

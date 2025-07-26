@@ -1,0 +1,65 @@
+📄 ODIL Setup Summary Report
+Location: D:\root\smartswasthya\odil
+Date: 2025-06-02
+Status: ✅ Completed (Base System)
+
+────────────────────────────────────────────
+🔍 COMPONENTS IMPLEMENTED:
+
+1. ✅ function_trace.json
+   • Traces all defined functions across the codebase.
+   • Captures file location and class (if inside one).
+
+2. ✅ class_trace.json
+   • Detects all class definitions with corresponding filenames.
+
+3. ✅ logic_trace.json
+   • Flags all logic files and maps which functions/models they use.
+   • Helps trace backend logic flow module-wise.
+
+4. ✅ model_trace.json
+   • Lists all Pydantic/SQLAlchemy model files.
+   • Captures model usage in logic or routes.
+
+5. ✅ template_trace.json
+   • Maps all HTML templates and which route/module uses them.
+
+6. ✅ route_trace.json
+   • Registers route modules and identifies their APIRouter objects.
+
+7. ✅ function_usage_map.json
+   • Cross-traces where each function is **used** (route, logic, template).
+
+8. ✅ obvious_connections.json
+   • Master file connecting: routes ⇄ logic ⇄ models ⇄ templates ⇄ functions.
+   • Also labels each connection as:
+     - Active
+     - Placeholder Only
+     - Affected
+
+────────────────────────────────────────────
+⚙️ SUPPORTING SCRIPTS:
+
+• generate_function_trace.py
+• generate_class_trace.py
+• generate_logic_trace.py
+• generate_model_trace.py
+• generate_template_trace.py
+• generate_route_trace.py
+• generate_function_usage_map.py
+• generate_obvious_connections.py
+
+────────────────────────────────────────────
+🧠 PLANNED (NOT YET IMPLEMENTED):
+
+• [ ] Visual summary integration in `dev_bucket` superadmin panel
+• [ ] Auto-refresh logic during Docker build or CRON job
+• [ ] Placeholder tracker for missing modules (e.g. scan_logic)
+• [ ] Consolidated CSV/PDF exports (optional)
+
+────────────────────────────────────────────
+📁 Folder Path:
+D:\root\smartswasthya\odil
+
+This folder contains all trace outputs & helper scripts for developer intelligence across the Smart Swasthya codebase.
+

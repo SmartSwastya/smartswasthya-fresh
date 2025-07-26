@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% block js %}{{ js }}{% endblock %}
+
+<!-- AUTO BACKEND -->
+
+<div class="container mx-auto py-8 px-4">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-semibold text-gray-700">🏠 Homecare Dashboard</h2>
+    <div>
+      <label class="mr-2 text-sm text-gray-600">🌐 Change Language:</label>
+      <select class="border rounded px-2 py-1 text-sm">
+        <option>English</option>
+        <option>हिंदी</option>
+        <option>मराठी</option>
+        <option>বাংলা</option>
+        <option>தமிழ்</option>
+        <option>తెలుగు</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Active Visits Today</h3>
+      <p class="text-3xl font-semibold text-blue-600 mt-2">27</p>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Pending Requests</h3>
+      <p class="text-3xl font-semibold text-yellow-500 mt-2">9</p>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Available Nurses</h3>
+      <p class="text-3xl font-semibold text-green-600 mt-2">14</p>
+    </div>
+  </div>
+
+  <!-- Services & Scheduling -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🧾 Homecare Services</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Doctor Visit</li>
+        <li>Nursing Assistance</li>
+        <li>Physiotherapy</li>
+        <li>Medical Equipment Rental</li>
+      </ul>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">📅 Scheduling & Management</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Appointment Slots</li>
+        <li>Assign Field Staff</li>
+        <li>Visit Feedback</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Patient Support -->
+  <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5 mt-6">
+    <h4 class="text-lg font-bold mb-3">🩺 Patient Monitoring & Alerts</h4>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>Vitals Tracking</li>
+      <li>Daily Visit Notes</li>
+      <li>Emergency Alert Button</li>
+    </ul>
+  </div>
+
+  <!-- Staff & Attendance -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">👩‍⚕️ Staff Management</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Field Nurses / Physiotherapists</li>
+        <li>Zone-Wise Allocation</li>
+        <li>Training & Certifications</li>
+      </ul>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🕒 Biometric Entry/Exit</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Live Staff Location Logs</li>
+        <li>RFID/Face/Geo-tag Access</li>
+        <li>Shift Report Summary</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+<!-- AUTO BACKEND -->

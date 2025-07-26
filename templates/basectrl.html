@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen p-6 bg-gradient-to-br from-[#d8e850] to-[#99e3f9]">
+  <div class="max-w-5xl mx-auto grid gap-6">
+
+    <!-- Header -->
+    <div class="bg-white/30 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/40">
+      <h1 class="text-2xl font-bold">🧩 Base Controls</h1>
+      <p>System toggles and global state managers.</p>
+    </div>
+
+    <!-- Flags -->
+    <div class="bg-white/30 backdrop-blur-md p-4 rounded-2xl border border-white/40">
+      <h2 class="text-xl font-semibold mb-2">🚩 Control Flags</h2>
+      <ul class="space-y-2 text-sm">
+        {% for flag in flag_controls %}
+        <li class="bg-white/20 p-2 rounded-xl flex justify-between">
+          <span>{{ flag.flag_key }}</span>
+          <span>{{ "Enabled" if flag.flag_value else "Disabled" }}</span>
+        </li>
+        {% else %}
+        <li>No flags configured.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Switches -->
+    <div class="bg-white/30 backdrop-blur-md p-4 rounded-2xl border border-white/40">
+      <h2 class="text-xl font-semibold mb-2">🔌 Switches</h2>
+      <ul class="space-y-2 text-sm">
+        {% for s in switch_states %}
+        <li class="bg-white/20 p-2 rounded-xl">
+          <div class="flex justify-between">
+            <strong>{{ s.name }}</strong>
+            <span>{{ "On" if s.status else "Off" }}</span>
+          </div>
+          <div class="text-xs text-gray-700">{{ s.description }}</div>
+        </li>
+        {% else %}
+        <li>No switches found.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

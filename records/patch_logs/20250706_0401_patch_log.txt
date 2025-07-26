@@ -1,0 +1,21 @@
+🛠️ Patch Run Summary — 2025-07-06 04:01 AM
+
+❌ FAILED PATCHES
+⚠️ Marker not found: """ ➝ routes\admin_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\dev_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\ambulance_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\bloodbank_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\doctor_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\family_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\homecare_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\hospital_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\lab_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\pharma_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\dev\console_dashboard_routes.py
+⚠️ Marker not found: """ ➝ routes\dev\scan_results_routes.py
+⚠️ Marker not found: """ ➝ routes\dev\sync_results_routes.py
+⚠️ Marker not found: """ ➝ routes\dev\ui_dev_reference_viewer_routes.py
+⚠️ Marker not found: """ ➝ routes\dev\token_routes.py
+⚠️ Marker not found: """ ➝ routes\dev\routes_routes.py
+⚠️ Marker not found: """ ➝ routes\dev\database_routes.py
+⚠️ Marker not found: """ ➝ routes\smartuser_dashboard_routes.py

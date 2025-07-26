@@ -1,0 +1,32 @@
+# Junk files
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+logs/
+*.log
+.env
+.envexample
+tmp/
+.pytest_cache/
+*.db
+*.bak
+
+# Excludes from bash script
+*.tar
+*.tar.gz
+.local
+*.png
+*.jpg
+*.jpeg
+*.json
+*.mp4
+*.whl
+*.exe
+*.zip
+.git
+Dockerfile
+Dockerfile.optimized
+Dockerfile.pkggen
+entrypoint.sh
+smart_docker.ps1

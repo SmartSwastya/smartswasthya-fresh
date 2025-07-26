@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen p-6 bg-gradient-to-br from-[#d8e850] to-[#99e3f9]">
+  <div class="max-w-4xl mx-auto grid gap-6">
+
+    <!-- Header -->
+    <div class="bg-white/30 backdrop-blur-md p-6 rounded-2xl border border-white/40 shadow-lg">
+      <h1 class="text-2xl font-bold">💾 Backups</h1>
+      <p>Access and manage system backups.</p>
+    </div>
+
+    <!-- Backup Files -->
+    <div class="bg-white/30 backdrop-blur-md p-4 rounded-2xl border border-white/40">
+      <ul class="space-y-2 text-sm">
+        {% for backup in backups %}
+        <li class="bg-white/20 p-2 rounded-xl flex justify-between">
+          <span>{{ backup.filename }}</span>
+          <a href="{{ backup.download_url }}" class="text-blue-600 underline">Download</a>
+        </li>
+        {% else %}
+        <li>No backups available.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

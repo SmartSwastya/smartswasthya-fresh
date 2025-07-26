@@ -1,0 +1,96 @@
+/* core.css - Centralized styles for Smart Swasthya Seva */
+
+/* Custom 135° Signature Gradient */
+.bg-gradient-135 {
+  background-image: linear-gradient(135deg, #d8e850, #b8eecb, #99e3f9);
+}
+
+/* Glassmorphism style for modals and popups */
+.glass-box {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 2rem;
+}
+
+/* Popped-Up Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+/* Button Styling */
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 1000;
+  visibility: visible;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #4CAF50;
+}
+
+/* Responsive Layout */
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #d8e850 0%, #99e3f9 100%);
+  min-height: 100vh;
+}
+
+/* Primary Button */
+.btn-primary {
+  background: linear-gradient(to right, #4dc0b5, #38a1db);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, #38a1db, #4dc0b5);
+}
+
+/* Input Styling */
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #38a1db;
+  outline: none;
+}

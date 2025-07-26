@@ -1,0 +1,1119 @@
+All JS Extracted From v1
+Decentralized Inside - Centralized Outside
+-------------------------------------------
+"D:\root\smartswasthya\templates\base.html"
+
+// 🟢 Step 1: Hide known CDN warnings BEFORE anything else
+console.warn = new Proxy(console.warn, {
+  apply(target, thisArg, args) {
+    if (args[0]?.includes?.('cdn.tailwindcss.com should not be used')) return;
+    if (args[0]?.includes?.('@tailwindcss/line-clamp')) return;
+    return target.apply(thisArg, args);
+  }
+});
+
+// 🛠 Custom Tailwind config
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#d8e850',
+        secondary: '#99e3f9',
+      }
+    }
+  }
+};
+
+// Popup Modal Logic
+const modal = document.getElementById("myModal");
+const closeModalBtn = document.getElementById("close-modal");
+
+// Removed the auto-show function for modal
+
+// Uncomment this if you need to manually show it using a button or an event in the future
+// setTimeout(() => {
+//   modal.classList.add("active");
+// }, 1000); // Automatically shows after 1 second, this is now disabled
+
+// Close Modal
+closeModalBtn.addEventListener("click", () => {
+  modal.classList.remove("active");
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btn  = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', () => {
+    const isOpen = !menu.classList.toggle('hidden');
+    btn.setAttribute('aria-expanded', String(isOpen));
+  });
+});
+
+-------------------------------------------
+
+"D:\root\smartswasthya\templates\signup.html"
+
+  let countdown;
+
+  function startTimer() {
+    let seconds = 60;
+    const timer = document.getElementById("timer");
+    const btn = document.getElementById("sendBtn");
+    btn.disabled = true;
+    countdown = setInterval(() => {
+      seconds--;
+      timer.textContent = `⏳ Resend in ${seconds}s`;
+      if (seconds <= 0) {
+        clearInterval(countdown);
+        timer.textContent = "";
+        btn.disabled = false;
+        btn.innerText = "🔁 Resend OTP";
+      }
+    }, 1000);
+  }
+
+  async function sendOTP() {
+    const mobile = document.getElementById("mobile").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const gender = document.getElementById("gender").value; // Get gender value
+    if (!mobile || mobile.length !== 10) {
+      alert("Please Enter Valid 10-digit Mobile Number ");
+      return;
+    }
+
+    try {
+      const response = await fetch(`/otp?mobile=${mobile}&name=${encodeURIComponent(name)}&gender=${gender}`);
+      const text = await response.text();
+
+      try {
+        const data = JSON.parse(text);
+        if (data.status === "sent") {
+          alert("✅ OTP sent successfully!");
+          document.getElementById("otpSection").classList.remove("hidden");
+          document.getElementById("passwordSection").classList.remove("hidden");
+          document.getElementById("submitSection").classList.remove("hidden");
+          startTimer();
+        } else {
+          alert("❌ " + data.message);
+        }
+      } catch (parseErr) {
+        console.error("❌ JSON Parse Error:", text);
+        alert("❌ Server response error. Check console.");
+      }
+
+    } catch (error) {
+      console.error("❌ Fetch Failed:", error);
+      alert("❌ Could not send OTP due to server error.");
+    }
+  }
+
+  // ✅ YOUR PATCHED FUNCTION: verifyOTP()
+  async function verifyOTP() {
+    const name = document.getElementById("name").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const emailField = document.getElementById("email");
+    const email = emailField ? emailField.value.trim() : "";
+    const password = document.getElementById("passwordInput").value.trim();
+    const otp = document.getElementById("otpInput").value.trim();
+    const gender = document.getElementById("gender").value; // Get gender value
+
+    if (!otp || otp.length !== 6 || !password) {
+      return alert("❌ Please enter OTP and Password.");
+    }
+
+    const res = await fetch('/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, mobile, email, otp, password, gender })
+    });
+
+    const data = await res.json();
+    console.log("✅ Response from /verify:", data);
+
+    if (data.success) {
+      alert("🎉 Signup Successful! Redirecting...");
+      sessionStorage.setItem("fromSignup", "true");
+      window.location.href = data.redirect || "/awareness";
+
+      return;
+    }
+
+    alert("❌ " + (data.message || "Something went wrong"));
+  }
+
+  // Block invalid characters while typing
+  function isAlpha(e) {
+    const char = String.fromCharCode(e.which);
+    if (!/^[a-zA-Z\s]$/.test(char)) {
+      return false;
+    }
+    return true;
+  }
+
+  // Remove invalid characters if pasted
+  function filterNameInput() {
+    const input = document.getElementById("name");
+    const error = document.getElementById("nameError");
+    const value = input.value;
+
+    // Allow only letters and spaces
+    const cleaned = value.replace(/[^a-zA-Z\s]/g, '');
+    input.value = cleaned;
+
+    // Show error if something was removed
+    if (value !== cleaned) {
+      error.classList.remove("hidden");
+    } else {
+      error.classList.add("hidden");
+    }
+  }
+
+ // Block any non-numeric key press
+  function isNumber(e) {
+    const char = String.fromCharCode(e.which);
+    return /^[0-9]$/.test(char);
+  }
+
+  // Clean pasted input and validate length
+  function validateMobile() {
+    const input = document.getElementById("mobile");
+    const error = document.getElementById("mobileError");
+    
+    // Remove all non-digit characters
+    input.value = input.value.replace(/[^0-9]/g, '');
+
+    // Show error if not exactly 10 digits
+    if (input.value.length !== 10) {
+      error.classList.remove("hidden");
+    } else {
+      error.classList.add("hidden");
+    }
+  }
+
+
+  function validateEmail() {
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("emailError");
+    const value = emailInput.value.trim();
+
+    // Only validate if the field is not empty
+    if (value === "") {
+      emailError.classList.add("hidden");
+      return;
+    }
+
+    // Simple email regex pattern
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailPattern.test(value)) {
+      emailError.classList.add("hidden");
+    } else {
+      emailError.classList.remove("hidden");
+    }
+  }
+
+  function togglePassword() {
+    const passwordInput = document.getElementById("passwordInput");
+    const icon = event.currentTarget;
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      icon.textContent = "🙈"; // icon when showing password
+    } else {
+      passwordInput.type = "password";
+      icon.textContent = "👁️"; // icon when hiding password
+    }
+  }
+
+document.getElementById("mobile").addEventListener("blur", async () => {
+  const mobileInput = document.getElementById("mobile");
+  const mobile = mobileInput.value.trim();
+  const sendBtn = document.getElementById("sendBtn");
+
+  if (mobile.length !== 10) return;
+
+  try {
+    const res = await fetch(`/check-mobile-exists?mobile=${mobile}`);
+    const data = await res.json();
+
+    if (data.exists) {
+      sendBtn.disabled = true;
+      alert("❌ This mobile number is already registered. Please login.");
+    } else {
+      sendBtn.disabled = false;
+    }
+  } catch (err) {
+    console.error("Error checking mobile existence:", err);
+    alert("⚠️ Could not validate mobile number. Please try again.");
+  }
+});
+
+-------------------------------------------
+"D:\root\smartswasthya\templates\login.html"
+
+    function isDigitOnly(e) {
+      const ch = String.fromCharCode(e.which);
+      return /^[0-9]$/.test(ch);
+    }
+    function filterToDigitsOnly(e) {
+      const el = e.target;
+      el.value = el.value.replace(/\D/g, '');
+      document.getElementById('mobileErrorMsg')
+        .classList.toggle('hidden', el.value.length === 10);
+    }
+    function handlePaste(e) {
+      const clip = (e.clipboardData || window.clipboardData).getData('text');
+      if (!/^\d+$/.test(clip)) e.preventDefault();
+    }
+    function togglePassword() {
+      const pw  = document.getElementById('password');
+      const eye = document.getElementById('eyeIcon');
+      if (pw.type === 'password') {
+        pw.type = 'text';
+        eye.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13.875 18.825A10.05 10.05 0 0112 19
+               c-4.478 0-8.269-2.943-9.543-7
+               a9.955 9.955 0 012.42-3.568
+               M6.21 6.21A9.953 9.953 0 0112 5
+               c4.478 0 8.269 2.943 9.543 7
+               a9.96 9.96 0 01-4.196 5.255
+               M3 3l18 18"/>`;
+      } else {
+        pw.type = 'password';
+        eye.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5
+               c4.477 0 8.268 2.943 9.542 7
+               -1.274 4.057-5.065 7-9.542 7
+               -4.477 0-8.268-2.943-9.542-7z"/>`;
+      }
+    }
+
+    const form = document.getElementById('loginForm');
+    const identity = document.getElementById('identity');
+    const password = document.getElementById('password');
+    const errorMsg = document.getElementById('errorMsg');
+    const roleSelector = document.getElementById('roleSelector');
+    const roleInputs = roleSelector ? roleSelector.querySelectorAll('input[type=radio]') : [];
+    let isLegacy = false;
+
+    identity.addEventListener('blur', async () => {
+      const mobile = identity.value.trim();
+      if (!mobile || mobile.length !== 10) return;
+
+      try {
+        const res = await fetch('/check-user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ identity: mobile })
+        });
+        const data = await res.json();
+
+        // Handle password mode
+        if (data.status === 'create') {
+          password.placeholder = '🔐 Create your new password';
+          isLegacy = true;
+        } else if (data.status === 'existing') {
+          password.placeholder = '🔑 Enter your password';
+          isLegacy = false;
+        } else {
+          errorMsg.textContent = '⚠️ User not found. Please sign up.';
+          errorMsg.classList.remove('hidden');
+          return;
+        }
+
+        errorMsg.classList.add('hidden');
+
+        // Handle role selector visibility
+        if (data.roles && Array.isArray(data.roles) && roleSelector) {
+          roleSelector.classList.remove('hidden');
+          roleInputs.forEach(input => {
+            const show = data.roles.includes(input.value);
+            input.parentElement.style.display = show ? 'block' : 'none';
+            if (show) input.checked = true; // Select first visible role
+          });
+        }
+
+      } catch (err) {
+        console.error('Check-user failed:', err);
+        errorMsg.textContent = '⚠️ Server error.';
+        errorMsg.classList.remove('hidden');
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const mobile = identity.value.trim();
+      const pass = password.value.trim();
+      const role = document.querySelector('input[name="role"]:checked')?.value || 'smartuser';
+      const endpoint = isLegacy ? '/set-password' : '/login';
+
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ identity: mobile, password: pass, role })
+        });
+
+        const result = await res.json();
+
+        if (result.status === 'success') {
+          if (result.token) {
+            localStorage.setItem("authToken", result.token);
+            document.cookie = `Authorization=Bearer ${result.token}; path=/`;
+          }
+          if (result.redirect === "/awareness") {
+            sessionStorage.setItem("fromSignup", "true");
+          }
+          return window.location.href = result.redirect || "/smart_user";
+        } else {
+          errorMsg.textContent = result.message || "❌ Login failed.";
+          errorMsg.classList.remove("hidden");
+        }
+      } catch (err) {
+        console.error('Login error:', err);
+        errorMsg.textContent = '⚠️ Internal server error.';
+        errorMsg.classList.remove('hidden');
+      }
+    });
+
+-------------------------------------------
+"D:\root\smartswasthya\templates\forgot_password.html"
+
+  let countdown;
+
+  function startTimer() {
+    let seconds = 60;
+    const timer = document.getElementById("timer");
+    const btn = document.getElementById("sendBtn");
+    btn.disabled = true;
+    countdown = setInterval(() => {
+      seconds--;
+      timer.textContent = `⏳ Resend in ${seconds}s`;
+      if (seconds <= 0) {
+        clearInterval(countdown);
+        timer.textContent = "";
+        btn.disabled = false;
+        btn.innerText = "🔁 Resend OTP";
+      }
+    }, 1000);
+  }
+
+  async function sendOTP() {
+    const mobile = document.getElementById("mobile").value.trim();
+    if (!mobile || mobile.length !== 10) {
+      return alert("❌ Please enter a valid 10-digit mobile number");
+    }
+
+    const response = await fetch(`/send-forgot-otp?mobile=${mobile}`);
+    const data = await response.json();
+
+    if (data.status === "sent") {
+      alert("✅ OTP sent successfully!");
+      document.getElementById("otpSection").classList.remove("hidden");
+      document.getElementById("passwordSection").classList.remove("hidden");
+      document.getElementById("submitSection").classList.remove("hidden");
+      startTimer();
+    } else {
+      alert("❌ " + (data.message || "Failed to send OTP"));
+    }
+  }
+
+  async function resetPassword() {
+    const mobile = document.getElementById("mobile").value.trim();
+    const otp = document.getElementById("otpInput").value.trim();
+    const password = document.getElementById("passwordInput").value.trim();
+
+    if (!mobile || !otp || !password) {
+      return alert("❌ All fields are required!");
+    }
+
+    const response = await fetch(`/reset-password?mobile=${mobile}&otp=${otp}&password=${encodeURIComponent(password)}`);
+    const data = await response.json();
+
+    if (data.success) {
+      alert("🎉 Password reset successful! Redirecting...");
+      window.location.href = "/login";  // ✅ Awareness hata diya gaya
+    } else {
+      alert("❌ " + (data.message || "Reset failed"));
+    }
+  }
+
+-------------------------------------------
+"D:\root\smartswasthya\templates\awareness_window.html"
+
+  window.onload = function () {
+    const skip = localStorage.getItem("hideAwarenessWindow");
+    const justSignedUp = sessionStorage.getItem("fromSignup");
+
+    if (skip === "true" && !justSignedUp) {
+      redirectWithToken();
+    }
+  };
+
+  function skipAndRedirect() {
+    const checkbox = document.getElementById("dontShowAgain");
+    if (checkbox.checked) {
+      localStorage.setItem("hideAwarenessWindow", "true");
+    }
+
+    sessionStorage.removeItem("fromSignup");
+    redirectWithToken();
+  }
+
+  function redirectWithToken() {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      alert("❌ Missing token. Please login again.");
+      return;
+    }
+
+    // ✅ Store token in cookie for automatic Flask recognition
+    document.cookie = `Authorization=Bearer ${token}; path=/`;
+
+    // ✅ Safe redirect — Flask will receive token from cookie
+    setTimeout(() => {
+      window.location.href = "/smart";
+    }, 200);  // wait 200ms before redirect
+  }
+
+-------------------------------------------
+"D:\root\smartswasthya\templates\index.html"
+
+    // 🟢 Step 1: Hide known CDN warnings BEFORE anything else
+    console.warn = new Proxy(console.warn, {
+      apply(target, thisArg, args) {
+        if (args[0]?.includes?.('cdn.tailwindcss.com should not be used')) return;
+        if (args[0]?.includes?.('@tailwindcss/line-clamp')) return;
+        return target.apply(thisArg, args);
+      }
+    });
+
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#d8e850',
+            secondary: '#99e3f9',
+          }
+        }
+      }
+    };
+
+    // Checking if location permission is already granted
+    if (localStorage.getItem('location_permission') === 'granted') {
+        // Requesting the high-accuracy location
+        navigator.geolocation.getCurrentPosition(success, error, {
+            enableHighAccuracy: true,  // Request high accuracy
+            timeout: 5000,             // Timeout for response
+            maximumAge: 0              // Don't use cached position
+        });
+    } else {
+        // Ask user for permission if not granted
+        if (confirm("We need access to your location. Grant permission?")) {
+            localStorage.setItem('location_permission', 'granted');
+            window.location.reload();  // Refresh the page to trigger location tracking
+        }
+    }
+
+    // Success callback for geolocation
+    function success(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Log the location details for debugging
+        console.log("Location fetched successfully:", {
+            latitude: latitude,
+            longitude: longitude
+        });
+
+        // Send location data to backend using POST method
+        fetch('/track-location', {
+            method: 'POST',  // HTTP method for sending data
+            headers: {
+                'Content-Type': 'application/json'  // Ensure proper content type for JSON
+            },
+            body: JSON.stringify({ latitude, longitude })  // Convert data to JSON format
+        })
+        .then(response => {
+            if (!response.ok) {
+                // Handle response errors
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();  // Parse response as JSON
+        })
+        .then(data => {
+            // Successfully sent data to backend
+            console.log('Data successfully sent to backend:', data);
+        })
+        .catch(err => {
+            // Catch and display any errors
+            console.error('Error while sending location data to backend:', err);
+        });
+    }
+
+    // Error callback for geolocation
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    
+        // Show a user-friendly message in case of failure
+        alert("Failed to retrieve location. Please ensure location services are enabled and try again.");
+        
+        // Optional: Provide fallback option if needed
+        getLocationUsingGoogleAPI(); // Fallback: Use Google Maps Geolocation API
+    }
+
+    // Fallback: Use Google Maps Geolocation API
+    function getLocationUsingGoogleAPI() {
+        // Use the injected API key
+        const apiKey = "{{ google_maps_api_key }}"; 
+
+        fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${apiKey}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "homeMobileCountryCode": 310,  // Example, can be removed if not needed
+                "homeMobileNetworkCode": 260
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const latitude = data.location.lat;
+            const longitude = data.location.lng;
+
+            console.log('Google Maps Geolocation API Response:');
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+            // Send the location data to your backend
+            fetch('/track-location', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ latitude, longitude })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data successfully sent to backend:', data);
+            })
+            .catch(err => {
+                console.error('Error while sending location data to backend:', err);
+            });
+        })
+        .catch(err => {
+            console.error('Error in Google Maps Geolocation API:', err);
+        });
+    }
+
+    let currentIndexDesktop = 0;
+    const totalSlides = document.querySelectorAll('.desktop-slider .slider-item').length;
+    const sliderElement = document.querySelector('.desktop-slider .slider');
+
+    function changeDesktopSlide() {
+      currentIndexDesktop = (currentIndexDesktop + 1) % totalSlides;
+      sliderElement.style.transform = `translateX(-${currentIndexDesktop * 100}%)`;
+    }
+
+    setInterval(changeDesktopSlide, 4000);
+
+    // Mobile Slider Logic (Horizontal sliding)
+    let currentIndexMobile = 0;
+    const mobileSlides = document.querySelectorAll('.mobile-slider .slider-item');
+    const totalMobileSlides = mobileSlides.length;
+
+    function changeMobileSlide() {
+      currentIndexMobile = (currentIndexMobile + 1) % totalMobileSlides; // Loop back to first image
+      const newTransformValue = -100 * currentIndexMobile + '%';
+      document.querySelector('.mobile-slider .slider').style.transition = 'transform 1s ease-in-out';
+      document.querySelector('.mobile-slider .slider').style.transform = `translateX(${newTransformValue})`;
+    }
+
+    // Change mobile slide every 4 seconds
+    setInterval(changeMobileSlide, 4000);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn  = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (toggleBtn && mobileMenu) {
+        toggleBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.querySelector('.overlay-elements input[type="text"]');
+    const resultBox = document.createElement('div');
+    resultBox.className = 'absolute z-50 mt-2 bg-white text-gray-800 rounded-md shadow-lg w-full max-w-xl mx-auto';
+    resultBox.style.display = 'none';
+    searchInput.parentElement.appendChild(resultBox);
+
+    let timeoutId;
+
+    searchInput.addEventListener('input', function () {
+      clearTimeout(timeoutId);
+      const query = this.value.trim();
+      if (query.length < 3) {
+        resultBox.style.display = 'none';
+        resultBox.innerHTML = '';
+        return;
+      }
+
+      timeoutId = setTimeout(() => {
+        fetch(`/search?q=${encodeURIComponent(query)}`)
+          .then(response => response.json())
+          .then(data => {
+            const results = data.results || [];
+            if (results.length === 0) {
+              resultBox.innerHTML = '<div class="px-4 py-2 text-sm text-gray-500">No results found</div>';
+            } else {
+              resultBox.innerHTML = results.map(item => `
+                <div class="px-4 py-2 border-b hover:bg-blue-100 cursor-pointer">
+                  <strong>${item.title}</strong><br>
+                  ${item.location ? `<small>${item.location}</small>` : item.desc || ''}
+                </div>
+              `).join('');
+            }
+            resultBox.style.display = 'block';
+          })
+          .catch(err => {
+            console.error('Search error:', err);
+          });
+      }, 300); // debounce
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!searchInput.contains(e.target)) {
+        resultBox.style.display = 'none';
+      }
+    });
+  });
+
+-------------------------------------------
+"D:\root\smartswasthya\templates\dev_bucket.html"
+
+    // 🟢 Step 1: Hide known CDN warnings BEFORE anything else
+    console.warn = new Proxy(console.warn, {
+      apply(target, thisArg, args) {
+        if (args[0]?.includes?.('cdn.tailwindcss.com should not be used')) return;
+        if (args[0]?.includes?.('@tailwindcss/line-clamp')) return;
+        return target.apply(thisArg, args);
+      }
+    });
+
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#d8e850',
+            secondary: '#99e3f9',
+          }
+        }
+      }
+    };
+
+-------------------------------------------
+"D:\root\smartswasthya\templates\smartuser_dashboard.html"
+
+// 🟢 Step 1: Hide known CDN warnings BEFORE anything else
+    console.warn = new Proxy(console.warn, {
+      apply(target, thisArg, args) {
+        if (args[0]?.includes?.('cdn.tailwindcss.com should not be used')) return;
+        if (args[0]?.includes?.('@tailwindcss/line-clamp')) return;
+        return target.apply(thisArg, args);
+      }
+    });
+tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#d8e850',
+            secondary: '#99e3f9',
+          }
+        }
+      }
+    };
+let failedAccuracyCount = 0;
+
+function dropPin() {
+  const previewDiv = document.getElementById("mapPreview");
+  previewDiv.classList.remove("hidden");
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+
+      document.getElementById("latitude").value = lat;
+      document.getElementById("longitude").value = lng;
+      document.getElementById("accuracy").value = accuracy;
+
+      map = new google.maps.Map(previewDiv, {
+        center: { lat, lng },
+        zoom: 15,
+      });
+
+      marker = new google.maps.Marker({
+        position: { lat, lng },
+        map,
+        draggable: true,
+        title: "Drag to adjust location",
+      });
+
+      google.maps.event.addListener(marker, 'dragend', e => {
+        document.getElementById("latitude").value = e.latLng.lat();
+        document.getElementById("longitude").value = e.latLng.lng();
+      });
+
+      // Fallback Trigger
+      if (accuracy > 50) {
+        failedAccuracyCount++;
+        if (failedAccuracyCount >= 2) {
+          document.getElementById("fallback-address-options").classList.remove("hidden");
+        }
+      } else {
+        failedAccuracyCount = 0;
+        document.getElementById("fallback-address-options").classList.add("hidden");
+      }
+
+    }, () => {
+      alert("❌ Location access failed.");
+    }, {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    });
+  } else {
+    alert("❌ Geolocation not supported.");
+  }
+}
+
+// 🔁 Bullet Toggle Logic
+document.addEventListener("DOMContentLoaded", function () {
+  const flatFields = document.getElementById("flat-fields");
+  const houseFields = document.getElementById("house-fields");
+
+  document.querySelectorAll('input[name="fallback_option"]').forEach(radio => {
+    radio.addEventListener("change", function () {
+      if (this.value === "flat") {
+        flatFields.style.display = "block";
+        houseFields.style.display = "none";
+      } else {
+        flatFields.style.display = "none";
+        houseFields.style.display = "block";
+      }
+    });
+  });
+});
+// ❌ Close Modal by ID
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.classList.remove("modal-open");
+  } else {
+    console.error("Modal with ID " + modalId + " not found");
+  }
+}
+// 🧓 Age Calculator on DOB Change + Update Dashboard
+function setupAgeCalculation() {
+  const dobField = document.getElementById("updateDob");
+  dobField.addEventListener("change", function () {
+    const dob = new Date(this.value);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+
+    const blocks = document.querySelectorAll(".text-gray-600.block");
+    blocks.forEach(el => {
+      if (el.innerText.includes("Age:")) {
+        const parts = el.innerText.split("|");
+        if (parts.length >= 1) {
+          parts[0] = `Age: ${age} yrs `;
+          el.innerText = parts.join("|");
+        }
+      }
+    });
+  });
+}
+document.addEventListener("DOMContentLoaded", setupAgeCalculation);
+// 🧾 Open Profile Modal
+function openProfilePopup() {
+  const modal = document.getElementById("profileModal");
+  if (modal) modal.style.display = "flex";
+  else console.error("Profile modal not found");
+}
+// 👀 Image Preview Before Upload
+function setupImagePreview() {
+  const input = document.getElementById("updateImage");
+  const preview = document.getElementById("previewImage");
+  input.addEventListener("change", function () {
+    const reader = new FileReader();
+    reader.onload = e => preview.src = e.target.result;
+    if (this.files[0]) reader.readAsDataURL(this.files[0]);
+  });
+}
+document.addEventListener("DOMContentLoaded", setupImagePreview);
+// 💾 Save Profile Changes — using FormData for full compatibility
+function saveProfileChanges() {
+  const form = document.getElementById("profileForm");
+  const dob = document.getElementById("updateDob").value.trim();
+  const userLocation = document.getElementById("userLocation").value.trim();
+
+  if (!dob || !userLocation) {
+    alert("⚠️ Date of Birth and Location are required!");
+    return;
+  }
+
+  const formData = new FormData(form);
+
+  formData.set("dob", dob);
+  formData.set("location", userLocation);
+  formData.set("doctor_name", document.getElementById("updateDoctor").value);
+  formData.set("contact_number", document.getElementById("connectMobile").value);
+  formData.set("recent_appointment", document.getElementById("lastVisit").value);
+  formData.set("gender", document.getElementById("updateGender").value);
+  formData.set("latitude", document.getElementById("latitude").value);
+  formData.set("longitude", document.getElementById("longitude").value);
+
+  const imageInput = document.getElementById("updateImage");
+  if (imageInput && imageInput.files.length > 0) {
+    formData.set("profile_image", imageInput.files[0]);
+  }
+
+  fetch("/profile/update-profile", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.text())
+  .then(() => {
+    alert("✅ Profile updated successfully!");
+    location.reload();
+  })
+  .catch(err => {
+    console.error("Profile update update error:", err);
+    alert("❌ Something went wrong.");
+  });
+}
+// 🔃 Sortable Card Setup
+const sortable = new Sortable(document.getElementById('sortable'), {
+  animation: 150,
+  onStart(evt) {
+    localStorage.removeItem('cardOrder');
+  },
+  onEnd(evt) {
+    const newOrder = Array.from(document.querySelectorAll('#sortable .card'))
+                           .map(card => card.innerHTML);
+    localStorage.setItem('cardOrder', JSON.stringify(newOrder));
+  },
+});
+
+let isSortingEnabled = false;
+
+document.getElementById('toggleSort').addEventListener('click', function() {
+  isSortingEnabled = !isSortingEnabled;
+  sortable.option('disabled', !isSortingEnabled);
+  document.body.style.overflow = isSortingEnabled ? 'hidden' : 'auto';
+  this.innerText = isSortingEnabled ? 'Switch to Scroll' : 'Switch to Sort';
+});
+
+window.onload = function() {
+  const savedOrder = localStorage.getItem('cardOrder');
+  if (savedOrder) {
+    const order = JSON.parse(savedOrder);
+    const cards = document.querySelectorAll('#sortable .card');
+
+    if (order.length === cards.length) {
+      order.forEach((cardHtml, index) => {
+        cards[index].innerHTML = cardHtml;
+      });
+    }
+  }
+  document.getElementById('toggleSort').innerText = 'Switch to Sort';
+  document.body.style.overflow = 'auto';
+  sortable.option('disabled', true);
+};
+// 📧 Email Verification Logic
+let otpTimerInterval;
+
+function sendEmailOTP() {
+  // send current email value so backend can save it temporarily
+  const emailValue = document.getElementById('updateEmail').value.trim();
+  fetch('/profile/send-otp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: emailValue })
+  })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.status === 'success'
+        ? 'OTP sent successfully.'
+        : data.message
+      );
+      if (data.status === 'success') {
+        // OK दबाते ही बटन छुपेगा और OTP इनपुट दिखेगा
+        document.getElementById('sendOTPButton').style.display = 'none';
+        document.getElementById('otpSection').style.display    = 'flex';
+        startOTPTimer(60);
+      }
+    })
+    .catch(() => alert('Error sending OTP.'));
+}
+
+function startOTPTimer(seconds) {
+  let remaining = seconds;
+  const timerEl = document.getElementById('otpTimer');
+  timerEl.textContent = `${remaining}s`;
+  otpTimerInterval = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) {
+      clearInterval(otpTimerInterval);
+      timerEl.textContent = 'Expired';
+      document.getElementById('sendOTPButton').disabled = false;
+    } else {
+      timerEl.textContent = `${remaining}s`;
+    }
+  }, 1000);
+}
+
+function verifyEmailOTP() {
+  const otp = document.getElementById('otpInput').value;
+  fetch('/profile/verify-otp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ otp })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+    if (data.status === 'success') {
+      // सफल वेरिफिकेशन पर OTP सेक्शन छुपा दें, सिर्फ ✅ दिखे
+      clearInterval(otpTimerInterval);
+      document.getElementById('otpSection').style.display = 'none';
+      document.getElementById('emailBadge').textContent     = '✅';
+    }
+  })
+  .catch(() => alert('Error verifying OTP.'));
+}
+// Enable dynamic show/hide of Verify-button for no-email users
+document.addEventListener('DOMContentLoaded', function() {
+  const emailInput = document.getElementById('updateEmail');
+  const sendBtn    = document.getElementById('sendOTPButton');
+  
+  // अगर अभी तक कोई email नहीं, तो इनपुट फील्ड खोलें और टाइप पर बटन दिखाएँ
+  if (!emailInput.value) {
+    emailInput.readOnly = false;
+    emailInput.addEventListener('input', function() {
+      if (emailInput.value.includes('@')) {
+        sendBtn.style.display = 'inline-block';
+      } else {
+        sendBtn.style.display = 'none';
+      }
+    });
+  }
+});
+
+-------------------------------------------
+"D:\root\smartswasthya\templates\doctor_dashboard.html"
+
+/* No inline JavaScript found in this page */
+
+-------------------------------------------
+"D:\root\smartswasthya\templates\pharma_dashboard.html"
+
+/* No inline JavaScript found in this page */
+
+-------------------------------------------
+"D:\root\smartswasthya\templates\lab_dashboard.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\homecare_dashboard.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\bloodbank_dashboard.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\ambulance_dashboard.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\hospital_dashboard.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\family_dashboard.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\admin_dashboard.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\popups.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\dev_dashboard.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\ui_map.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\backups.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\database.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\basectrl.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\editor.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\console.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\sync_results.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\sync.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\ui_dev_referenceer.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\submission_result.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\scan_results.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------
+"D:\root\smartswasthya\templates\token.html"
+
+/* No inline JavaScript found in this page */
+-------------------------------------------

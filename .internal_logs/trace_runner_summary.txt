@@ -1,0 +1,11 @@
+🧠 Starting full trace generator batch...
+
+▶ Running: odil/generate_function_usage_map.py
+
+▶ Running: odil/generate_model_trace.py
+
+▶ Running: odil/generate_logic_trace.py
+
+▶ Running: odil/generate_code_trace.py
+
+✅ All trace generators executed.

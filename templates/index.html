@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Smart Swasthya Seva</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon" />
+
+  <!-- ✅ Tailwind CDN with safe override -->
+  <script>
+    // 🟢 Step 1: Hide known CDN warnings BEFORE anything else
+    console.warn = new Proxy(console.warn, {
+      apply(target, thisArg, args) {
+        if (args[0]?.includes?.('cdn.tailwindcss.com should not be used')) return;
+        if (args[0]?.includes?.('@tailwindcss/line-clamp')) return;
+        return target.apply(thisArg, args);
+      }
+    });
+  </script>
+
+  <!-- ✅ Tailwind CDN with plugins (minus redundant 'line-clamp') -->
+  <script src="https://cdn.tailwindcss.com/3.4.1?plugins=forms,typography,aspect-ratio"></script>
+
+  <!-- 🛠 Custom Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#d8e850',
+            secondary: '#99e3f9',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- 🎨 Custom 135° Signature Gradient -->
+  <style>
+    .bg-gradient-135 {
+      background-image: linear-gradient(135deg, #d8e850, #b8eecb, #99e3f9);
+    }
+  </style>
+
+  <style>
+    /* Custom styles */
+    .slider-container {
+      position: relative;
+      height: 100vh; /* Full screen height */
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 1s ease-in-out; /* Smooth transition for slider */
+    }
+
+    .slider-item {
+      min-width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    /* Mobile Slider: Visible on Mobile Only */
+    @media (max-width: 767px) {
+      .desktop-slider {
+        display: none; /* Hide desktop slider */
+      }
+
+      .mobile-slider {
+        display: block; /* Show mobile slider */
+        height: 100vh; /* Full screen height */
+        width: 100%; /* Full width */
+      }
+    }
+
+    /* Hide mobile slider on desktop */
+    @media (min-width: 768px) {
+      .mobile-slider {
+        display: none; /* Hide mobile slider */
+      }
+    }
+  </style>
+
+<script>
+    // Checking if location permission is already granted
+    if (localStorage.getItem('location_permission') === 'granted') {
+        // Requesting the high-accuracy location
+        navigator.geolocation.getCurrentPosition(success, error, {
+            enableHighAccuracy: true,  // Request high accuracy
+            timeout: 5000,             // Timeout for response
+            maximumAge: 0              // Don't use cached position
+        });
+    } else {
+        // Ask user for permission if not granted
+        if (confirm("We need access to your location. Grant permission?")) {
+            localStorage.setItem('location_permission', 'granted');
+            window.location.reload();  // Refresh the page to trigger location tracking
+        }
+    }
+
+    // Success callback for geolocation
+    function success(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Log the location details for debugging
+        console.log("Location fetched successfully:", {
+            latitude: latitude,
+            longitude: longitude
+        });
+
+        // Send location data to backend using POST method
+        fetch('/track-location', {
+            method: 'POST',  // HTTP method for sending data
+            headers: {
+                'Content-Type': 'application/json'  // Ensure proper content type for JSON
+            },
+            body: JSON.stringify({ latitude, longitude })  // Convert data to JSON format
+        })
+        .then(response => {
+            if (!response.ok) {
+                // Handle response errors
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();  // Parse response as JSON
+        })
+        .then(data => {
+            // Successfully sent data to backend
+            console.log('Data successfully sent to backend:', data);
+        })
+        .catch(err => {
+            // Catch and display any errors
+            console.error('Error while sending location data to backend:', err);
+        });
+    }
+
+    // Error callback for geolocation
+    function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    
+        // Show a user-friendly message in case of failure
+        alert("Failed to retrieve location. Please ensure location services are enabled and try again.");
+        
+        // Optional: Provide fallback option if needed
+        getLocationUsingGoogleAPI(); // Fallback: Use Google Maps Geolocation API
+    }
+
+    // Fallback: Use Google Maps Geolocation API
+    function getLocationUsingGoogleAPI() {
+        // Use the injected API key
+        const apiKey = "{{ google_maps_api_key }}"; 
+
+        fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${apiKey}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "homeMobileCountryCode": 310,  // Example, can be removed if not needed
+                "homeMobileNetworkCode": 260
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const latitude = data.location.lat;
+            const longitude = data.location.lng;
+
+            console.log('Google Maps Geolocation API Response:');
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+            // Send the location data to your backend
+            fetch('/track-location', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ latitude, longitude })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Data successfully sent to backend:', data);
+            })
+            .catch(err => {
+                console.error('Error while sending location data to backend:', err);
+            });
+        })
+        .catch(err => {
+            console.error('Error in Google Maps Geolocation API:', err);
+        });
+    }
+</script>
+
+
+  <style>
+    /* Glassmorphism style for modals and popups */
+    .glass-box {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 2rem;
+    }
+
+    /* Popped-Up Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    /* Button Styling */
+    button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #4CAF50; /* Green background */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 1000;  /* Ensure the button appears above other content */
+      visibility: visible;  /* Ensure button is visible */
+    }
+
+    button:hover {
+      background-color: #45a049; /* Slightly darker on hover */
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 5px #4CAF50;
+    }
+
+    /* Responsive Layout */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #d8e850 0%, #99e3f9 100%);
+      min-height: 100vh;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #4dc0b5, #38a1db);
+      color: white;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(to right, #38a1db, #4dc0b5);
+    }
+
+    /* Custom styles */
+    .slider-container {
+      position: relative;
+      height: 100vh; /* Full screen height */
+      overflow: hidden;
+      margin-bottom: 0; /* Fix gap between slider and footer */
+    }
+
+    /* Slider styles */
+    .slider {
+      display: flex;
+      transition: transform 1s ease-in-out; /* Smooth transition for slider */
+    }
+
+    .slider-item {
+      min-width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    /* Overlay styling */
+    .overlay-elements {
+      position: absolute;
+      bottom: 70px; /* Adjusted to make sure elements are placed correctly */
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: white;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .headline {
+      font-size: 2.2rem; /* Adjusted font size for single line */
+      font-weight: bold;
+      margin-bottom: 20px;
+      padding: 0 10px;
+      white-space: nowrap; /* Ensures text stays in one line */
+      overflow: hidden;  /* Prevents overflow */
+      text-overflow: ellipsis; /* Handles overflow gracefully */
+    }
+
+    .search-bar {
+      background-color: white;
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .search-bar input {
+      width: 100%;
+    }
+
+    .cta-button {
+      background-color: #38a1db; /* Matching blue shade */
+      color: white;
+      padding: 12px 30px;
+      border-radius: 25px;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    .cta-button:hover {
+      background-color: #007bb5;
+    }
+
+    /* Footer styles */
+    footer {
+      margin-top: 0; /* Directly below content */
+    }
+
+    /* Hide desktop slider on mobile */
+    @media (max-width: 767px) {
+      .desktop-slider {
+        display: none; /* Hide desktop slider */
+      }
+
+      /* Show mobile version of the slider */
+      .mobile-slider {
+        display: block; /* Show mobile slider */
+        height: 100vh; /* Full screen height */
+        width: 100%; /* Full width */
+      }
+
+      .overlay-elements {
+        position: absolute;
+        bottom: 40px;
+        padding: 20px;
+        z-index: 999;
+      }
+    }
+
+    /* Hide mobile slider on desktop */
+    @media (min-width: 768px) {
+      .mobile-slider {
+        display: none; /* Hide mobile slider */
+      }
+    }
+  </style>
+</head>
+
+<body class="relative bg-gradient-135">
+
+  <!-- 🔷 HEADER -->
+  <header class="bg-white/70 backdrop-blur-md shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold text-cyan-700 flex items-center gap-2">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="h-8 drop-shadow-md">
+        Smart Swasthya Seva
+      </a>
+      <button id="menu-toggle" class="md:hidden text-gray-700 text-3xl focus:outline-none">☰</button>
+      <nav class="hidden md:flex space-x-6 items-center">
+        <a href="/about" class="text-gray-700 hover:text-cyan-700">About</a>
+        <a href="/search" class="text-gray-700 hover:text-cyan-700">Search</a>
+        <a href="/login" class="text-gray-700 hover:text-cyan-700">Login</a>
+        <a href="/signup" class="btn-primary px-4 py-1 rounded shadow">Sign Up</a>
+      </nav>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-3">
+      <a href="/about" class="block text-gray-700 hover:text-cyan-700">About</a>
+      <a href="/search" class="block text-gray-700 hover:text-cyan-700">Search</a>
+      <a href="/login" class="block text-gray-700 hover:text-cyan-700">Login</a>
+      <a href="/signup" class="block btn-primary px-4 py-1 rounded shadow w-fit">Sign Up</a>
+    </div>
+  </header>
+
+ <!-- Desktop Slider: Visible on Desktop Only -->
+  <div class="desktop-slider slider-container overflow-hidden relative w-full h-screen">
+    <div class="slider flex">
+      <img src="/static/images/img1.png" alt="Slide 1" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/img2.png" alt="Slide 2" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/img3.png" alt="Slide 3" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/img4.png" alt="Slide 4" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/img5.png" alt="Slide 5" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/img6.png" alt="Slide 6" class="slider-item w-full h-full object-cover">
+    </div>
+  </div>
+
+  <script>
+    let currentIndexDesktop = 0;
+    const totalSlides = document.querySelectorAll('.desktop-slider .slider-item').length;
+    const sliderElement = document.querySelector('.desktop-slider .slider');
+
+    function changeDesktopSlide() {
+      currentIndexDesktop = (currentIndexDesktop + 1) % totalSlides;
+      sliderElement.style.transform = `translateX(-${currentIndexDesktop * 100}%)`;
+    }
+
+    setInterval(changeDesktopSlide, 4000);
+  </script>
+
+ <!-- Mobile Slider: Visible on Mobile Only -->
+  <div class="mobile-slider slider-container overflow-hidden relative w-full h-screen">
+    <div class="slider flex transition-transform duration-1000 ease-in-out">
+      <img src="/static/images/image1.png" alt="Slide 1" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/image2.png" alt="Slide 2" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/image3.png" alt="Slide 3" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/image4.png" alt="Slide 4" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/image5.png" alt="Slide 5" class="slider-item w-full h-full object-cover">
+      <img src="/static/images/image6.png" alt="Slide 6" class="slider-item w-full h-full object-cover">
+    </div>
+  </div>
+
+  <script>
+    // Mobile Slider Logic (Horizontal sliding)
+    let currentIndexMobile = 0;
+    const mobileSlides = document.querySelectorAll('.mobile-slider .slider-item');
+    const totalMobileSlides = mobileSlides.length;
+
+    function changeMobileSlide() {
+      currentIndexMobile = (currentIndexMobile + 1) % totalMobileSlides; // Loop back to first image
+      const newTransformValue = -100 * currentIndexMobile + '%';
+      document.querySelector('.mobile-slider .slider').style.transition = 'transform 1s ease-in-out';
+      document.querySelector('.mobile-slider .slider').style.transform = `translateX(${newTransformValue})`;
+    }
+
+    // Change mobile slide every 4 seconds
+    setInterval(changeMobileSlide, 4000);
+  </script>
+
+  <!-- Overlay Elements -->
+  <div class="overlay-elements absolute bottom-[210px] md:bottom-[90px] w-full" >
+    <h1 class="headline text-xl sm:text-2xl md:text-5xl font-bold mb-6 px-4" style="line-height: 1.3; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
+      Bringing Quality Health Services to You
+    </h1>
+    <div class="flex justify-center items-center w-full">
+      <div class="flex items-center w-full max-w-xl bg-white border border-blue-500 rounded-full overflow-hidden shadow-md">
+        <input type="text" placeholder="AI Driven Healthcare Marketplace..." class="flex-grow px-4 py-2 sm:px-5 sm:py-3 text-gray-700 text-base focus:outline-none bg-transparent" />
+        <button class="bg-blue-600 px-5 py-3 flex items-center justify-center rounded-r-full hover:bg-blue-700" style="padding:14px;">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <a href="tel:102" class="cta-button mt-4 inline-block bg-red-500 text-white px-4 py-2 rounded-full shadow hover:bg-red-600 text-sm sm:text-base md:text-lg" style="background-color:#2563eb;">
+      Call An Ambulance
+    </a>
+  </div>
+
+  <!-- 🔷 FOOTER -->
+  <footer class="bg-white/60 backdrop-blur-sm shadow-inner">
+    <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-500 text-sm">
+      &copy; 2025 Smart Swasthya Seva. All rights reserved.
+    </div>
+  </footer>
+  <!-- Hamburger toggle script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn  = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (toggleBtn && mobileMenu) {
+        toggleBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    });
+  </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchInput = document.querySelector('.overlay-elements input[type="text"]');
+    const resultBox = document.createElement('div');
+    resultBox.className = 'absolute z-50 mt-2 bg-white text-gray-800 rounded-md shadow-lg w-full max-w-xl mx-auto';
+    resultBox.style.display = 'none';
+    searchInput.parentElement.appendChild(resultBox);
+
+    let timeoutId;
+
+    searchInput.addEventListener('input', function () {
+      clearTimeout(timeoutId);
+      const query = this.value.trim();
+      if (query.length < 3) {
+        resultBox.style.display = 'none';
+        resultBox.innerHTML = '';
+        return;
+      }
+
+      timeoutId = setTimeout(() => {
+        fetch(`/search?q=${encodeURIComponent(query)}`)
+          .then(response => response.json())
+          .then(data => {
+            const results = data.results || [];
+            if (results.length === 0) {
+              resultBox.innerHTML = '<div class="px-4 py-2 text-sm text-gray-500">No results found</div>';
+            } else {
+              resultBox.innerHTML = results.map(item => `
+                <div class="px-4 py-2 border-b hover:bg-blue-100 cursor-pointer">
+                  <strong>${item.title}</strong><br>
+                  ${item.location ? `<small>${item.location}</small>` : item.desc || ''}
+                </div>
+              `).join('');
+            }
+            resultBox.style.display = 'block';
+          })
+          .catch(err => {
+            console.error('Search error:', err);
+          });
+      }, 300); // debounce
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!searchInput.contains(e.target)) {
+        resultBox.style.display = 'none';
+      }
+    });
+  });
+  </script>
+</body>
+</html>

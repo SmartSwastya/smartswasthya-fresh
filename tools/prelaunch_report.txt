@@ -1,0 +1,61 @@
+
+📄 pyproject.toml not found.
+⚙️ Running tools/coder.py to auto-generate pyproject.toml...
+❌ coder.py executed but pyproject.toml still missing
+
+🔐 SmartSwasthya Prelaunch Checker V3 🔐
+==========================================
+
+📦 Missing __init__.py files:
+
+🚨 Dynamic Import Suspicion:
+ - D:\root\smartswasthya\tools\..\obvious_mapper.py [Line 10]: import importlib
+ - D:\root\smartswasthya\tools\..\obvious_mapper.py [Line 11]: import importlib.util
+# @auto_flag: dynamic_imports [importlib.import_module]
+# ⚠️ Dynamic import detected — avoid in core logic
+# @auto_flag: dynamic_imports [importlib.import_module]
+# ⚠️ Dynamic import detected — avoid in core logic
+# @auto_flag: dynamic_imports [importlib.import_module]
+# ⚠️ Dynamic import detected — avoid in core logic
+ - D:\root\smartswasthya\tools\..\obvious_mapper.py [Line 51]: module = importlib.import_module(name)
+ - D:\root\smartswasthya\tools\..\obvious_mapper.py [Line 70]: module = importlib.import_module(route_module)
+ - D:\root\smartswasthya\tools\..\obvious_mapper.py [Line 128]: spec = importlib.util.spec_from_file_location("obvious_router_registrar", module_path)
+ - D:\root\smartswasthya\tools\..\obvious_mapper.py [Line 129]: module = importlib.util.module_from_spec(spec)
+ - D:\root\smartswasthya\tools\..\obvious_mapper.py [Line 130]: spec.loader.exec_module(module)
+ - D:\root\smartswasthya\tools\..\logic\task_logic.py [Line 3]: # │ Description: Handles task execution and status tracking │
+ - D:\root\smartswasthya\tools\..\odil\generate_route_trace.py [Line 10]: import importlib
+ - D:\root\smartswasthya\tools\..\odil\generate_route_trace.py [Line 84]: mod = importlib.import_module(module_path)
+ - D:\root\smartswasthya\tools\..\registry\app_registry.py [Line 8]: import importlib.util
+ - D:\root\smartswasthya\tools\..\registry\app_registry.py [Line 36]: spec = importlib.util.spec_from_file_location(module_name, module_path)
+ - D:\root\smartswasthya\tools\..\registry\app_registry.py [Line 37]: module = importlib.util.module_from_spec(spec)
+ - D:\root\smartswasthya\tools\..\registry\app_registry.py [Line 38]: spec.loader.exec_module(module)
+ - D:\root\smartswasthya\tools\..\tools\coder.py [Line 118]: 'engine_status': '✅ full chain executed',
+ - D:\root\smartswasthya\tools\..\tools\coder.py [Line 137]: def execute_temp_commands():
+ - D:\root\smartswasthya\tools\..\tools\coder.py [Line 173]: logging.info("Commands executed & cleared ✅")
+ - D:\root\smartswasthya\tools\..\tools\coder.py [Line 178]: os.execv(sys.executable, [sys.executable] + [__file__])
+ - D:\root\smartswasthya\tools\..\tools\coder.py [Line 187]: execute_temp_commands()
+ - D:\root\smartswasthya\tools\..\tools\obvious_router_registrar.py [Line 8]: import importlib.util
+ - D:\root\smartswasthya\tools\..\tools\obvious_router_registrar.py [Line 16]: spec = importlib.util.spec_from_file_location(module_name, module_path)
+ - D:\root\smartswasthya\tools\..\tools\obvious_router_registrar.py [Line 17]: module = importlib.util.module_from_spec(spec)
+ - D:\root\smartswasthya\tools\..\tools\obvious_router_registrar.py [Line 18]: spec.loader.exec_module(module)
+ - D:\root\smartswasthya\tools\..\tools\obvious_route_generator.py [Line 6]: import importlib.util
+ - D:\root\smartswasthya\tools\..\tools\obvious_route_generator.py [Line 19]: spec = importlib.util.spec_from_file_location(module_name, module_path)
+ - D:\root\smartswasthya\tools\..\tools\obvious_route_generator.py [Line 20]: module = importlib.util.module_from_spec(spec)
+ - D:\root\smartswasthya\tools\..\tools\obvious_route_generator.py [Line 21]: spec.loader.exec_module(module)
+ - D:\root\smartswasthya\tools\..\tools\prelaunch_checker_v3.py [Line 8]: import importlib.util
+# @auto_flag: dynamic_imports [__import__]
+# ⚠️ Dynamic import detected — avoid in core logic
+# @auto_flag: dynamic_imports [__import__]
+# ⚠️ Dynamic import detected — avoid in core logic
+# @auto_flag: dynamic_imports [__import__]
+# ⚠️ Dynamic import detected — avoid in core logic
+ - D:\root\smartswasthya\tools\..\tools\prelaunch_checker_v3.py [Line 16]: DYNAMIC_IMPORT_KEYWORDS = ["__import__", "importlib", "eval", "exec"]
+ - D:\root\smartswasthya\tools\..\tools\prelaunch_checker_v3.py [Line 41]: log("❌ coder.py executed but pyproject.toml still missing")
+
+🔁 include_router chains found:
+
+🪫 Placeholder Modules:
+
+📂 Missing Essential Folders:
+
+⚠️ Errors found. Please resolve before launch.

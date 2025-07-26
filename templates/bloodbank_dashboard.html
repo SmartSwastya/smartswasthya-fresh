@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% block js %}{{ js }}{% endblock %}
+
+<!-- AUTO BACKEND -->
+
+<div class="container mx-auto py-8 px-4">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-semibold text-gray-700">🩸 Blood Bank Dashboard</h2>
+    <div>
+      <label class="mr-2 text-sm text-gray-600">🌐 Change Language:</label>
+      <select class="border rounded px-2 py-1 text-sm">
+        <option>English</option>
+        <option>हिंदी</option>
+        <option>मराठी</option>
+        <option>বাংলা</option>
+        <option>தமிழ்</option>
+        <option>తెలుగు</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Total Units Available</h3>
+      <p class="text-3xl font-semibold text-red-600 mt-2">512</p>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Today's Donations</h3>
+      <p class="text-3xl font-semibold text-green-600 mt-2">23</p>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Pending Requests</h3>
+      <p class="text-3xl font-semibold text-yellow-600 mt-2">7</p>
+    </div>
+  </div>
+
+  <!-- Inventory & Donor Section -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🧾 Blood Inventory</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Group-wise Units (A+, A-, B+, etc.)</li>
+        <li>Expiry Monitoring</li>
+        <li>Reserve for Emergencies</li>
+      </ul>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🧑‍🦱 Donor Records</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Verified Repeat Donors</li>
+        <li>Voluntary Drives</li>
+        <li>Donor History & Next Eligibility</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Requests and Logistics -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">📨 Blood Requests</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Hospitals, Emergencies</li>
+        <li>Auto-alert for Low Inventory</li>
+        <li>Approval & Delivery Coordination</li>
+      </ul>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🚚 Cold Chain Logistics</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Temperature Controlled Dispatch</li>
+        <li>Delivery Agents & Routes</li>
+        <li>Vehicle Monitoring</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Staff & Attendance -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">👨‍⚕️ Staff Management</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Lab Technicians & Supervisors</li>
+        <li>Shift Rotation & Holidays</li>
+        <li>Emergency Response Teams</li>
+      </ul>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🕐 Entry/Exit with Biometric</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>RFID/Fingerprint Logs</li>
+        <li>Real-time Monitoring</li>
+        <li>Exportable Attendance Reports</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+<!-- AUTO BACKEND -->

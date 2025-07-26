@@ -1,0 +1,88 @@
+"""
+CHECKER TOOL V2 — Smart Swasthya Seva
+------------------------------------------------
+Compare smartswasthya_full.tar (v1) with current live project (v4)
+to generate a structured JSON task diff summary for DB syncing.
+Output: JSON (add/update/remark)
+Execution: Must run inside Docker (live context safe)
+"""
+
+import os
+import json
+import tarfile
+from pathlib import Path
+
+# 1. CONFIGURATION
+V1_TAR_PATH = "root/smartswasthya/tools/checker/previous_version/smartswasthya_full.tar"
+V4_DIR_PATH = "root/smartswasthya"
+OUTPUT_DIR = "root/smartswasthya/tools/checker/new_version_audit"
+MAPPING_TABLE = "root/smartswasthya/tools/checker/section_mapping.json"
+TASK_OUTPUT_FILE = os.path.join(OUTPUT_DIR, "task_diff_summary.json")
+
+# 2. UTILITIES
+
+def extract_tar_to_memory(tar_path):
+    """Extract TAR contents to memory (dict: path -> str content)"""
+    memory_fs = {}
+    with tarfile.open(tar_path, 'r') as tar:
+        for member in tar.getmembers():
+            if member.isfile():
+                f = tar.extractfile(member)
+                if f:
+                    memory_fs[member.name] = f.read().decode('utf-8', errors='ignore')
+    return memory_fs
+
+def load_mapping_table():
+    with open(MAPPING_TABLE, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+def save_json(data, path):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+    print(f"[\u2713] Saved: {path}")
+
+# 3. DIFF LOGIC (TO BE FILLED LATER)
+
+def compare_file_pair(v1_content, v4_path, blueprint_context):
+    """
+    Stub: Perform comparison between v1 file content and v4 live file path.
+    Will use semantic understanding of upgrades like Flask to FastAPI etc.
+    """
+    return {
+        "status": "updated",
+        "changes": ["Function refactored", "Flask → FastAPI migration"],
+        "section": "05",
+        "v1_path": "api/routes/doctor.py",
+        "v4_path": "routes/doctor_routes.py"
+    }
+
+# 4. MAIN LOGIC
+
+def run_checker():
+    print("[1/5] Extracting v1 TAR to memory...")
+    v1_files = extract_tar_to_memory(V1_TAR_PATH)
+
+    print("[2/5] Loading section mapping...")
+    blueprint_map = load_mapping_table()
+
+    print("[3/5] Running structured comparisons...")
+    task_list = []
+    for section, file_pairs in blueprint_map.items():
+        for pair in file_pairs:
+            v1_rel = pair.get("v1")
+            v4_rel = pair.get("v4")
+            v1_content = v1_files.get(v1_rel)
+            v4_path = Path(V4_DIR_PATH) / v4_rel
+
+            if v1_content and v4_path.exists():
+                result = compare_file_pair(v1_content, v4_path, blueprint_map)
+                task_list.append(result)
+
+    print("[4/5] Writing task diff summary...")
+    save_json(task_list, TASK_OUTPUT_FILE)
+
+    print("[5/5] Checker Tool complete. Tasks ready for DB sync.")
+
+if __name__ == "__main__":
+    run_checker()

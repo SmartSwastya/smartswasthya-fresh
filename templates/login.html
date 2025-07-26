@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Smart Swasthya Seva{% endblock %}
+
+{% block content %}
+{% block js %}{{ js | default('') }}{% endblock %}
+  <div class="max-w-md mx-auto bg-white/50 backdrop-blur-md p-6 mt-16 rounded-2xl shadow-lg border border-cyan-100">
+    <h1 class="text-2xl font-bold text-cyan-700 text-center mb-6">🔐 Welcome Back</h1>
+
+    <form id="loginForm" method="POST" action="/login" class="space-y-4">
+      <div>
+        <label class="block font-semibold mb-1">📱 Mobile Number</label>
+        <input
+          type="tel"
+          name="identity"
+          id="identity"
+          class="input"
+          placeholder="Enter mobile number"
+          required
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="10"
+          onkeypress="return isDigitOnly(event)"
+          oninput="filterToDigitsOnly(event)"
+          onpaste="handlePaste(event)"
+        >
+        <small id="mobileErrorMsg" class="text-red-500 text-sm hidden">
+          Enter exactly 10 digits.
+        </small>
+      </div>
+      <!-- 📌 Dynamically injected role selector -->
+      <div id="roleSelector" class="hidden space-y-2">
+        <label class="block font-semibold">👤 Select Role</label>
+        <div class="space-y-1 ml-2">
+          <label><input type="radio" name="role" value="smartuser" checked> Smart User</label><br>
+          <label><input type="radio" name="role" value="admin"> Admin / Developer</label><br>
+          <label><input type="radio" name="role" value="specialist"> Health Care Specialist</label>
+        </div>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">🔑 Password</label>
+        <div class="relative">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="input pr-10"
+            placeholder="Enter your password"
+            required
+          >
+          <button
+            type="button"
+            onclick="togglePassword()"
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600"
+          >
+            <svg
+              id="eyeIcon"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5
+                       c4.477 0 8.268 2.943 9.542 7
+                       -1.274 4.057-5.065 7-9.542 7
+                       -4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </button>
+        </div>
+        <div class="text-right text-sm mt-1">
+          <a href="/forgot_password" class="text-cyan-600 hover:underline">
+            Forgot Password?
+          </a>
+        </div>
+      </div>
+
+      <button type="submit" class="btn w-full mt-2">🚀 Login</button>
+      <p id="errorMsg" class="text-red-500 text-sm mt-2 hidden"></p>
+
+      <p class="text-center text-sm text-gray-600 mt-6">
+        Don't have an account?
+        <a href="/signup" class="text-cyan-600 hover:underline">Create one</a>
+      </p>
+    </form>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+
+  <!-- ─── Helper functions (must load before any on* handlers) ─── -->
+  <script>
+    function isDigitOnly(e) {
+      const ch = String.fromCharCode(e.which);
+      return /^[0-9]$/.test(ch);
+    }
+    function filterToDigitsOnly(e) {
+      const el = e.target;
+      el.value = el.value.replace(/\D/g, '');
+      document.getElementById('mobileErrorMsg')
+        .classList.toggle('hidden', el.value.length === 10);
+    }
+    function handlePaste(e) {
+      const clip = (e.clipboardData || window.clipboardData).getData('text');
+      if (!/^\d+$/.test(clip)) e.preventDefault();
+    }
+    function togglePassword() {
+      const pw  = document.getElementById('password');
+      const eye = document.getElementById('eyeIcon');
+      if (pw.type === 'password') {
+        pw.type = 'text';
+        eye.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13.875 18.825A10.05 10.05 0 0112 19
+               c-4.478 0-8.269-2.943-9.543-7
+               a9.955 9.955 0 012.42-3.568
+               M6.21 6.21A9.953 9.953 0 0112 5
+               c4.478 0 8.269 2.943 9.543 7
+               a9.96 9.96 0 01-4.196 5.255
+               M3 3l18 18"/>`;
+      } else {
+        pw.type = 'password';
+        eye.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5
+               c4.477 0 8.268 2.943 9.542 7
+               -1.274 4.057-5.065 7-9.542 7
+               -4.477 0-8.268-2.943-9.542-7z"/>`;
+      }
+    }
+  </script>
+
+  <!-- ─── Your existing form logic (unchanged) ─── -->
+  <script>
+    const form = document.getElementById('loginForm');
+    const identity = document.getElementById('identity');
+    const password = document.getElementById('password');
+    const errorMsg = document.getElementById('errorMsg');
+    const roleSelector = document.getElementById('roleSelector');
+    const roleInputs = roleSelector ? roleSelector.querySelectorAll('input[type=radio]') : [];
+    let isLegacy = false;
+
+    identity.addEventListener('blur', async () => {
+      const mobile = identity.value.trim();
+      if (!mobile || mobile.length !== 10) return;
+
+      try {
+        const res = await fetch('/check-user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ identity: mobile })
+        });
+        const data = await res.json();
+
+        // Handle password mode
+        if (data.status === 'create') {
+          password.placeholder = '🔐 Create your new password';
+          isLegacy = true;
+        } else if (data.status === 'existing') {
+          password.placeholder = '🔑 Enter your password';
+          isLegacy = false;
+        } else {
+          errorMsg.textContent = '⚠️ User not found. Please sign up.';
+          errorMsg.classList.remove('hidden');
+          return;
+        }
+
+        errorMsg.classList.add('hidden');
+
+        // Handle role selector visibility
+        if (data.roles && Array.isArray(data.roles) && roleSelector) {
+          roleSelector.classList.remove('hidden');
+          roleInputs.forEach(input => {
+            const show = data.roles.includes(input.value);
+            input.parentElement.style.display = show ? 'block' : 'none';
+            if (show) input.checked = true; // Select first visible role
+          });
+        }
+
+      } catch (err) {
+        console.error('Check-user failed:', err);
+        errorMsg.textContent = '⚠️ Server error.';
+        errorMsg.classList.remove('hidden');
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const mobile = identity.value.trim();
+      const pass = password.value.trim();
+      const role = document.querySelector('input[name="role"]:checked')?.value || 'smartuser';
+      const endpoint = isLegacy ? '/set-password' : '/login';
+
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ identity: mobile, password: pass, role })
+        });
+
+        const result = await res.json();
+
+        if (result.status === 'success') {
+          if (result.token) {
+            localStorage.setItem("authToken", result.token);
+            document.cookie = `Authorization=Bearer ${result.token}; path=/`;
+          }
+          if (result.redirect === "/awareness") {
+            sessionStorage.setItem("fromSignup", "true");
+          }
+          return window.location.href = result.redirect || "/smart_user";
+        } else {
+          errorMsg.textContent = result.message || "❌ Login failed.";
+          errorMsg.classList.remove("hidden");
+        }
+      } catch (err) {
+        console.error('Login error:', err);
+        errorMsg.textContent = '⚠️ Internal server error.';
+        errorMsg.classList.remove('hidden');
+      }
+    });
+  </script>
+  <!-- ─── CSS only (no JS here!) ─── -->
+  <style>
+    .input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.375rem;
+      transition: border-color 0.2s;
+    }
+    .input:focus {
+      border-color: #38a1db;
+      outline: none;
+    }
+    .btn {
+      background: linear-gradient(to right, #4dc0b5, #38a1db);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    .btn:hover {
+      background: linear-gradient(to right, #38a1db, #4dc0b5);
+    }
+  </style>
+{% endblock %}

@@ -1,0 +1,169 @@
+🛠️ Patch Run Summary — 2025-07-06 05:39 PM
+
+❌ FAILED PATCHES
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\active_token.py
+❌ Failed to write: 'models\\ambulance_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\ambulance_profiles.py
+❌ Failed to write: 'models\\appointments.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\appointments.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\app_update_logs.py
+❌ Failed to write: 'models\\billing_invoices.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\billing_invoices.py
+❌ Failed to write: 'models\\bio_metrics.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\bio_metrics.py
+❌ Failed to write: 'models\\blood_bank_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\blood_bank_profiles.py
+❌ Failed to write: 'models\\chat_sessions.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\chat_sessions.py
+❌ Failed to write: 'models\\corporate_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\corporate_profiles.py
+❌ Failed to write: 'models\\device_logs.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\device_logs.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\dev_tasks.py
+❌ Failed to write: 'models\\digital_signatures.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\digital_signatures.py
+❌ Failed to write: 'models\\doctor_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\doctor_profiles.py
+❌ Failed to write: 'models\\ele_devices.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\ele_devices.py
+❌ Failed to write: 'models\\emergency_alerts.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\emergency_alerts.py
+❌ Failed to write: 'models\\emergency_contacts.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\emergency_contacts.py
+❌ Failed to write: 'models\\family_health_status.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\family_health_status.py
+❌ Failed to write: 'models\\feedbacks.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\feedbacks.py
+❌ Failed to write: 'models\\health_insurance_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\health_insurance_profiles.py
+❌ Failed to write: 'models\\health_metrics.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\health_metrics.py
+❌ Failed to write: 'models\\home_care_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\home_care_profiles.py
+❌ Failed to write: 'models\\hospital_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\hospital_profiles.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\inventory_items.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\inventory_transactions.py
+❌ Failed to write: 'models\\lab_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\lab_profiles.py
+❌ Failed to write: 'models\\lab_test_results.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\lab_test_results.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\legacy_user.py
+❌ Failed to write: 'models\\live_tracking.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\live_tracking.py
+❌ Failed to write: 'models\\login_sessions.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\login_sessions.py
+❌ Failed to write: 'models\\medical_records.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\medical_records.py
+❌ Failed to write: 'models\\medication_reminders.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\medication_reminders.py
+❌ Failed to write: 'models\\message_logs.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\message_logs.py
+❌ Failed to write: 'models\\notifications.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\notifications.py
+❌ Failed to write: 'models\\order_service_tracking.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\order_service_tracking.py
+❌ Failed to write: 'models\\otp_logs.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\otp_logs.py
+❌ Failed to write: 'models\\otp_sessions.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\otp_sessions.py
+❌ Failed to write: 'models\\password_reset_requests.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\password_reset_requests.py
+❌ Failed to write: 'models\\pharmacy_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\pharmacy_profiles.py
+❌ Failed to write: 'models\\prescriptions.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\prescriptions.py
+❌ Failed to write: 'models\\referral_earnings.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\referral_earnings.py
+❌ Failed to write: 'models\\referral_links.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\referral_links.py
+❌ Failed to write: 'models\\scan_reports.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\scan_reports.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\service_packages.py
+❌ Failed to write: 'models\\service_requests.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\service_requests.py
+❌ Failed to write: 'models\\staff_attendance.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\staff_attendance.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\staff_profiles.py
+❌ Failed to write: 'models\\support_tickets.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\support_tickets.py
+❌ Failed to write: 'models\\users.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\users.py
+❌ Failed to write: 'models\\user_activity_log.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\user_activity_log.py
+❌ Failed to write: 'models\\user_consents.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\user_consents.py
+❌ Failed to write: 'models\\user_devices.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\user_devices.py
+❌ Failed to write: 'models\\user_documents.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\user_documents.py
+❌ Failed to write: 'models\\user_kyc.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\user_kyc.py
+❌ Failed to write: 'models\\user_location_logs.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\user_location_logs.py
+❌ Failed to write: 'models\\user_login_history.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\user_login_history.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\user_profile_model.py
+❌ Failed to write: 'models\\user_settings.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\user_settings.py
+❌ Failed to write: 'models\\user_wallet.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\user_wallet.py
+❌ Failed to write: 'models\\vendor_profiles.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\vendor_profiles.py
+❌ Failed to write: 'models\\wallet_transactions.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ models\wallet_transactions.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\task_tracker\code_snippet_map.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\task_tracker\dev_assignment_log.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\task_tracker\model_trace.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\task_tracker\route_trace.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\task_tracker\task_master.py
+⚠️ Marker not found: from sqlalchemy.orm import relationship ➝ models\task_tracker\task_status_history.py
+⚠️ Marker not found: import json ➝ logic\bloodbank_logic.py
+⚠️ Marker not found: import json ➝ logic\doctor_logic.py
+❌ Failed to write: 'logic\\dummy_task.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ logic\dummy_task.py
+⚠️ Marker not found: import json ➝ logic\family_logic.py
+⚠️ Marker not found: import json ➝ logic\homecare_logic.py
+⚠️ Marker not found: import json ➝ logic\hospital_logic.py
+⚠️ Marker not found: import json ➝ logic\lab_logic.py
+⚠️ Marker not found: import json ➝ logic\dev\token_logic.py
+⚠️ Marker not found: import json ➝ routes\account_routes.py
+❌ Failed to write: 'routes\\admin_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\admin_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\admin_login_routes.py
+⚠️ Marker not found: import json ➝ routes\admin_trace_routes.py
+⚠️ Marker not found: import json ➝ routes\alerts_routes.py
+❌ Failed to write: 'routes\\ambulance_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\ambulance_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\ambulance_dashboard_routes.py
+❌ Failed to write: 'routes\\awareness_window_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\awareness_window_routes.py
+⚠️ Marker not found: import json ➝ routes\awareness_window_routes.py
+⚠️ Marker not found: import json ➝ routes\base_routes.py
+❌ Failed to write: 'routes\\bloodbank_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\bloodbank_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\console_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\dev_auth_routes.py
+⚠️ Marker not found: import json ➝ routes\dev_bucket_routes.py
+⚠️ Marker not found: import json ➝ routes\dev_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\dev_login_routes.py
+❌ Failed to write: 'routes\\doctor_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\doctor_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\email_otp.py
+❌ Failed to write: 'routes\\family_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\family_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\health.py
+❌ Failed to write: 'routes\\homecare_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\homecare_dashboard_routes.py
+❌ Failed to write: 'routes\\home_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\home_routes.py
+⚠️ Marker not found: import json ➝ routes\home_routes.py
+❌ Failed to write: 'routes\\hospital_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\hospital_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\identity_routes.py
+⚠️ Marker not found: import json ➝ routes\index_routes.py
+❌ Failed to write: 'routes\\lab_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\lab_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\landing_routes.py
+⚠️ Marker not found: import json ➝ routes\location_routes.py
+⚠️ Marker not found: import json ➝ routes\logic_trigger.py
+⚠️ Marker not found: import json ➝ routes\login_routes.py
+⚠️ Marker not found: import json ➝ routes\partner_docs_routes.py
+⚠️ Marker not found: import json ➝ routes\partner_routes.py
+❌ Failed to write: 'routes\\pharma_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\pharma_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\pharma_dashboard_routes.py
+❌ Failed to write: 'routes\\popup_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\popup_routes.py
+⚠️ Marker not found: import json ➝ routes\popup_routes.py
+⚠️ Marker not found: import json ➝ routes\profile_routes.py
+❌ Failed to write: 'routes\\rollback_viewer_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\rollback_viewer_routes.py
+⚠️ Marker not found: import json ➝ routes\scan_results_routes.py
+⚠️ Marker not found: import json ➝ routes\settings_routes.py
+⚠️ Marker not found: import json ➝ routes\signup_routes.py
+⚠️ Marker not found: import json ➝ routes\smartuser.py
+❌ Failed to write: 'routes\\smartuser_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\smartuser_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\smartuser_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\smart_user_routes.py
+⚠️ Marker not found: import json ➝ routes\sms_otp.py
+⚠️ Marker not found: import json ➝ routes\submission_result_routes.py
+⚠️ Marker not found: import json ➝ routes\sync_results_routes.py
+⚠️ Marker not found: import json ➝ routes\task_runner.py
+⚠️ Marker not found: import json ➝ routes\track_routes.py
+⚠️ Marker not found: import json ➝ routes\ui_map_routes.py
+⚠️ Marker not found: import json ➝ routes\user_profile_routes.py
+⚠️ Marker not found: import json ➝ routes\user_routes.py
+⚠️ Marker not found: import json ➝ routes\verification_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\api_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\backups_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\basectrl_routes.py
+❌ Failed to write: 'routes\\dev\\console_dashboard_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\dev\console_dashboard_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\console_dashboard_routes.py
+❌ Failed to write: 'routes\\dev\\database_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\dev\database_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\database_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\dummy_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\editor_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\env_routes.py
+❌ Failed to write: 'routes\\dev\\routes_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\dev\routes_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\routes_routes.py
+❌ Failed to write: 'routes\\dev\\scan_results_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\dev\scan_results_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\scan_results_routes.py
+❌ Failed to write: 'routes\\dev\\sync_results_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\dev\sync_results_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\sync_results_routes.py
+❌ Failed to write: 'routes\\dev\\token_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\dev\token_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\token_routes.py
+❌ Failed to write: 'routes\\dev\\ui_dev_reference_viewer_routes.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\dev\ui_dev_reference_viewer_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\ui_dev_reference_viewer_routes.py
+⚠️ Marker not found: import json ➝ routes\dev\sync\retry_handler.py
+⚠️ Marker not found: import json ➝ routes\dev\sync\scan.py
+❌ Failed to write: 'routes\\dev\\sync\\sync.py' is not in the subpath of 'D:\\root\\smartswasthya' OR one path is relative and the other is absolute. ➝ routes\dev\sync\sync.py
+⚠️ Marker not found: import json ➝ routes\dev\sync\sync.py
+⚠️ Marker not found: import json ➝ blueprints\sync_routes.py
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\admin_login.html
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\base.html
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\console_dashboard.html
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\dev_login.html
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\index.html
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\landing.html
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\scan_results.html
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\smartuser_dashboard.html
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\sync_results.html
+⚠️ Marker not found: import json ➝ templates\templates.py
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\ui_dev_reference_viewer.html
+⚠️ Marker not found: from fastapi.responses import HTMLResponse ➝ templates\dev\base\basectrl.html

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% block js %}{{ js }}{% endblock %}
+
+<!-- AUTO BACKEND -->
+<div class="container mx-auto py-8 px-4">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-semibold text-gray-700">💊 Pharmacy Dashboard</h2>
+    <div>
+      <label class="mr-2 text-sm text-gray-600">🌐 Change Language:</label>
+      <select class="border rounded px-2 py-1 text-sm">
+        <option>English</option>
+        <option>हिंदी</option>
+        <option>मराठी</option>
+        <option>বাংলা</option>
+        <option>தமிழ்</option>
+        <option>తెలుగు</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Total Medicines</h3>
+      <p class="text-3xl font-semibold text-blue-600 mt-2">2,431</p>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Orders Today</h3>
+      <p class="text-3xl font-semibold text-green-500 mt-2">87</p>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Pending Prescriptions</h3>
+      <p class="text-3xl font-semibold text-yellow-500 mt-2">13</p>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Manage Inventory -->
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">📦 Inventory Management</h4>
+      <ul class="list-disc list-inside text-gray-600 space-y-1">
+        <li>Add / Update Medicines</li>
+        <li>Batch & Expiry Tracking</li>
+        <li>Real-Time Stock Level Monitor</li>
+      </ul>
+    </div>
+
+    <!-- Order Fulfillment -->
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">📬 Order Fulfillment</h4>
+      <ul class="list-disc list-inside text-gray-600 space-y-1">
+        <li>Verify Prescription</li>
+        <li>Generate Bill & Delivery</li>
+        <li>Connect with Delivery Agent</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Staff + Entry Exit -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+    <!-- Staff -->
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">👥 Staff Management</h4>
+      <ul class="list-disc list-inside text-gray-600 space-y-1">
+        <li>Add/Remove Pharmacists</li>
+        <li>Shift Timings</li>
+        <li>Assign Counters</li>
+      </ul>
+    </div>
+
+    <!-- Biometric -->
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🕒 Premises Entry/Exit (Biometric)</h4>
+      <ul class="list-disc list-inside text-gray-600 space-y-1">
+        <li>Fingerprint/Face Check-in</li>
+        <li>Working Hours Log</li>
+        <li>Shift Violation Alerts</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+<!-- AUTO BACKEND -->

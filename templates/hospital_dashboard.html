@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% block js %}{{ js }}{% endblock %}
+
+<!-- AUTO BACKEND -->
+<div class="container mx-auto py-8 px-4">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-semibold text-gray-700">🏥 Hospital Dashboard</h2>
+    <div>
+      <label class="mr-2 text-sm text-gray-600">🌐 Change Language:</label>
+      <select class="border rounded px-2 py-1 text-sm">
+        <option>English</option>
+        <option>हिंदी</option>
+        <option>मराठी</option>
+        <option>বাংলা</option>
+        <option>தமிழ்</option>
+        <option>తెలుగు</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Stats Overview -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Total Beds</h3>
+      <p class="text-3xl font-semibold text-blue-600 mt-2">250</p>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Occupied Beds</h3>
+      <p class="text-3xl font-semibold text-red-500 mt-2">175</p>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">OPD Patients Today</h3>
+      <p class="text-3xl font-semibold text-green-600 mt-2">73</p>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5">
+      <h3 class="text-lg font-bold text-gray-600">Emergency Cases</h3>
+      <p class="text-3xl font-semibold text-yellow-500 mt-2">11</p>
+    </div>
+  </div>
+
+  <!-- Department Management -->
+  <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5 mb-6">
+    <h4 class="text-xl font-bold mb-3">🏥 Departments</h4>
+    <ul class="list-disc list-inside text-gray-700 space-y-1">
+      <li>Cardiology, Neurology, Pediatrics, Orthopedics, etc.</li>
+      <li>Department-Wise OPD Slots</li>
+      <li>Availability Calendar & Management</li>
+    </ul>
+  </div>
+
+  <!-- OPD/IPD & Floor Control -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🩺 OPD & IPD System</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Doctor Schedule Sync</li>
+        <li>Token System with SMS Alerts</li>
+        <li>Admit/Discharge Panel</li>
+      </ul>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🏨 Floor Management</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Ward-wise Dashboard</li>
+        <li>Isolation/ICU Handling</li>
+        <li>Live Camera/Monitoring Feed (Optional)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Staff & Biometric -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">👩‍⚕️ Staff Management</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Doctors, Nurses, Ward Boys Allocation</li>
+        <li>Duty Roster & Leave Management</li>
+        <li>Specialist Integration</li>
+      </ul>
+    </div>
+    <div class="bg-white/50 backdrop-blur-md rounded-xl shadow p-5">
+      <h4 class="text-lg font-bold mb-3">🕐 Entry/Exit with Biometric</h4>
+      <ul class="list-disc list-inside text-gray-700 space-y-1">
+        <li>Fingerprint/RFID Terminal Logs</li>
+        <li>Shift Timings & Alerts</li>
+        <li>Emergency Drill Triggers</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+<!-- AUTO BACKEND -->

@@ -1,0 +1,2 @@
+📊 Registered via ObviousMapper: 1 models
+✅ Base from sqlalchemy.orm.decl_api

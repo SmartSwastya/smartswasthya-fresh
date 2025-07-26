@@ -1,0 +1,454 @@
+task_id,title,description,status,source_layer,matched_file,source
+TASK001,Setup base FastAPI project,Initialize FastAPI project with standard folder structure,pending,v1,—,v1_csv
+TASK002,Create users table,Define and migrate core users model,pending,v1,—,v1_csv
+TASK003,Implement user registration,Create signup route with validation,pending,v1,—,v1_csv
+TASK004,Add email verification,Send OTP and verify email logic,pending,v1,—,v1_csv
+TASK005,Implement login flow,Add password hashing and JWT token generation,pending,v1,—,v1_csv
+TASK006,Create dashboard UI,Build base dashboard interface for Smart Users,pending,v1,—,v1_csv
+TASK007,Add profile popup modal,Enable modal with live edit/save,pending,v1,—,v1_csv
+TASK008,Integrate mobile verification,Skip if mobile already verified via Fast2SMS,pending,v1,—,v1_csv
+TASK009,Create user activity logger,Track login/logout and basic user actions,pending,v1,—,v1_csv
+TASK010,Setup Docker environment,Build Dockerfile and docker-compose for dev,pending,v1,—,v1_csv
+TASK011,Add SQLite test DB,Support local SQLite for fast testing,pending,v1,—,v1_csv
+TASK012,Build logic folder,Split complex functions into logic/ modules,pending,v1,—,v1_csv
+TASK013,Implement sync tool (v1),Basic scp-based sync logic with file listing,pending,v1,—,v1_csv
+TASK014,Build dev-bucket UI,Create UI to show assigned tasks to devs,pending,v1,—,v1_csv
+TASK015,Create task model,"Define dev_tasks with title, description, assigned_to",pending,v1,—,v1_csv
+TASK016,Seed initial tasks,Auto-insert system tasks (SYS001–SYS010),pending,v1,—,v1_csv
+TASK017,Fetch task by ID,Build logic to retrieve task by task_id,pending,v1,—,v1_csv
+TASK018,Enable file download per task,Link download button with ZIP package,pending,v1,—,v1_csv
+TASK019,Create submission handler,Support ZIP + optional notes upload,pending,v1,—,v1_csv
+TASK020,Mark task complete,Update status on successful upload,pending,v1,—,v1_csv
+TASK021,Implement feedback model,Track dev feedback per task,pending,v1,—,v1_csv
+TASK022,Build progress bar widget,UI element for task completion % per dev,pending,v1,—,v1_csv
+TASK023,Create admin review route,Allow admin to review and approve dev uploads,pending,v1,—,v1_csv
+TASK024,Implement admin approval logic,Update task status post approval,pending,v1,—,v1_csv
+TASK025,Auto sync uploaded files,Push submitted files to correct logic path,pending,v1,—,v1_csv
+TASK026,Check route duplication,Scan for route conflict and report,pending,v1,—,v1_csv
+TASK027,Add route tag scanner,Group routes with FastAPI tags,pending,v1,—,v1_csv
+TASK028,Sync logic files via Celery,Use Celery to background sync logic changes,pending,v1,—,v1_csv
+TASK029,Track developer login,Log dev sessions and time spent,pending,v1,—,v1_csv
+TASK030,Daily snapshot backup,Create daily ZIP snapshot of logic folder,pending,v1,—,v1_csv
+TASK031,Build logic tree viewer,Display nested logic folder structure visually,pending,v1,—,v1_csv
+TASK032,Check unused models,Detect models not referenced in any logic,pending,v1,—,v1_csv
+TASK033,Show model-logic map,Map which logic uses which model,pending,v1,—,v1_csv
+TASK034,Check unused routes,Detect routes not referenced in frontend,pending,v1,—,v1_csv
+TASK035,Sync DB migrations,Trigger alembic upgrades after logic sync,pending,v1,—,v1_csv
+TASK036,Lock file on edit,Prevent multiple devs editing same logic file,pending,v1,—,v1_csv
+TASK037,Enable Google login,OAuth-based restricted Gmail login,pending,v1,—,v1_csv
+TASK038,Superadmin dashboard,UI for overall task and dev tracking,pending,v1,—,v1_csv
+TASK039,Enable tagging system,Add tags for logic classification,pending,v1,—,v1_csv
+TASK040,Route to logic mapper,Tool to auto-link route → logic function,pending,v1,—,v1_csv
+TASK041,Logic conflict detector,Scan logic for conflicting function names,pending,v1,—,v1_csv
+TASK042,Create offline installer,Build full installer ZIP with Python/Node deps,pending,v1,—,v1_csv
+TASK043,Mark task priority,Allow admin to tag urgent tasks,pending,v1,—,v1_csv
+TASK044,Auto assign tasks,Distribute tasks evenly across devs,pending,v1,—,v1_csv
+TASK045,Track function coverage,Mark how many functions have tests,pending,v1,—,v1_csv
+TASK046,Setup test folder,Prepare unit testing infra for logic,pending,v1,—,v1_csv
+TASK047,Scan test coverage,Report test % per logic file,pending,v1,—,v1_csv
+TASK048,Tag external dependencies,Show where 3rd party libs used,pending,v1,—,v1_csv
+TASK049,Scan logic usage of DB,Show which logic files hit which models,pending,v1,—,v1_csv
+TASK050,Build DB model viewer,UI to navigate all models + relationships,pending,v1,—,v1_csv
+TASK051,Sync logic changes to test,Mirror synced logic to test folder for CI,pending,v1,—,v1_csv
+TASK052,Build analytics summary,Overall dev contribution & progress view,pending,v1,—,v1_csv
+TASK053,Developer profile modal,Show recent uploads + badges,pending,v1,—,v1_csv
+TASK054,Detect logic bloat,Mark logic files >500 lines for review,pending,v1,—,v1_csv
+TASK055,Suggest logic refactor,Recommend splitting heavy logic,pending,v1,—,v1_csv
+TASK056,Scan for old logic style,Detect v1-style legacy logic usage,pending,v1,—,v1_csv
+TASK057,Track logic function reuse,Show reused functions across files,pending,v1,—,v1_csv
+TASK058,Enable smart filter in UI,Filter tasks by type,pending,v1,—,v1_csv
+TASK059,Allow dev comments,Feedback option inside logic popup,pending,v1,—,v1_csv
+TASK060,Enable live task timer,Track how much time each dev spends,pending,v1,—,v1_csv
+TASK061,Generate progress CSV,Auto-export dev progress CSV,pending,v1,—,v1_csv
+TASK062,Sync user_docs folder,Auto sync user document logic changes,pending,v1,—,v1_csv
+TASK063,Auto alert for task delay,Notify admin if task inactive 7+ days,pending,v1,—,v1_csv
+TASK064,Allow logic rollback,Restore previous version of logic,pending,v1,—,v1_csv
+TASK065,Sync scanned logic to DB,Save function list to DB after scan,pending,v1,—,v1_csv
+TASK066,Track scan date,Log when logic/functions last scanned,pending,v1,—,v1_csv
+TASK067,Enable search by function,Search box to jump to function in logic,pending,v1,—,v1_csv
+TASK068,Detect logic duplicates,Find similar code blocks across logic,pending,v1,—,v1_csv
+TASK069,Add logic complexity score,Compute logic based on branching,pending,v1,—,v1_csv
+TASK070,Show Git-style diff,Display before/after on logic updates,pending,v1,—,v1_csv
+TASK071,Add logic tags to DB,Each logic tagged for classification,pending,v1,—,v1_csv
+TASK072,Export tagged logic,Download all logic with a specific tag,pending,v1,—,v1_csv
+TASK073,Compare logic versions,Show timeline of changes,pending,v1,—,v1_csv
+TASK074,Add logic status (active/legacy),Mark old logic as legacy,pending,v1,—,v1_csv
+TASK075,Enable logic lock override,Admin can force unlock logic,pending,v1,—,v1_csv
+TASK076,Setup error trace viewer,Display recent error logs for logic,pending,v1,—,v1_csv
+TASK077,Sync static files (CSS/JS),Copy updated frontend files to test,pending,v1,—,v1_csv
+TASK078,Enable logic preview popup,Quick preview of logic content,pending,v1,—,v1_csv
+TASK079,Add UI file validator,Validate ZIPs for missing/extra files,pending,v1,—,v1_csv
+TASK080,Setup Celery retry logic,Retry background sync on failure,pending,v1,—,v1_csv
+TASK081,Add dev-level badges,Assign 'Fast Finisher',pending,v1,—,v1_csv
+TASK082,Add logic file version,Maintain logic file history,pending,v1,—,v1_csv
+TASK083,Track test success/fail,Link logic to test pass status,pending,v1,—,v1_csv
+TASK084,Enable Docker rebuild,Rebuild containers post logic sync,pending,v1,—,v1_csv
+TASK085,Track broken migrations,Log Alembic errors if any,pending,v1,—,v1_csv
+TASK086,Visualize route coverage,Route → logic → model path,pending,v1,—,v1_csv
+TASK087,Track user activity in Dev Bucket,Log UI usage,pending,v1,—,v1_csv
+TASK088,Tag untracked logic,Detect logic not mapped to any task,pending,v1,—,v1_csv
+TASK089,Auto suggest task based on commit,AI-based auto assignment,pending,v1,—,v1_csv
+TASK090,Enable dark mode toggle,Switch dashboard to dark theme,pending,v1,—,v1_csv
+TASK091,Enable UI localization,Translate UI to Hindi,pending,v1,—,v1_csv
+TASK092,Track logic by folder group,Cluster logic under services,pending,v1,—,v1_csv
+TASK093,Add notification center,Show sync/submit/task alerts,pending,v1,—,v1_csv
+TASK094,Enable logic lint checker,Auto format + suggest corrections,pending,v1,—,v1_csv
+TASK095,Mark required files per task,Define expected upload content,pending,v1,—,v1_csv
+TASK096,Enable direct logic edit in browser,VS Code-style editor in modal,pending,v1,—,v1_csv
+TASK097,Setup build notifier,Notify when ZIP uploaded successfully,pending,v1,—,v1_csv
+TASK098,Export Dev Task Summary,CSV export for admin tracking,pending,v1,—,v1_csv
+TASK099,Setup upload API for bot,Programmatic task submit endpoint,pending,v1,—,v1_csv
+TASK100,Enable chunked ZIP upload,Support partial uploads for large files,pending,v1,—,v1_csv
+TASK101,Scan for circular imports,Mark files with cyclic dependencies,pending,v1,—,v1_csv
+TASK102,Enable nested task view,Show subtasks per master task,pending,v1,—,v1_csv
+TASK103,Setup task dependency map,Link dependent tasks,pending,v1,—,v1_csv
+TASK104,Allow task reassignment,Admin can move task to another dev,pending,v1,—,v1_csv
+TASK105,Mark cross-linked logic,Logic used in more than one feature,pending,v1,—,v1_csv
+TASK106,Enable logic owner attribution,Mark original creator in file,pending,v1,—,v1_csv
+TASK107,Enable project-wide logic view,Full visual map of all logic,pending,v1,—,v1_csv
+TASK108,Setup plugin-like extensions,Enable dynamic loading of new logic,pending,v1,—,v1_csv
+TASK109,Add metadata parser,Pull info from docstrings,pending,v1,—,v1_csv
+TASK110,Scan logic for sensitive info,Detect hardcoded keys/passwords,pending,v1,—,v1_csv
+TASK111,Add AI code review option,Optional Copilot-style suggestions,pending,v1,—,v1_csv
+TASK112,Enable logic block comments,Inline review system,pending,v1,—,v1_csv
+TASK113,Enable zip structure validator,Detect folder mismatch in ZIP,pending,v1,—,v1_csv
+TASK114,Export logic list to Excel,One-click Excel export,pending,v1,—,v1_csv
+TASK115,Highlight logic change history,Git-style timeline,pending,v1,—,v1_csv
+TASK116,Add logic tags (public/internal),Restrict visibility,pending,v1,—,v1_csv
+TASK117,Enable group upload,Team-based submit flow,pending,v1,—,v1_csv
+TASK118,Track unused DB tables,Compare models vs actual usage,pending,v1,—,v1_csv
+TASK119,Add logic index page,Search all logic quickly,pending,v1,—,v1_csv
+TASK120,Tag logic by route,Attach logic to specific route,pending,v1,—,v1_csv
+TASK121,Enable logic QR share,Quick open via QR,pending,v1,—,v1_csv
+TASK122,Add model-logic conflict detector,Check for missing relationships,pending,v1,—,v1_csv
+TASK123,Add DB auto index suggester,Suggest DB indexes based on usage,pending,v1,—,v1_csv
+TASK124,Scan for slow queries,Find ORM logic causing lag,pending,v1,—,v1_csv
+TASK125,Create sync error dashboard,Track failed syncs,pending,v1,—,v1_csv
+TASK126,Auto-patch route conflicts,Fix same-path routes automatically,pending,v1,—,v1_csv
+TASK127,Enable AI logic summary,One-line logic description,pending,v1,—,v1_csv
+TASK128,Setup static asset cache,Prevent stale JS/CSS,pending,v1,—,v1_csv
+TASK129,Sync docker logs to UI,View recent log output,pending,v1,—,v1_csv
+TASK130,Enable ZIP previewer,Show contents before upload,pending,v1,—,v1_csv
+TASK131,Enable re-download option,Allow dev to redownload uploaded task,pending,v1,—,v1_csv
+TASK132,Track package.json deps,Sync frontend changes,pending,v1,—,v1_csv
+TASK133,Add service-based grouping,Group logic under Hospital/Lab/etc.,pending,v1,—,v1_csv
+TASK134,Enable logic copy tool,Quick duplicate and edit logic,pending,v1,—,v1_csv
+TASK135,Add logic test runner,One-click run test for logic,pending,v1,—,v1_csv
+TASK136,Auto lint + format pre-upload,Prevent messy code,pending,v1,—,v1_csv
+TASK137,Add celery task monitor,View active/retry/failed tasks,pending,v1,—,v1_csv
+TASK138,Enable context tagging,Show where logic is called,pending,v1,—,v1_csv
+TASK139,Add live stats on dev bucket,Show submissions/hour,pending,v1,—,v1_csv
+TASK140,Add schema auto sync,DB model → JSON schema push,pending,v1,—,v1_csv
+TASK141,Create post-submit checklist,Must pass before success,pending,v1,—,v1_csv
+TASK142,Scan logic for TODOs,Unfinished items,pending,v1,—,v1_csv
+TASK143,Mark critical logic files,Prevent deletion,pending,v1,—,v1_csv
+TASK144,Sync scan report to admin,Email summary,pending,v1,—,v1_csv
+TASK145,Auto mark deprecated logic,Based on age or tags,pending,v1,—,v1_csv
+TASK146,Create logic doc generator,Auto markdown for each file,pending,v1,—,v1_csv
+TASK147,Tag UI usage per logic,Used in modal/home/profile,pending,v1,—,v1_csv
+TASK148,Link Figma ID to UI tasks,Track UI from Figma,pending,v1,—,v1_csv
+TASK149,Enable priority override,Admin push logic to top,pending,v1,—,v1_csv
+TASK150,Enable flag for blocked task,Needs approval/clarity,pending,v1,—,v1_csv
+TASK151,Enable logic A/B testing,Try multiple versions,pending,v1,—,v1_csv
+TASK152,Setup end-to-end test tracker,Link tasks to Cypress/Playwright,pending,v1,—,v1_csv
+TASK153,Enable component reuse checker,Scan for redundant UI,pending,v1,—,v1_csv
+TASK154,Enable logic folder ownership,Lock per team,pending,v1,—,v1_csv
+TASK155,Add sync report preview,Before final submit,pending,v1,—,v1_csv
+TASK156,Add AI suggest missing files,Zip upload validator,pending,v1,—,v1_csv
+TASK157,Build modular test scaffold,Template for unit tests,pending,v1,—,v1_csv
+TASK158,Enable logic notify webhook,Ping on success,pending,v1,—,v1_csv
+TASK159,Add contribution heatmap,Calendar view,pending,v1,—,v1_csv
+TASK160,Add function-level annotation,Inline explanations,pending,v1,—,v1_csv
+TASK161,Enable error trace attach,Dev can attach traceback,pending,v1,—,v1_csv
+TASK162,Enable logic submission notes,Dev optional explanation,pending,v1,—,v1_csv
+TASK163,Enable code search by keyword,VS Code style,pending,v1,—,v1_csv
+TASK164,Enable logic export via API,For documentation use,pending,v1,—,v1_csv
+TASK165,Enable smart ZIP name validation,Check format,pending,v1,—,v1_csv
+TASK166,Enable logic inheritance map,Parent-child functions,pending,v1,—,v1_csv
+TASK167,Mark test-blocked logic,Awaiting test infra,pending,v1,—,v1_csv
+TASK168,Show sync history per logic,Past submit timeline,pending,v1,—,v1_csv
+TASK169,Enable ZIP → folder unpacker,Auto extract and compare,pending,v1,—,v1_csv
+TASK170,Track logic response time,From request to DB,pending,v1,—,v1_csv
+TASK171,Add zip checksum validator,Detect upload corruption,pending,v1,—,v1_csv
+TASK172,Enable celery job retry viewer,See retry count/reason,pending,v1,—,v1_csv
+TASK173,Enable API schema visualizer,FastAPI auto-doc,pending,v1,—,v1_csv
+TASK174,Enable broken route tracker,Dead endpoints,pending,v1,—,v1_csv
+TASK175,Enable sync summary alert,Popup after every task,pending,v1,—,v1_csv
+TASK176,Sync final logic to prod,Push to production after pass,pending,v1,—,v1_csv
+TASK177,Enable system audit log,Track all changes,pending,v1,—,v1_csv
+TASK178,Enable logic sync chain,Logic A depends on B etc.,pending,v1,—,v1_csv
+TASK179,Track rejected tasks,History of rejected uploads,pending,v1,—,v1_csv
+TASK180,Show global progress bar,Dev/Task % overall,pending,v1,—,v1_csv
+TASK181,Enable VCS sync option,Sync to GitHub/Gitea,pending,v1,—,v1_csv
+TASK182,Enable smart link to task,Open task from commit,pending,v1,—,v1_csv
+TASK183,Enable AI prompt assist,Auto fill ZIP reason,pending,v1,—,v1_csv
+TASK184,Enable legacy ZIP importer,Auto convert V1 zip,pending,v1,—,v1_csv
+TASK185,Enable component registry,UI component doc,pending,v1,—,v1_csv
+TASK186,Enable cloud sync toggle,Enable S3 sync,pending,v1,—,v1_csv
+TASK187,Enable fallback ZIP upload,Retry via browser,pending,v1,—,v1_csv
+TASK188,Enable logic tag bulk edit,Change tags via UI,pending,v1,—,v1_csv
+TASK189,Enable dev logic notes,Private notes per file,pending,v1,—,v1_csv
+TASK190,Final task: Review & QA,End-to-end review of system,pending,v1,—,v1_csv
+PDF001,FastAPI + Jinja2 templating,Core platform architecture,pending,Core,—,pdf
+PDF002,PostgreSQL + Alembic migration,Database system setup,partial,Core,smartswasthya/alembic/env.py,pdf
+PDF003,Docker microservices,"Containers: smart_app, smart_db, smart_minio",partial,Core,smartswasthya/tools/trace_generator.py,pdf
+PDF004,OTP System - Mobile + Email,OTP via Fast2SMS and Email cooldown,partial,Core,smartswasthya/blueprints/dev_bucket_routes.py,pdf
+PDF005,Sync Logic Phase 1,Local → Server sync working,done,Core,smartswasthya/alembic/versions/085c13600c7d_add_dev_tasks_table.py,pdf
+PDF006,Sync Logic Phase 2,Server → Node propagation,done,Core,smartswasthya/blueprints/sync_routes.py,pdf
+PDF007,MinIO Chunk Logic,STEP 3-B implemented,done,Core,smartswasthya/logic/admin_trace_logic.py,pdf
+PDF008,ABHA / Aadhaar Integration,Future Aadhaar linkage,pending,Core,—,pdf
+PDF009,File browser + editor,Ace/Monaco UI + File API,partial,Debug,smartswasthya/blueprints/dev_bucket_routes.py,pdf
+PDF010,Patch directory logic,Upload & apply patches,done,Debug,smartswasthya/logic/admin_trace_logic.py,pdf
+PDF011,Log tail via subprocess,WebSocket or subprocess stream logs,partial,Debug,smartswasthya/handler.py,pdf
+PDF012,Smart Patch Suggestion,Auto-patch logic via AI,done,Debug,smartswasthya/routes/smartuser.py,pdf
+PDF013,Side-by-side file diff,Visual comparison UI,partial,Debug,smartswasthya/blueprints/dev_bucket_routes.py,pdf
+PDF014,DevBucket Phase 1,Basic engine + task files,done,DevBucket,smartswasthya/alembic/versions/085c13600c7d_add_dev_tasks_table.py,pdf
+PDF015,DevBucket Phase 2,"Gmail notifications, logs",pending,DevBucket,—,pdf
+PDF016,DevBucket Phase 3-A,Instruction editor approval UI,pending,DevBucket,—,pdf
+PDF017,DevBucket Phase 3-B,Auto-slide pending → visible,pending,DevBucket,—,pdf
+PDF018,DevBucket Phase 3-C,Task reassignment logic,pending,DevBucket,—,pdf
+PDF019,DevBucket Phase 3-D,Admin UI panel,pending,DevBucket,—,pdf
+PDF020,DevBucket Phase 4,Smart priority + expiry alerts,done,DevBucket,smartswasthya/alembic/versions/4675d330ee7b_init_fresh_schema.py,pdf
+PDF021,Model aliasing,SmartUser → User mapping,partial,Compat,smartswasthya/obvious_mapper.py,pdf
+PDF022,Self-contained logics,"moderator.py, token_manager.py, email_verification.py",pending,Compat,—,pdf
+PDF023,Route-to-model trace,Auto-map routes to model usage,partial,Compat,smartswasthya/obvious_mapper.py,pdf
+AUTO001,Detected logic: get_db,Auto-detected from scan in smartswasthya/database.py,done,AutoScan,smartswasthya/database.py,auto_scan
+AUTO002,Detected logic: check_router_imports,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO003,Detected logic: check_main_app_entry,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO004,Detected logic: check_structure_consistency,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO005,Detected logic: find_duplicate_routes,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO006,Detected logic: log,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO007,Detected logic: load_safe,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO008,Detected logic: save_safe,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO009,Detected logic: add_safe_folder,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO010,Detected logic: update_tags,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO011,Detected logic: full_scan,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO012,Detected logic: trigger_reload,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO013,Detected logic: generate_assist,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO014,Detected logic: home,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO015,Detected logic: rename_route,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO016,Detected logic: command,Auto-detected from scan in smartswasthya/handler.py,done,AutoScan,smartswasthya/handler.py,auto_scan
+AUTO017,Detected logic: health,Auto-detected from scan in smartswasthya/main.py,done,AutoScan,smartswasthya/main.py,auto_scan
+AUTO018,Detected logic: ensure_all_inits,Auto-detected from scan in smartswasthya/obvious_mapper.py,done,AutoScan,smartswasthya/obvious_mapper.py,auto_scan
+AUTO019,Detected logic: extract_classes_from_model,Auto-detected from scan in smartswasthya/obvious_mapper.py,done,AutoScan,smartswasthya/obvious_mapper.py,auto_scan
+AUTO020,Detected logic: generate_model_trace,Auto-detected from scan in smartswasthya/obvious_mapper.py,done,AutoScan,smartswasthya/obvious_mapper.py,auto_scan
+AUTO021,Detected logic: run,Auto-detected from scan in smartswasthya/obvious_mapper.py,done,AutoScan,smartswasthya/obvious_mapper.py,auto_scan
+AUTO022,Detected logic: register_section,Auto-detected from scan in smartswasthya/obvious_mapper.py,done,AutoScan,smartswasthya/obvious_mapper.py,auto_scan
+AUTO023,Detected logic: run_migrations_offline,Auto-detected from scan in smartswasthya/alembic/env.py,done,AutoScan,smartswasthya/alembic/env.py,auto_scan
+AUTO024,Detected logic: run_migrations_online,Auto-detected from scan in smartswasthya/alembic/env.py,done,AutoScan,smartswasthya/alembic/env.py,auto_scan
+AUTO025,Detected logic: upgrade,Auto-detected from scan in smartswasthya/alembic/versions/085c13600c7d_add_dev_tasks_table.py,done,AutoScan,smartswasthya/alembic/versions/085c13600c7d_add_dev_tasks_table.py,auto_scan
+AUTO026,Detected logic: downgrade,Auto-detected from scan in smartswasthya/alembic/versions/085c13600c7d_add_dev_tasks_table.py,done,AutoScan,smartswasthya/alembic/versions/085c13600c7d_add_dev_tasks_table.py,auto_scan
+AUTO027,Detected logic: upgrade,Auto-detected from scan in smartswasthya/alembic/versions/4675d330ee7b_init_fresh_schema.py,done,AutoScan,smartswasthya/alembic/versions/4675d330ee7b_init_fresh_schema.py,auto_scan
+AUTO028,Detected logic: downgrade,Auto-detected from scan in smartswasthya/alembic/versions/4675d330ee7b_init_fresh_schema.py,done,AutoScan,smartswasthya/alembic/versions/4675d330ee7b_init_fresh_schema.py,auto_scan
+AUTO029,Detected logic: get_file,Auto-detected from scan in smartswasthya/blueprints/dev_bucket_routes.py,done,AutoScan,smartswasthya/blueprints/dev_bucket_routes.py,auto_scan
+AUTO030,Detected logic: can_upload,Auto-detected from scan in smartswasthya/blueprints/dev_bucket_routes.py,done,AutoScan,smartswasthya/blueprints/dev_bucket_routes.py,auto_scan
+AUTO031,Detected logic: ping,Auto-detected from scan in smartswasthya/blueprints/dev_bucket_routes.py,done,AutoScan,smartswasthya/blueprints/dev_bucket_routes.py,auto_scan
+AUTO032,Detected logic: get_system_tasks,Auto-detected from scan in smartswasthya/blueprints/dev_bucket_routes.py,done,AutoScan,smartswasthya/blueprints/dev_bucket_routes.py,auto_scan
+AUTO033,Detected logic: dev_bucket_ui,Auto-detected from scan in smartswasthya/blueprints/dev_bucket_routes.py,done,AutoScan,smartswasthya/blueprints/dev_bucket_routes.py,auto_scan
+AUTO034,Detected logic: sync_placeholder,Auto-detected from scan in smartswasthya/blueprints/sync_routes.py,done,AutoScan,smartswasthya/blueprints/sync_routes.py,auto_scan
+AUTO035,Detected logic: home,Auto-detected from scan in smartswasthya/console_refactor/console_routes.py,done,AutoScan,smartswasthya/console_refactor/console_routes.py,auto_scan
+AUTO036,Detected logic: scan_modified,Auto-detected from scan in smartswasthya/console_refactor/console_routes.py,done,AutoScan,smartswasthya/console_refactor/console_routes.py,auto_scan
+AUTO037,Detected logic: retry_sync,Auto-detected from scan in smartswasthya/console_refactor/console_routes.py,done,AutoScan,smartswasthya/console_refactor/console_routes.py,auto_scan
+AUTO038,Detected logic: run_dev_console,Auto-detected from scan in smartswasthya/console_refactor/console_runner.py,done,AutoScan,smartswasthya/console_refactor/console_runner.py,auto_scan
+AUTO039,Detected logic: should_skip_path,Auto-detected from scan in smartswasthya/console_refactor/console_utils.py,done,AutoScan,smartswasthya/console_refactor/console_utils.py,auto_scan
+AUTO040,Detected logic: get_files_modified_between,Auto-detected from scan in smartswasthya/console_refactor/console_utils.py,done,AutoScan,smartswasthya/console_refactor/console_utils.py,auto_scan
+AUTO041,Detected logic: load_retry_list,Auto-detected from scan in smartswasthya/console_refactor/console_utils.py,done,AutoScan,smartswasthya/console_refactor/console_utils.py,auto_scan
+AUTO042,Detected logic: generate_console_log,Auto-detected from scan in smartswasthya/console_refactor/console_utils.py,done,AutoScan,smartswasthya/console_refactor/console_utils.py,auto_scan
+AUTO043,Detected logic: set_permission,Auto-detected from scan in smartswasthya/logic/admin_trace_logic.py,done,AutoScan,smartswasthya/logic/admin_trace_logic.py,auto_scan
+AUTO044,Detected logic: get_permissions,Auto-detected from scan in smartswasthya/logic/admin_trace_logic.py,done,AutoScan,smartswasthya/logic/admin_trace_logic.py,auto_scan
+AUTO045,Detected logic: reset_permissions,Auto-detected from scan in smartswasthya/logic/admin_trace_logic.py,done,AutoScan,smartswasthya/logic/admin_trace_logic.py,auto_scan
+AUTO046,Detected logic: get_active_developers_with_permissions,Auto-detected from scan in smartswasthya/logic/admin_trace_logic.py,done,AutoScan,smartswasthya/logic/admin_trace_logic.py,auto_scan
+AUTO047,Detected logic: get_current_user,Auto-detected from scan in smartswasthya/logic/auth.py,done,AutoScan,smartswasthya/logic/auth.py,auto_scan
+AUTO048,Detected logic: verify_password,Auto-detected from scan in smartswasthya/logic/auth.py,done,AutoScan,smartswasthya/logic/auth.py,auto_scan
+AUTO049,Detected logic: get_password_hash,Auto-detected from scan in smartswasthya/logic/auth.py,done,AutoScan,smartswasthya/logic/auth.py,auto_scan
+AUTO050,Detected logic: authenticate_user,Auto-detected from scan in smartswasthya/logic/auth.py,done,AutoScan,smartswasthya/logic/auth.py,auto_scan
+AUTO051,Detected logic: create_access_token,Auto-detected from scan in smartswasthya/logic/auth.py,done,AutoScan,smartswasthya/logic/auth.py,auto_scan
+AUTO052,Detected logic: register_user_logic,Auto-detected from scan in smartswasthya/logic/auth.py,done,AutoScan,smartswasthya/logic/auth.py,auto_scan
+AUTO053,Detected logic: get_current_user,Auto-detected from scan in smartswasthya/logic/auth.py,done,AutoScan,smartswasthya/logic/auth.py,auto_scan
+AUTO054,Detected logic: decode_token,Auto-detected from scan in smartswasthya/logic/auth.py,done,AutoScan,smartswasthya/logic/auth.py,auto_scan
+AUTO055,Detected logic: fetch_all_tasks,Auto-detected from scan in smartswasthya/logic/dev_bucket_logic.py,done,AutoScan,smartswasthya/logic/dev_bucket_logic.py,auto_scan
+AUTO056,Detected logic: get_task_details,Auto-detected from scan in smartswasthya/logic/dev_bucket_logic.py,done,AutoScan,smartswasthya/logic/dev_bucket_logic.py,auto_scan
+AUTO057,Detected logic: submit_task_result,Auto-detected from scan in smartswasthya/logic/dev_bucket_logic.py,done,AutoScan,smartswasthya/logic/dev_bucket_logic.py,auto_scan
+AUTO058,Detected logic: add,Auto-detected from scan in smartswasthya/logic/dummy_task.py,done,AutoScan,smartswasthya/logic/dummy_task.py,auto_scan
+AUTO059,Detected logic: can_resend_otp,Auto-detected from scan in smartswasthya/logic/email_otp_logic.py,done,AutoScan,smartswasthya/logic/email_otp_logic.py,auto_scan
+AUTO060,Detected logic: send_email_otp_logic,Auto-detected from scan in smartswasthya/logic/email_otp_logic.py,done,AutoScan,smartswasthya/logic/email_otp_logic.py,auto_scan
+AUTO061,Detected logic: verify_email_otp_logic,Auto-detected from scan in smartswasthya/logic/email_otp_logic.py,done,AutoScan,smartswasthya/logic/email_otp_logic.py,auto_scan
+AUTO062,Detected logic: send_email,Auto-detected from scan in smartswasthya/logic/email_otp_logic.py,done,AutoScan,smartswasthya/logic/email_otp_logic.py,auto_scan
+AUTO063,Detected logic: get_user_by_email,Auto-detected from scan in smartswasthya/logic/helper.py,done,AutoScan,smartswasthya/logic/helper.py,auto_scan
+AUTO064,Detected logic: generate_tags,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO065,Detected logic: determine_priority,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO066,Detected logic: determine_module_type,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO067,Detected logic: infer_route,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO068,Detected logic: load_tasks,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO069,Detected logic: enrich_tasks,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO070,Detected logic: save_enriched_tasks,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO071,Detected logic: generate_instruction,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO072,Detected logic: save_instruction_set,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO073,Detected logic: build_sample_instruction_set,Auto-detected from scan in smartswasthya/logic/instruction_logic.py,done,AutoScan,smartswasthya/logic/instruction_logic.py,auto_scan
+AUTO074,Detected logic: scan_files_between,Auto-detected from scan in smartswasthya/logic/scan_logic.py,done,AutoScan,smartswasthya/logic/scan_logic.py,auto_scan
+AUTO075,Detected logic: retry_sync,Auto-detected from scan in smartswasthya/logic/sync_logic.py,done,AutoScan,smartswasthya/logic/sync_logic.py,auto_scan
+AUTO076,Detected logic: get_synced_files,Auto-detected from scan in smartswasthya/logic/sync_logic.py,done,AutoScan,smartswasthya/logic/sync_logic.py,auto_scan
+AUTO077,Detected logic: load_retry_files,Auto-detected from scan in smartswasthya/logic/sync_retry_logic.py,done,AutoScan,smartswasthya/logic/sync_retry_logic.py,auto_scan
+AUTO078,Detected logic: scp_file,Auto-detected from scan in smartswasthya/logic/sync_retry_logic.py,done,AutoScan,smartswasthya/logic/sync_retry_logic.py,auto_scan
+AUTO079,Detected logic: retry_sync_logic,Auto-detected from scan in smartswasthya/logic/sync_retry_logic.py,done,AutoScan,smartswasthya/logic/sync_retry_logic.py,auto_scan
+AUTO080,Detected logic: trigger_cleanup_task,Auto-detected from scan in smartswasthya/logic/task_logic.py,done,AutoScan,smartswasthya/logic/task_logic.py,auto_scan
+AUTO081,Detected logic: trigger_cleanup_test,Auto-detected from scan in smartswasthya/logic/task_logic.py,done,AutoScan,smartswasthya/logic/task_logic.py,auto_scan
+AUTO082,Detected logic: get_task_status,Auto-detected from scan in smartswasthya/logic/task_logic.py,done,AutoScan,smartswasthya/logic/task_logic.py,auto_scan
+AUTO083,Detected logic: clean_string,Auto-detected from scan in smartswasthya/logic/utils.py,done,AutoScan,smartswasthya/logic/utils.py,auto_scan
+AUTO084,Detected logic: admin_only,Auto-detected from scan in smartswasthya/middleware/token_validator.py,done,AutoScan,smartswasthya/middleware/token_validator.py,auto_scan
+AUTO085,Detected logic: developer_only,Auto-detected from scan in smartswasthya/middleware/token_validator.py,done,AutoScan,smartswasthya/middleware/token_validator.py,auto_scan
+AUTO086,Detected logic: should_check,Auto-detected from scan in smartswasthya/odil/generate_code_trace.py,done,AutoScan,smartswasthya/odil/generate_code_trace.py,auto_scan
+AUTO087,Detected logic: get_all_python_files,Auto-detected from scan in smartswasthya/odil/generate_code_trace.py,done,AutoScan,smartswasthya/odil/generate_code_trace.py,auto_scan
+AUTO088,Detected logic: extract_functions,Auto-detected from scan in smartswasthya/odil/generate_code_trace.py,done,AutoScan,smartswasthya/odil/generate_code_trace.py,auto_scan
+AUTO089,Detected logic: extract_classes,Auto-detected from scan in smartswasthya/odil/generate_code_trace.py,done,AutoScan,smartswasthya/odil/generate_code_trace.py,auto_scan
+AUTO090,Detected logic: generate_code_trace,Auto-detected from scan in smartswasthya/odil/generate_code_trace.py,done,AutoScan,smartswasthya/odil/generate_code_trace.py,auto_scan
+AUTO091,Detected logic: get_all_py_files,Auto-detected from scan in smartswasthya/odil/generate_function_usage_map.py,done,AutoScan,smartswasthya/odil/generate_function_usage_map.py,auto_scan
+AUTO092,Detected logic: extract_defined_functions,Auto-detected from scan in smartswasthya/odil/generate_function_usage_map.py,done,AutoScan,smartswasthya/odil/generate_function_usage_map.py,auto_scan
+AUTO093,Detected logic: track_function_usage,Auto-detected from scan in smartswasthya/odil/generate_function_usage_map.py,done,AutoScan,smartswasthya/odil/generate_function_usage_map.py,auto_scan
+AUTO094,Detected logic: scan_template_usage,Auto-detected from scan in smartswasthya/odil/generate_function_usage_map.py,done,AutoScan,smartswasthya/odil/generate_function_usage_map.py,auto_scan
+AUTO095,Detected logic: run,Auto-detected from scan in smartswasthya/odil/generate_function_usage_map.py,done,AutoScan,smartswasthya/odil/generate_function_usage_map.py,auto_scan
+AUTO096,Detected logic: extract_definitions,Auto-detected from scan in smartswasthya/odil/generate_logic_trace.py,done,AutoScan,smartswasthya/odil/generate_logic_trace.py,auto_scan
+AUTO097,Detected logic: generate_logic_trace,Auto-detected from scan in smartswasthya/odil/generate_logic_trace.py,done,AutoScan,smartswasthya/odil/generate_logic_trace.py,auto_scan
+AUTO098,Detected logic: extract_model_classes,Auto-detected from scan in smartswasthya/odil/generate_model_trace.py,done,AutoScan,smartswasthya/odil/generate_model_trace.py,auto_scan
+AUTO099,Detected logic: scan_model_usage,Auto-detected from scan in smartswasthya/odil/generate_model_trace.py,done,AutoScan,smartswasthya/odil/generate_model_trace.py,auto_scan
+AUTO100,Detected logic: generate_model_trace,Auto-detected from scan in smartswasthya/odil/generate_model_trace.py,done,AutoScan,smartswasthya/odil/generate_model_trace.py,auto_scan
+AUTO101,Detected logic: read_json,Auto-detected from scan in smartswasthya/odil/generate_obvious_connections.py,done,AutoScan,smartswasthya/odil/generate_obvious_connections.py,auto_scan
+AUTO102,Detected logic: template_exists,Auto-detected from scan in smartswasthya/odil/generate_route_trace.py,done,AutoScan,smartswasthya/odil/generate_route_trace.py,auto_scan
+AUTO103,Detected logic: extract_route_info,Auto-detected from scan in smartswasthya/odil/generate_route_trace.py,done,AutoScan,smartswasthya/odil/generate_route_trace.py,auto_scan
+AUTO104,Detected logic: generate_route_trace,Auto-detected from scan in smartswasthya/odil/generate_route_trace.py,done,AutoScan,smartswasthya/odil/generate_route_trace.py,auto_scan
+AUTO105,Detected logic: get_all_templates,Auto-detected from scan in smartswasthya/odil/generate_template_trace.py,done,AutoScan,smartswasthya/odil/generate_template_trace.py,auto_scan
+AUTO106,Detected logic: generate_template_trace,Auto-detected from scan in smartswasthya/odil/generate_template_trace.py,done,AutoScan,smartswasthya/odil/generate_template_trace.py,auto_scan
+AUTO107,Detected logic: get_model_summary,Auto-detected from scan in smartswasthya/odil/model_trace.py,done,AutoScan,smartswasthya/odil/model_trace.py,auto_scan
+AUTO108,Detected logic: should_check,Auto-detected from scan in smartswasthya/records/records.py,done,AutoScan,smartswasthya/records/records.py,auto_scan
+AUTO109,Detected logic: get_all_python_files,Auto-detected from scan in smartswasthya/records/records.py,done,AutoScan,smartswasthya/records/records.py,auto_scan
+AUTO110,Detected logic: load_file_lines,Auto-detected from scan in smartswasthya/records/records.py,done,AutoScan,smartswasthya/records/records.py,auto_scan
+AUTO111,Detected logic: compare_files,Auto-detected from scan in smartswasthya/records/records.py,done,AutoScan,smartswasthya/records/records.py,auto_scan
+AUTO112,Detected logic: write_backup,Auto-detected from scan in smartswasthya/records/records.py,done,AutoScan,smartswasthya/records/records.py,auto_scan
+AUTO113,Detected logic: get_log_file_path,Auto-detected from scan in smartswasthya/records/records.py,done,AutoScan,smartswasthya/records/records.py,auto_scan
+AUTO114,Detected logic: record_deletion,Auto-detected from scan in smartswasthya/records/records.py,done,AutoScan,smartswasthya/records/records.py,auto_scan
+AUTO115,Detected logic: main,Auto-detected from scan in smartswasthya/records/records.py,done,AutoScan,smartswasthya/records/records.py,auto_scan
+AUTO116,Detected logic: setup_app,Auto-detected from scan in smartswasthya/registry/app_registry.py,done,AutoScan,smartswasthya/registry/app_registry.py,auto_scan
+AUTO117,Detected logic: ping_account,Auto-detected from scan in smartswasthya/routes/account_routes.py,done,AutoScan,smartswasthya/routes/account_routes.py,auto_scan
+AUTO118,Detected logic: set_permission_route,Auto-detected from scan in smartswasthya/routes/admin_trace_routes.py,done,AutoScan,smartswasthya/routes/admin_trace_routes.py,auto_scan
+AUTO119,Detected logic: dev_context,Auto-detected from scan in smartswasthya/routes/admin_trace_routes.py,done,AutoScan,smartswasthya/routes/admin_trace_routes.py,auto_scan
+AUTO120,Detected logic: get_permission_route,Auto-detected from scan in smartswasthya/routes/admin_trace_routes.py,done,AutoScan,smartswasthya/routes/admin_trace_routes.py,auto_scan
+AUTO121,Detected logic: get_active_developers_with_permissions,Auto-detected from scan in smartswasthya/routes/admin_trace_routes.py,done,AutoScan,smartswasthya/routes/admin_trace_routes.py,auto_scan
+AUTO122,Detected logic: ping_alerts,Auto-detected from scan in smartswasthya/routes/alerts_routes.py,done,AutoScan,smartswasthya/routes/alerts_routes.py,auto_scan
+AUTO123,Detected logic: ping_awareness,Auto-detected from scan in smartswasthya/routes/awareness_window_routes.py,done,AutoScan,smartswasthya/routes/awareness_window_routes.py,auto_scan
+AUTO124,Detected logic: send_email_otp,Auto-detected from scan in smartswasthya/routes/email_otp.py,done,AutoScan,smartswasthya/routes/email_otp.py,auto_scan
+AUTO125,Detected logic: verify_email_otp,Auto-detected from scan in smartswasthya/routes/email_otp.py,done,AutoScan,smartswasthya/routes/email_otp.py,auto_scan
+AUTO126,Detected logic: extended_health,Auto-detected from scan in smartswasthya/routes/health.py,done,AutoScan,smartswasthya/routes/health.py,auto_scan
+AUTO127,Detected logic: ping_home,Auto-detected from scan in smartswasthya/routes/home_routes.py,done,AutoScan,smartswasthya/routes/home_routes.py,auto_scan
+AUTO128,Detected logic: ping_identity,Auto-detected from scan in smartswasthya/routes/identity_routes.py,done,AutoScan,smartswasthya/routes/identity_routes.py,auto_scan
+AUTO129,Detected logic: hello,Auto-detected from scan in smartswasthya/routes/index_routes.py,done,AutoScan,smartswasthya/routes/index_routes.py,auto_scan
+AUTO130,Detected logic: ping_login,Auto-detected from scan in smartswasthya/routes/login_routes.py,done,AutoScan,smartswasthya/routes/login_routes.py,auto_scan
+AUTO131,Detected logic: ping_partner_docs,Auto-detected from scan in smartswasthya/routes/partner_docs_routes.py,done,AutoScan,smartswasthya/routes/partner_docs_routes.py,auto_scan
+AUTO132,Detected logic: ping_partner,Auto-detected from scan in smartswasthya/routes/partner_routes.py,done,AutoScan,smartswasthya/routes/partner_routes.py,auto_scan
+AUTO133,Detected logic: ping_profile,Auto-detected from scan in smartswasthya/routes/profile_routes.py,done,AutoScan,smartswasthya/routes/profile_routes.py,auto_scan
+AUTO134,Detected logic: demo_root,Auto-detected from scan in smartswasthya/routes/routes.py,done,AutoScan,smartswasthya/routes/routes.py,auto_scan
+AUTO135,Detected logic: ping_settings,Auto-detected from scan in smartswasthya/routes/settings_routes.py,done,AutoScan,smartswasthya/routes/settings_routes.py,auto_scan
+AUTO136,Detected logic: ping_signup,Auto-detected from scan in smartswasthya/routes/signup_routes.py,done,AutoScan,smartswasthya/routes/signup_routes.py,auto_scan
+AUTO137,Detected logic: register,Auto-detected from scan in smartswasthya/routes/smartuser.py,done,AutoScan,smartswasthya/routes/smartuser.py,auto_scan
+AUTO138,Detected logic: login,Auto-detected from scan in smartswasthya/routes/smartuser.py,done,AutoScan,smartswasthya/routes/smartuser.py,auto_scan
+AUTO139,Detected logic: ping_dashboard,Auto-detected from scan in smartswasthya/routes/smartuser_dashboard_routes.py,done,AutoScan,smartswasthya/routes/smartuser_dashboard_routes.py,auto_scan
+AUTO140,Detected logic: ping_smart_user,Auto-detected from scan in smartswasthya/routes/smart_user_routes.py,done,AutoScan,smartswasthya/routes/smart_user_routes.py,auto_scan
+AUTO141,Detected logic: run_task,Auto-detected from scan in smartswasthya/routes/task_runner.py,done,AutoScan,smartswasthya/routes/task_runner.py,auto_scan
+AUTO142,Detected logic: cleanup_test,Auto-detected from scan in smartswasthya/routes/task_runner.py,done,AutoScan,smartswasthya/routes/task_runner.py,auto_scan
+AUTO143,Detected logic: check_task_status,Auto-detected from scan in smartswasthya/routes/task_runner.py,done,AutoScan,smartswasthya/routes/task_runner.py,auto_scan
+AUTO144,Detected logic: ping_track,Auto-detected from scan in smartswasthya/routes/track_routes.py,done,AutoScan,smartswasthya/routes/track_routes.py,auto_scan
+AUTO145,Detected logic: ping_user_profile,Auto-detected from scan in smartswasthya/routes/user_profile_routes.py,done,AutoScan,smartswasthya/routes/user_profile_routes.py,auto_scan
+AUTO146,Detected logic: register_user,Auto-detected from scan in smartswasthya/routes/user_routes.py,done,AutoScan,smartswasthya/routes/user_routes.py,auto_scan
+AUTO147,Detected logic: ping_verification,Auto-detected from scan in smartswasthya/routes/verification_routes.py,done,AutoScan,smartswasthya/routes/verification_routes.py,auto_scan
+AUTO148,Detected logic: ping_dev_api,Auto-detected from scan in smartswasthya/routes/dev/api_routes.py,done,AutoScan,smartswasthya/routes/dev/api_routes.py,auto_scan
+AUTO149,Detected logic: ping_dev_db,Auto-detected from scan in smartswasthya/routes/dev/database_routes.py,done,AutoScan,smartswasthya/routes/dev/database_routes.py,auto_scan
+AUTO150,Detected logic: ping_dev_editor,Auto-detected from scan in smartswasthya/routes/dev/editor_routes.py,done,AutoScan,smartswasthya/routes/dev/editor_routes.py,auto_scan
+AUTO151,Detected logic: ping_dev_routes,Auto-detected from scan in smartswasthya/routes/dev/routes_routes.py,done,AutoScan,smartswasthya/routes/dev/routes_routes.py,auto_scan
+AUTO152,Detected logic: ping_dev_token,Auto-detected from scan in smartswasthya/routes/dev/token_routes.py,done,AutoScan,smartswasthya/routes/dev/token_routes.py,auto_scan
+AUTO153,Detected logic: ping_retry_handler,Auto-detected from scan in smartswasthya/routes/dev/sync/retry_handler.py,done,AutoScan,smartswasthya/routes/dev/sync/retry_handler.py,auto_scan
+AUTO154,Detected logic: list_all_python_files,Auto-detected from scan in smartswasthya/routes/dev/sync/scan.py,done,AutoScan,smartswasthya/routes/dev/sync/scan.py,auto_scan
+AUTO155,Detected logic: scan_by_time,Auto-detected from scan in smartswasthya/routes/dev/sync/scan.py,done,AutoScan,smartswasthya/routes/dev/sync/scan.py,auto_scan
+AUTO156,Detected logic: retry_sync,Auto-detected from scan in smartswasthya/routes/dev/sync/sync.py,done,AutoScan,smartswasthya/routes/dev/sync/sync.py,auto_scan
+AUTO157,Detected logic: cleanup_old_files,Auto-detected from scan in smartswasthya/tasks/cleanup_task.py,done,AutoScan,smartswasthya/tasks/cleanup_task.py,auto_scan
+AUTO158,Detected logic: landing_page_template,Auto-detected from scan in smartswasthya/templates/templates.py,done,AutoScan,smartswasthya/templates/templates.py,auto_scan
+AUTO159,Detected logic: setup_temp_dirs,Auto-detected from scan in smartswasthya/tools/checker_tool.py,done,AutoScan,smartswasthya/tools/checker_tool.py,auto_scan
+AUTO160,Detected logic: extract_all,Auto-detected from scan in smartswasthya/tools/checker_tool.py,done,AutoScan,smartswasthya/tools/checker_tool.py,auto_scan
+AUTO161,Detected logic: compare_python_files,Auto-detected from scan in smartswasthya/tools/checker_tool.py,done,AutoScan,smartswasthya/tools/checker_tool.py,auto_scan
+AUTO162,Detected logic: run_checker,Auto-detected from scan in smartswasthya/tools/checker_tool.py,done,AutoScan,smartswasthya/tools/checker_tool.py,auto_scan
+AUTO163,Detected logic: load_all_instructions,Auto-detected from scan in smartswasthya/tools/developer_task_loader.py,done,AutoScan,smartswasthya/tools/developer_task_loader.py,auto_scan
+AUTO164,Detected logic: get_instruction_by_index,Auto-detected from scan in smartswasthya/tools/developer_task_loader.py,done,AutoScan,smartswasthya/tools/developer_task_loader.py,auto_scan
+AUTO165,Detected logic: generate_dev_bucket_submission,Auto-detected from scan in smartswasthya/tools/developer_task_loader.py,done,AutoScan,smartswasthya/tools/developer_task_loader.py,auto_scan
+AUTO166,Detected logic: extract_requirements,Auto-detected from scan in smartswasthya/tools/gen_requirements.py,done,AutoScan,smartswasthya/tools/gen_requirements.py,auto_scan
+AUTO167,Detected logic: create_custom_instruction,Auto-detected from scan in smartswasthya/tools/instruction_editor.py,done,AutoScan,smartswasthya/tools/instruction_editor.py,auto_scan
+AUTO168,Detected logic: build_sample,Auto-detected from scan in smartswasthya/tools/instruction_editor.py,done,AutoScan,smartswasthya/tools/instruction_editor.py,auto_scan
+AUTO169,Detected logic: view_admin_review_queue,Auto-detected from scan in smartswasthya/tools/instruction_editor.py,done,AutoScan,smartswasthya/tools/instruction_editor.py,auto_scan
+AUTO170,Detected logic: load_registry,Auto-detected from scan in smartswasthya/tools/obvious_navigator.py,done,AutoScan,smartswasthya/tools/obvious_navigator.py,auto_scan
+AUTO171,Detected logic: list_python_files,Auto-detected from scan in smartswasthya/tools/obvious_navigator.py,done,AutoScan,smartswasthya/tools/obvious_navigator.py,auto_scan
+AUTO172,Detected logic: extract_functions_and_classes,Auto-detected from scan in smartswasthya/tools/obvious_navigator.py,done,AutoScan,smartswasthya/tools/obvious_navigator.py,auto_scan
+AUTO173,Detected logic: explore_all,Auto-detected from scan in smartswasthya/tools/obvious_navigator.py,done,AutoScan,smartswasthya/tools/obvious_navigator.py,auto_scan
+AUTO174,Detected logic: navigate,Auto-detected from scan in smartswasthya/tools/obvious_navigator.py,done,AutoScan,smartswasthya/tools/obvious_navigator.py,auto_scan
+AUTO175,Detected logic: dynamic_import,Auto-detected from scan in smartswasthya/tools/obvious_router_registrar.py,done,AutoScan,smartswasthya/tools/obvious_router_registrar.py,auto_scan
+AUTO176,Detected logic: register_all_routes,Auto-detected from scan in smartswasthya/tools/obvious_router_registrar.py,done,AutoScan,smartswasthya/tools/obvious_router_registrar.py,auto_scan
+AUTO177,Detected logic: generate_routes_for_directory,Auto-detected from scan in smartswasthya/tools/obvious_route_generator.py,done,AutoScan,smartswasthya/tools/obvious_route_generator.py,auto_scan
+AUTO178,Detected logic: log,Auto-detected from scan in smartswasthya/tools/prelaunch_checker_v3.py,done,AutoScan,smartswasthya/tools/prelaunch_checker_v3.py,auto_scan
+AUTO179,Detected logic: section,Auto-detected from scan in smartswasthya/tools/prelaunch_checker_v3.py,done,AutoScan,smartswasthya/tools/prelaunch_checker_v3.py,auto_scan
+AUTO180,Detected logic: scan_missing_init_py,Auto-detected from scan in smartswasthya/tools/prelaunch_checker_v3.py,done,AutoScan,smartswasthya/tools/prelaunch_checker_v3.py,auto_scan
+AUTO181,Detected logic: scan_dynamic_imports,Auto-detected from scan in smartswasthya/tools/prelaunch_checker_v3.py,done,AutoScan,smartswasthya/tools/prelaunch_checker_v3.py,auto_scan
+AUTO182,Detected logic: scan_router_chain,Auto-detected from scan in smartswasthya/tools/prelaunch_checker_v3.py,done,AutoScan,smartswasthya/tools/prelaunch_checker_v3.py,auto_scan
+AUTO183,Detected logic: scan_placeholders,Auto-detected from scan in smartswasthya/tools/prelaunch_checker_v3.py,done,AutoScan,smartswasthya/tools/prelaunch_checker_v3.py,auto_scan
+AUTO184,Detected logic: check_essential_folders,Auto-detected from scan in smartswasthya/tools/prelaunch_checker_v3.py,done,AutoScan,smartswasthya/tools/prelaunch_checker_v3.py,auto_scan
+AUTO185,Detected logic: check_pyproject,Auto-detected from scan in smartswasthya/tools/prelaunch_checker_v3.py,done,AutoScan,smartswasthya/tools/prelaunch_checker_v3.py,auto_scan
+AUTO186,Detected logic: run_all_checks,Auto-detected from scan in smartswasthya/tools/prelaunch_checker_v3.py,done,AutoScan,smartswasthya/tools/prelaunch_checker_v3.py,auto_scan
+AUTO187,Detected logic: extract_keywords_from_instruction,Auto-detected from scan in smartswasthya/tools/trace_generator.py,done,AutoScan,smartswasthya/tools/trace_generator.py,auto_scan
+AUTO188,Detected logic: trace_keywords_in_handler,Auto-detected from scan in smartswasthya/tools/trace_generator.py,done,AutoScan,smartswasthya/tools/trace_generator.py,auto_scan
+AUTO189,Detected logic: check_docker_file_references,Auto-detected from scan in smartswasthya/tools/trace_generator.py,done,AutoScan,smartswasthya/tools/trace_generator.py,auto_scan
+AUTO190,Detected logic: write_trace_to_txt,Auto-detected from scan in smartswasthya/tools/trace_generator.py,done,AutoScan,smartswasthya/tools/trace_generator.py,auto_scan
+AUTO191,Detected logic: verify_function_in_js,Auto-detected from scan in smartswasthya/tools/ui_integrity_checker.py,done,AutoScan,smartswasthya/tools/ui_integrity_checker.py,auto_scan
+AUTO192,Detected logic: run_integrity_check,Auto-detected from scan in smartswasthya/tools/ui_integrity_checker.py,done,AutoScan,smartswasthya/tools/ui_integrity_checker.py,auto_scan
+AUTO193,Detected logic: find_py_files,Auto-detected from scan in smartswasthya/tools/coder_tools/circular_trap_scanner.py,done,AutoScan,smartswasthya/tools/coder_tools/circular_trap_scanner.py,auto_scan
+AUTO194,Detected logic: parse_imports,Auto-detected from scan in smartswasthya/tools/coder_tools/circular_trap_scanner.py,done,AutoScan,smartswasthya/tools/coder_tools/circular_trap_scanner.py,auto_scan
+AUTO195,Detected logic: normalize_path,Auto-detected from scan in smartswasthya/tools/coder_tools/circular_trap_scanner.py,done,AutoScan,smartswasthya/tools/coder_tools/circular_trap_scanner.py,auto_scan
+AUTO196,Detected logic: build_graph,Auto-detected from scan in smartswasthya/tools/coder_tools/circular_trap_scanner.py,done,AutoScan,smartswasthya/tools/coder_tools/circular_trap_scanner.py,auto_scan
+AUTO197,Detected logic: detect_cycles,Auto-detected from scan in smartswasthya/tools/coder_tools/circular_trap_scanner.py,done,AutoScan,smartswasthya/tools/coder_tools/circular_trap_scanner.py,auto_scan
+AUTO198,Detected logic: report_results,Auto-detected from scan in smartswasthya/tools/coder_tools/circular_trap_scanner.py,done,AutoScan,smartswasthya/tools/coder_tools/circular_trap_scanner.py,auto_scan
+AUTO199,Detected logic: run_circular_trap_scan,Auto-detected from scan in smartswasthya/tools/coder_tools/circular_trap_scanner.py,done,AutoScan,smartswasthya/tools/coder_tools/circular_trap_scanner.py,auto_scan
+AUTO200,Detected logic: dfs,Auto-detected from scan in smartswasthya/tools/coder_tools/circular_trap_scanner.py,done,AutoScan,smartswasthya/tools/coder_tools/circular_trap_scanner.py,auto_scan
+AUTO201,Detected logic: sync_developer_docs,Auto-detected from scan in smartswasthya/tools/coder_tools/docs_sync.py,done,AutoScan,smartswasthya/tools/coder_tools/docs_sync.py,auto_scan
+AUTO202,Detected logic: log_dummy_outputs,Auto-detected from scan in smartswasthya/tools/coder_tools/dummy_checker.py,done,AutoScan,smartswasthya/tools/coder_tools/dummy_checker.py,auto_scan
+AUTO203,Detected logic: handle_route_duplicates,Auto-detected from scan in smartswasthya/tools/coder_tools/duplicator.py,done,AutoScan,smartswasthya/tools/coder_tools/duplicator.py,auto_scan
+AUTO204,Detected logic: print_menu,Auto-detected from scan in smartswasthya/tools/coder_tools/main_trigger.py,done,AutoScan,smartswasthya/tools/coder_tools/main_trigger.py,auto_scan
+AUTO205,Detected logic: main,Auto-detected from scan in smartswasthya/tools/coder_tools/main_trigger.py,done,AutoScan,smartswasthya/tools/coder_tools/main_trigger.py,auto_scan
+AUTO206,Detected logic: backup_file_if_needed,Auto-detected from scan in smartswasthya/tools/coder_tools/patcher.py,done,AutoScan,smartswasthya/tools/coder_tools/patcher.py,auto_scan
+AUTO207,Detected logic: apply_patch_queue,Auto-detected from scan in smartswasthya/tools/coder_tools/patcher.py,done,AutoScan,smartswasthya/tools/coder_tools/patcher.py,auto_scan
+AUTO208,Detected logic: add_patch_instruction,Auto-detected from scan in smartswasthya/tools/coder_tools/patch_queue.py,done,AutoScan,smartswasthya/tools/coder_tools/patch_queue.py,auto_scan
+AUTO209,Detected logic: list_patch_queue,Auto-detected from scan in smartswasthya/tools/coder_tools/patch_queue.py,done,AutoScan,smartswasthya/tools/coder_tools/patch_queue.py,auto_scan
+AUTO210,Detected logic: generate_pyproject_if_missing,Auto-detected from scan in smartswasthya/tools/coder_tools/pyproject_writer.py,done,AutoScan,smartswasthya/tools/coder_tools/pyproject_writer.py,auto_scan
+AUTO211,Detected logic: detect_route_conflicts,Auto-detected from scan in smartswasthya/tools/coder_tools/route_conflict_handler.py,done,AutoScan,smartswasthya/tools/coder_tools/route_conflict_handler.py,auto_scan
+AUTO212,Detected logic: generate_snapshot,Auto-detected from scan in smartswasthya/tools/coder_tools/snapshot_generator.py,done,AutoScan,smartswasthya/tools/coder_tools/snapshot_generator.py,auto_scan
+AUTO213,Detected logic: log_version_event,Auto-detected from scan in smartswasthya/tools/coder_tools/version_tracker.py,done,AutoScan,smartswasthya/tools/coder_tools/version_tracker.py,auto_scan
+AUTO214,Detected logic: list_versions,Auto-detected from scan in smartswasthya/tools/coder_tools/version_tracker.py,done,AutoScan,smartswasthya/tools/coder_tools/version_tracker.py,auto_scan
+AUTO215,Detected logic: run_cmd,Auto-detected from scan in smartswasthya/tools/devops/auto_migrate.py,done,AutoScan,smartswasthya/tools/devops/auto_migrate.py,auto_scan
+AUTO216,Detected logic: main,Auto-detected from scan in smartswasthya/tools/devops/auto_migrate.py,done,AutoScan,smartswasthya/tools/devops/auto_migrate.py,auto_scan
+AUTO217,Detected logic: run,Auto-detected from scan in smartswasthya/tools/devops/dev_bundle.auto_update.py,done,AutoScan,smartswasthya/tools/devops/dev_bundle.auto_update.py,auto_scan
+AUTO218,Detected logic: refresh_python_bundle,Auto-detected from scan in smartswasthya/tools/devops/dev_bundle.auto_update.py,done,AutoScan,smartswasthya/tools/devops/dev_bundle.auto_update.py,auto_scan
+AUTO219,Detected logic: refresh_node_bundle,Auto-detected from scan in smartswasthya/tools/devops/dev_bundle.auto_update.py,done,AutoScan,smartswasthya/tools/devops/dev_bundle.auto_update.py,auto_scan
+AUTO220,Detected logic: build_reverse_trace,Auto-detected from scan in smartswasthya/tools/devops/reverse_trace_builder.py,done,AutoScan,smartswasthya/tools/devops/reverse_trace_builder.py,auto_scan
+AUTO221,Detected logic: seed_admin,Auto-detected from scan in smartswasthya/tools/devops/seed_admin.py,done,AutoScan,smartswasthya/tools/devops/seed_admin.py,auto_scan
+AUTO222,Detected logic: extract_tar_gz,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO223,Detected logic: compress_to_tar_gz,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO224,Detected logic: read_pyproject_dependencies,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO225,Detected logic: read_installed_manifest,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO226,Detected logic: write_installed_manifest,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO227,Detected logic: log_bundle_update,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO228,Detected logic: update_installed_manifest,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO229,Detected logic: remove_win_wheels,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO230,Detected logic: deduplicate_whl_files,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO231,Detected logic: update_python_bundle,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO232,Detected logic: main,Auto-detected from scan in smartswasthya/tools/devops/smart_bundle_manager.py,done,AutoScan,smartswasthya/tools/devops/smart_bundle_manager.py,auto_scan
+AUTO233,Detected logic: get_logged_in_user,Auto-detected from scan in smartswasthya/utils/auth_guard.py,done,AutoScan,smartswasthya/utils/auth_guard.py,auto_scan
+AUTO234,Detected logic: get_admin_token_header,Auto-detected from scan in smartswasthya/utils/auth_guard.py,done,AutoScan,smartswasthya/utils/auth_guard.py,auto_scan
+AUTO235,Detected logic: should_skip_path,Auto-detected from scan in smartswasthya/utils/file_scanner.py,done,AutoScan,smartswasthya/utils/file_scanner.py,auto_scan
+AUTO236,Detected logic: list_all_files,Auto-detected from scan in smartswasthya/utils/file_scanner.py,done,AutoScan,smartswasthya/utils/file_scanner.py,auto_scan
+AUTO237,Detected logic: filter_files_by_time,Auto-detected from scan in smartswasthya/utils/file_scanner.py,done,AutoScan,smartswasthya/utils/file_scanner.py,auto_scan
+AUTO238,Detected logic: extract_tar_file,Auto-detected from scan in smartswasthya/utils/file_scanner.py,done,AutoScan,smartswasthya/utils/file_scanner.py,auto_scan
+AUTO239,Detected logic: get_template_routes_map,Auto-detected from scan in smartswasthya/utils/file_scanner.py,done,AutoScan,smartswasthya/utils/file_scanner.py,auto_scan
+AUTO240,Detected logic: log_admin_task,Auto-detected from scan in smartswasthya/utils/logger_helper.py,done,AutoScan,smartswasthya/utils/logger_helper.py,auto_scan
