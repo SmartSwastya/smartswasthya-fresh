@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen p-6 bg-gradient-to-br from-[#d8e850] to-[#99e3f9]">
+  <div class="max-w-5xl mx-auto grid gap-6">
+
+    <!-- Header -->
+    <div class="bg-white/30 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/40">
+      <h1 class="text-2xl font-bold">🗃 Database Overview</h1>
+      <p>Schema and row-level visibility into tables.</p>
+    </div>
+
+    <!-- Table List -->
+    <div class="bg-white/30 backdrop-blur-md p-4 rounded-2xl border border-white/40 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr>
+            <th class="text-left py-2 px-3">Table Name</th>
+            <th class="text-left py-2 px-3">Row Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for table in all_tables %}
+          <tr class="bg-white/20 rounded-xl">
+            <td class="py-2 px-3 font-medium">{{ table }}</td>
+            <td class="py-2 px-3">{{ table_counts[table] if table in table_counts else "Unknown" }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="2" class="py-4 text-center">No tables found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

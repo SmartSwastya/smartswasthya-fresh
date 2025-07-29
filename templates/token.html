@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-[#d8e850] to-[#99e3f9] p-6">
+  <div class="max-w-3xl mx-auto backdrop-blur-md bg-white/30 p-6 rounded-2xl shadow-lg border border-white/40">
+    <h2 class="text-2xl font-bold mb-4">Active Tokens</h2>
+
+    {% if tokens %}
+      <table class="w-full text-left">
+        <thead>
+          <tr class="border-b border-white/40">
+            <th class="py-2">Token</th>
+            <th class="py-2">Created</th>
+            <th class="py-2">Expires</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for t in tokens %}
+          <tr class="border-b border-white/20">
+            <td class="py-2">{{ t.token }}</td>
+            <td>{{ t.created_at }}</td>
+            <td>{{ t.expires_at }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No active tokens found.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

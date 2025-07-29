@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart User Dashboard</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon" />
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_GEO_API_KEY }}"></script>
+
+  <!-- ✅ Tailwind CDN with safe override -->
+  <script>
+    // 🟢 Step 1: Hide known CDN warnings BEFORE anything else
+    console.warn = new Proxy(console.warn, {
+      apply(target, thisArg, args) {
+        if (args[0]?.includes?.('cdn.tailwindcss.com should not be used')) return;
+        if (args[0]?.includes?.('@tailwindcss/line-clamp')) return;
+        return target.apply(thisArg, args);
+      }
+    });
+  </script>
+
+  <!-- ✅ Tailwind CDN with plugins (minus redundant 'line-clamp') -->
+  <script src="https://cdn.tailwindcss.com/3.4.1?plugins=forms,typography,aspect-ratio"></script>
+
+  <!-- 🛠 Custom Tailwind config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#d8e850',
+            secondary: '#99e3f9',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- 🎨 Custom 135° Signature Gradient -->
+  <style>
+    .bg-gradient-135 {
+      background-image: linear-gradient(135deg, #d8e850, #b8eecb, #99e3f9);
+    }
+  </style>
+
+  <!-- Include SortableJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+
+  <style>
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+   }
+
+    /* Glassmorphism style for modals and popups */
+    .glass-box {
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    /* Popped-Up Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    /* Button Styling */
+    button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #4CAF50; /* Green background */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 1000;  /* Ensure the button appears above other content */
+      visibility: visible;  /* Ensure button is visible */
+    }
+
+    button:hover {
+      background-color: #45a049; /* Slightly darker on hover */
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 5px #4CAF50;
+    }
+
+    /* Responsive Layout */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #d8e850 0%, #99e3f9 100%);
+      min-height: 100vh;
+      padding: 40px; /* Body padding as per referance.json */
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #4dc0b5, #38a1db);
+      color: white;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(to right, #38a1db, #4dc0b5);
+    }
+
+    /* Card Styling for Auto resizing based on content */
+    .card {
+      width: 100%; /* Adjust width to 100% for content-based resizing */
+      height: auto; /* Adjust height based on content */
+      min-width: 250px; /* Minimum width to avoid collapse */
+      min-height: 150px; /* Minimum height for consistency */
+      padding: 20px; /* Card padding as per referance.json */
+      margin-bottom: 1rem; /* Margin between cards */
+      background: rgba(255, 255, 255, 0.1); /* Slight background tint */
+      backdrop-filter: blur(10px); /* Glassmorphism effect */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Card hover effect */
+    .card:hover {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+  </style>
+</head>
+
+<body class="relative">
+  <button id="toggleSort" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 5px; font-size: 16px;">
+  Switch to Sort
+  </button>
+  <!-- Header Section -->
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-semibold text-gray-700">🧠 Smart User Dashboard</h2>
+	 
+    <div>
+	<a href="index.html" class="text-sm text-gray-600 font-medium">
+	  <svg xmlns="http://www.w3.org/2000/svg" class="inline h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
+		<path d="M12 24c1.104 0 2-.896 2-2h-4a2 2 0 002 2zm6.364-6l1.636-1.636V11c0-3.859-2.632-7.063-6.192-7.854V2a2 2 0 10-4 0v1.146C6.632 3.937 4 7.141 4 11v5.364L5.636 18H18.364z"/>
+	  </svg>
+	  Notification
+	</a>
+      <label class="mr-2 text-sm text-gray-600">🌐 Change Language:</label>
+      <select class="border rounded px-2 py-1 text-sm">
+        <option>English</option>
+        <option>हिंदी</option>
+        <option>मराठी</option>
+        <option>বাংলা</option>
+        <option>தமிழ்</option>
+        <option>తెలుగు</option>
+      </select>
+    </div>
+  </div>
+ 
+<!-- Profile Modal -->
+<div id="profileModal" class="modal">
+  <div class="glass-box w-full max-w-4xl mx-auto p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="font-bold text-xl text-cyan-800">🧾 Profile Settings</h3>
+      <button onclick="closeModal('profileModal')" class="text-lg text-red-600">❌</button>
+    </div>
+
+    <form id="profileForm" method="POST" enctype="multipart/form-data">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col space-y-3">
+          <label class="text-gray-200 font-medium">👤 Full Name:</label>
+          <input type="text" id="updateName" value="{{ user.full_name or '' }}" disabled
+            class="bg-gray-800 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2">
+
+          <label class="text-gray-200 font-medium">📧 Email:</label>
+
+          <div class="flex items-center space-x-2 mb-4">
+            {% if user.email and user.is_email_verified %}
+              <input type="email" id="updateEmail" value="{{ user.email }}" readonly
+                class="bg-gray-800 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2 w-full">
+              <span id="emailBadge" class="text-xl">✅</span>
+            {% else %}
+              <input type="email" id="updateEmail" value="{{ user.email or '' }}"
+                class="bg-gray-900 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2 w-full">
+              <button type="button" id="sendOTPButton" onclick="sendEmailOTP()"
+                class="px-3 py-1 rounded bg-yellow-400 hover:bg-yellow-500 text-white text-sm">
+                Verify
+              </button>
+            {% endif %}
+          </div>
+
+          <div id="otpSection" class="flex items-center mb-4 {% if not user.email or user.is_email_verified %}hidden{% endif %}">
+            <input type="text" id="otpInput" placeholder="Enter OTP"
+              class="w-1/2 text-sm rounded-md text-white bg-gray-900 border border-gray-600 shadow-inner px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+            <button type="button" onclick="verifyEmailOTP()"
+              class="px-3 py-1 rounded-md btn-primary text-white ml-2">Submit</button>
+            <span id="otpTimer" class="ml-2 text-sm text-white"></span>
+          </div>
+
+          <label class="text-gray-200 font-medium">📱 Mobile:</label>
+          <input type="tel" id="updateMobile" value="{{ user.mobile or '' }}" disabled
+            class="bg-gray-800 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2">
+
+          <!-- 🚻 Gender Field -->
+          <label class="text-gray-200 font-medium">🚻 Gender:</label>
+          <select id="updateGender"
+            class="bg-gray-900 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+            <option value="" disabled {% if not user.gender %}selected{% endif %}>Select Gender</option>
+            <option value="Male" {% if user.gender == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if user.gender == 'Female' %}selected{% endif %}>Female</option>
+            <option value="Other" {% if user.gender == 'Other' %}selected{% endif %}>Other</option>
+          </select>
+
+          <label class="text-gray-200 font-medium">🧑‍⚕️ Doctor Name:</label>
+          <input type="text" id="updateDoctor" value="{{ user.doctor_name or '' }}" placeholder="Doctor’s name"
+            class="bg-gray-900 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2">
+
+          <label class="text-gray-200 font-medium">📞 Connecting Mobile:</label>
+          <input type="tel" id="connectMobile" value="{{ user.connect_mobile or '' }}" placeholder="Doctor's number"
+            class="bg-gray-900 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2">
+
+          <label class="text-gray-200 font-medium">📷 Profile Image:</label>
+          <input type="file" id="updateImage" accept="image/*"
+            class="bg-gray-900 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2">
+          <img id="previewImage" src="{{ profile.image_url or '/static/images/default_profile.png' }}" class="w-24 h-24 rounded-full mt-2">
+        </div>
+
+        <div class="flex flex-col space-y-3">
+          <label class="text-gray-200 font-medium">🎂 Date of Birth:</label>
+          <input type="date" id="updateDob" value="{{ user.dob.strftime('%Y-%m-%d') if user.dob else '' }}"
+            class="bg-gray-900 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+
+          <label class="text-gray-200 font-medium">📅 Doctor's Last Visit:</label>
+          <input type="date" id="lastVisit" value="{{ user.last_visit.strftime('%Y-%m-%d') if user.last_visit else '' }}"
+            class="bg-gray-900 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+
+          <label class="text-gray-200 font-medium">📍 Location:</label>
+          <input type="text" id="userLocation" value="{{ user.location or '' }}" placeholder="City, State"
+            class="bg-gray-900 text-white rounded-md border border-gray-600 shadow-inner px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+
+          <label class="text-gray-200 font-medium">📌 Drop Pin:</label>
+          <button type="button" onclick="dropPin()" class="btn-primary w-full rounded-md">📍 Drop Pin</button>
+
+          <div id="mapPreview"
+               class="mt-3"
+               style="height:300px; width:100%; border:1px solid #ccc; border-radius:4px;">
+            <!-- Google Map will render here -->
+          </div>
+
+          <div id="fallback-address-options" class="mt-4 p-3 border border-yellow-400 rounded-md bg-yellow-50 text-sm text-gray-800 hidden">
+            <p class="mb-2 font-medium">📌 Location not accurate? Please complete one of the following:</p>
+
+            <label class="block mb-1"><input type="radio" name="fallback_option" value="flat" checked> I live in a flat/apartment</label>
+            <div id="flat-fields" class="mb-2 ml-4">
+              <input type="text" name="flat_no" class="mb-1 w-full rounded px-2 py-1" placeholder="Flat No." />
+              <input type="text" name="floor_no" class="mb-1 w-full rounded px-2 py-1" placeholder="Floor No." />
+              <input type="text" name="wing_no" class="mb-1 w-full rounded px-2 py-1" placeholder="Wing / Block" />
+            </div>
+
+            <label class="block mb-1"><input type="radio" name="fallback_option" value="house"> I live in a house (independent)</label>
+            <div id="house-fields" class="mb-2 ml-4 hidden">
+              <input type="text" name="house_no" class="w-full rounded px-2 py-1" placeholder="House Name / Number" />
+            </div>
+
+            <p class="text-gray-600 mt-1 italic">* Fill any one option completely to help us reach you better.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end mt-6">
+        <button type="button" onclick="saveProfileChanges()" class="btn-primary px-6 py-2 rounded-md">💾 Save</button>
+      </div>
+    <input type="hidden" id="latitude" name="latitude">
+    <input type="hidden" id="longitude" name="longitude">
+    <input type="hidden" id="accuracy"  name="accuracy">   <!-- <-- new -->
+    </form>
+  </div>
+</div>
+
+<!-- Top-row Dashboard Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+  <!-- Profile Section -->
+  <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5 flex flex-wrap items-center gap-4 justify-between relative">
+    <div class="flex items-center gap-4 flex-wrap">
+      <img src="{{ profile.image_url or '/static/images/default_profile.png' }}" alt="Smart User Profile" class="rounded-full" width="60">
+      <div class="flex flex-col flex-wrap max-w-full">
+        <h4 class="mb-0 font-semibold text-gray-800">
+          Welcome, {{ user.full_name or user.name or "User" }}
+        </h4>
+        <small class="text-gray-600 block">
+          Age: {{ age if age is not none else 'N/A' }} |
+          Last Visit: {{ user.last_visit.strftime('%d %b %Y') if user.last_visit else 'Never' }}
+        </small>
+        <small class="text-gray-600 block">
+          Email: {{ user.email or 'Not Provided' }}
+          {% if user.is_email_verified %}<span class="ml-1 text-blue-500 text-lg">🛡️</span>{% endif %}
+        </small>
+        <small class="text-gray-600 block">
+          Mobile: {{ user.mobile or 'Not Provided' }} (self)
+          {% if user.is_verified %}<span class="ml-1 text-green-600 text-lg">🟢</span>{% endif %}
+        </small>
+        <small class="text-gray-600 block">
+          Gender: {{ user.gender or 'Not Specified' }}
+        </small>
+        <small class="text-gray-600 block">
+          Doctor Name: {{ user.doctor_name or 'Not Assigned' }}
+        </small>
+        {% if user.connect_mobile %}
+        <small class="text-gray-600 block">
+          Mobile: {{ user.connect_mobile }} (Doctor's)
+        </small>
+        {% endif %}
+      </div>
+    </div>
+    <a href="javascript:void(0);" class="absolute top-2 right-2 text-green-600 hover:text-blue-600 text-sm" onclick="openProfilePopup()">
+      ⚙️
+    </a>
+  </div>
+
+  <!-- Prescriptions Card -->
+  <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5 relative">
+    <h3 class="text-lg font-bold text-gray-600">Prescriptions</h3>
+    <ul class="list-group list-group-flush">
+      {% for prescription in user.prescriptions %}
+        <li class="list-group-item">{{ prescription.name }} – <small>{{ prescription.date }}</small></li>
+      {% else %}
+        <li class="text-sm italic text-gray-500">No prescriptions available.</li>
+      {% endfor %}
+    </ul>
+    <span class="absolute top-2 right-2 text-gray-600 text-xl cursor-pointer">📝</span>
+  </div>
+
+  <!-- Lab Reports Card -->
+  <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5 relative">
+    <h3 class="text-lg font-bold text-gray-600">Lab Reports</h3>
+    <ul class="list-group list-group-flush">
+      {% for report in user.lab_reports %}
+        <li class="list-group-item">
+          {{ report.name }} –
+          <a href="{{ report.link }}" target="_blank" class="text-blue-600 underline">View</a>
+        </li>
+      {% else %}
+        <li class="text-sm italic text-gray-500">No lab reports uploaded.</li>
+      {% endfor %}
+    </ul>
+    <span class="absolute top-2 right-2 text-gray-600 text-xl cursor-pointer">📄</span>
+  </div>
+</div>
+
+<!-- Second-row Sortable Tracker Cards -->
+<div id="sortable" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
+  <!-- 📊 Vital Stats -->
+  <div class="w-full bg-white/50 backdrop-blur-md shadow rounded-xl p-5 card flex flex-col justify-start">
+    <h3 class="text-lg font-bold text-gray-600 mb-2">📊 Vital Stats</h3>
+    {% if current_user.is_authenticated %}
+      <p class="text-gray-700">💓 Heart Rate: <span class="font-semibold text-green-600">{{ user.heart_rate or "N/A" }} bpm</span></p>
+      <p class="text-gray-700">🦶 Steps: <span class="font-semibold text-blue-600">{{ user.steps or "N/A" }}</span></p>
+      <p class="text-gray-700">🛌 Sleep: <span class="font-semibold text-yellow-600">{{ user.sleep_hours or "N/A" }} hrs</span></p>
+      <p class="text-gray-700">🩺 BP: <span class="font-semibold text-red-600">{{ user.blood_pressure or "N/A" }}</span></p>
+    {% else %}
+      <p class="text-sm italic text-gray-500">Vitals not available. Please log in.</p>
+    {% endif %}
+  </div>
+
+  <!-- 🎯 Health Goals -->
+  <div class="w-full bg-white/50 backdrop-blur-md shadow rounded-xl p-5 card flex flex-col justify-start">
+    <h3 class="text-lg font-bold text-gray-600 mb-2">🎯 Health Goals</h3>
+    {% if user.health_goals %}
+      {% set goals = user.health_goals | safe | from_json %}
+      <p>💪 Weight Goal: {{ goals.weight_target or "Not Set" }} kg (Current: {{ user.health_metrics.weight or "N/A" }} kg)</p>
+      <p>🏃‍♂️ Fitness Goal: {{ goals.steps_target or "Not Set" }} steps/day (Current: {{ user.health_metrics.steps or "N/A" }} steps)</p>
+    {% else %}
+      <p class="text-gray-500 italic">No health goals set yet.</p>
+    {% endif %}
+  </div>
+
+  <!-- 🏃‍♂️ Activity Tracker -->
+  <div class="w-full bg-white/50 backdrop-blur-md shadow rounded-xl p-5 card flex flex-col justify-start">
+    <h3 class="text-lg font-bold text-gray-600 mb-2">🏃‍♂️ Activity Tracker</h3>
+    {% if user.activity_tracker %}
+      {% set activity = user.activity_tracker | safe | from_json %}
+      <p>🔥 Calories Burned Today: {{ activity.calories_burned or "0" }}</p>
+      <p>🧘‍♀️ Active Minutes Today: {{ activity.active_minutes or "0" }}</p>
+    {% else %}
+      <p class="text-gray-500 italic">No activity data available for today.</p>
+    {% endif %}
+  </div>
+
+  <!-- 🍏 Diet Tracker -->
+  <div class="w-full bg-white/50 backdrop-blur-md shadow rounded-xl p-5 card flex flex-col justify-start">
+    <h3 class="text-lg font-bold text-gray-600 mb-2">🍏 Diet Tracker</h3>
+    {% if user.diet_tracker %}
+      {% set diet = user.diet_tracker | safe | from_json %}
+      <p>🥗 Today's Meals: {{ diet.meals or "Not Recorded" }}</p>
+      <p>💧 Water Intake: {{ diet.water_intake or "0" }} liters</p>
+    {% else %}
+      <p class="text-gray-500 italic">No diet tracking data available.</p>
+    {% endif %}
+  </div>
+
+  <!-- 👨‍👩‍👧‍👦 Family Health Overview -->
+  <div class="w-full bg-white/50 backdrop-blur-md shadow rounded-xl p-5 card flex flex-col justify-start relative">
+    <h3 class="text-lg font-bold text-gray-600 mb-2">👨‍👩‍👧‍👦 Family Health Overview</h3>
+    {% if user.family %}
+      {% set family = user.family | safe | from_json %}
+      <ul class="list-disc pl-5 space-y-1">
+        {% for member in family %}
+          <li>{{ member.name }} – Age: {{ member.age }} | Health Status: {{ member.health_status }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-gray-500 italic">No family data available.</p>
+    {% endif %}
+    <span class="absolute top-2 right-2 text-gray-600 text-xl cursor-pointer">👀</span>
+  </div>
+</div>
+
+<!-- Notifications Section -->
+<div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5 card relative mb-6">
+  <h3 class="text-lg font-bold text-gray-600">🔔 Notifications</h3>
+  {% if user.notifications %}
+    {% set notes = user.notifications | safe | from_json %}
+    <ul class="list-disc pl-5 space-y-1">
+      {% for note in notes %}
+        <li>{{ note.message }} <small class="text-xs text-gray-500">{{ note.date }}</small></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-gray-500 italic">No notifications at this time.</p>
+  {% endif %}
+</div>
+
+<!-- Bottom-row: Tips & Emergency Contacts -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <!-- Daily Health Tips -->
+  <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5 card">
+    <h3 class="text-lg font-bold text-gray-600">📝 Daily Health Tips</h3>
+    {% if user.tips %}
+      <p class="text-base">💡 {{ user.tips }}</p>
+    {% else %}
+      <p class="text-sm italic">No tips available today. Stay hydrated! 💧</p>
+    {% endif %}
+  </div>
+  <!-- Emergency Contacts Card -->
+  <div class="bg-white/50 backdrop-blur-md shadow rounded-xl p-5 card relative">
+    <h3 class="text-lg font-bold text-gray-600">🚨 Emergency Contacts</h3>
+    {% if user.emergency_alerts %}
+      {% set ec = user.emergency_alerts.emergency_contacts | safe | from_json %}
+      <p>🚑 <strong>Ambulance:</strong> {{ ec.ambulance or "Not provided" }}</p>
+      <p>👨‍⚕️ <strong>Doctor:</strong> {{ ec.doctor or "Not provided" }}</p>
+    {% else %}
+      <p class="text-sm italic text-gray-500">Emergency contacts not available. Please update in settings.</p>
+    {% endif %}
+    <span class="absolute top-2 right-2 text-gray-600 text-xl cursor-pointer">⚙️</span>
+  </div>
+</div>
+
+<script>
+let failedAccuracyCount = 0;
+
+function dropPin() {
+  const previewDiv = document.getElementById("mapPreview");
+  previewDiv.classList.remove("hidden");
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+
+      document.getElementById("latitude").value = lat;
+      document.getElementById("longitude").value = lng;
+      document.getElementById("accuracy").value = accuracy;
+
+      map = new google.maps.Map(previewDiv, {
+        center: { lat, lng },
+        zoom: 15,
+      });
+
+      marker = new google.maps.Marker({
+        position: { lat, lng },
+        map,
+        draggable: true,
+        title: "Drag to adjust location",
+      });
+
+      google.maps.event.addListener(marker, 'dragend', e => {
+        document.getElementById("latitude").value = e.latLng.lat();
+        document.getElementById("longitude").value = e.latLng.lng();
+      });
+
+      // Fallback Trigger
+      if (accuracy > 50) {
+        failedAccuracyCount++;
+        if (failedAccuracyCount >= 2) {
+          document.getElementById("fallback-address-options").classList.remove("hidden");
+        }
+      } else {
+        failedAccuracyCount = 0;
+        document.getElementById("fallback-address-options").classList.add("hidden");
+      }
+
+    }, () => {
+      alert("❌ Location access failed.");
+    }, {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    });
+  } else {
+    alert("❌ Geolocation not supported.");
+  }
+}
+
+// 🔁 Bullet Toggle Logic
+document.addEventListener("DOMContentLoaded", function () {
+  const flatFields = document.getElementById("flat-fields");
+  const houseFields = document.getElementById("house-fields");
+
+  document.querySelectorAll('input[name="fallback_option"]').forEach(radio => {
+    radio.addEventListener("change", function () {
+      if (this.value === "flat") {
+        flatFields.style.display = "block";
+        houseFields.style.display = "none";
+      } else {
+        flatFields.style.display = "none";
+        houseFields.style.display = "block";
+      }
+    });
+  });
+});
+</script>
+
+<script>
+// ❌ Close Modal by ID
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.classList.remove("modal-open");
+  } else {
+    console.error("Modal with ID " + modalId + " not found");
+  }
+}
+</script>
+
+<script>
+// 🧓 Age Calculator on DOB Change + Update Dashboard
+function setupAgeCalculation() {
+  const dobField = document.getElementById("updateDob");
+  dobField.addEventListener("change", function () {
+    const dob = new Date(this.value);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+
+    const blocks = document.querySelectorAll(".text-gray-600.block");
+    blocks.forEach(el => {
+      if (el.innerText.includes("Age:")) {
+        const parts = el.innerText.split("|");
+        if (parts.length >= 1) {
+          parts[0] = `Age: ${age} yrs `;
+          el.innerText = parts.join("|");
+        }
+      }
+    });
+  });
+}
+document.addEventListener("DOMContentLoaded", setupAgeCalculation);
+</script>
+
+<script>
+// 🧾 Open Profile Modal
+function openProfilePopup() {
+  const modal = document.getElementById("profileModal");
+  if (modal) modal.style.display = "flex";
+  else console.error("Profile modal not found");
+}
+</script>
+
+<script>
+// 👀 Image Preview Before Upload
+function setupImagePreview() {
+  const input = document.getElementById("updateImage");
+  const preview = document.getElementById("previewImage");
+  input.addEventListener("change", function () {
+    const reader = new FileReader();
+    reader.onload = e => preview.src = e.target.result;
+    if (this.files[0]) reader.readAsDataURL(this.files[0]);
+  });
+}
+document.addEventListener("DOMContentLoaded", setupImagePreview);
+</script>
+
+<script>
+// 💾 Save Profile Changes — using FormData for full compatibility
+function saveProfileChanges() {
+  const form = document.getElementById("profileForm");
+  const dob = document.getElementById("updateDob").value.trim();
+  const userLocation = document.getElementById("userLocation").value.trim();
+
+  if (!dob || !userLocation) {
+    alert("⚠️ Date of Birth and Location are required!");
+    return;
+  }
+
+  const formData = new FormData(form);
+
+  formData.set("dob", dob);
+  formData.set("location", userLocation);
+  formData.set("doctor_name", document.getElementById("updateDoctor").value);
+  formData.set("contact_number", document.getElementById("connectMobile").value);
+  formData.set("recent_appointment", document.getElementById("lastVisit").value);
+  formData.set("gender", document.getElementById("updateGender").value);
+  formData.set("latitude", document.getElementById("latitude").value);
+  formData.set("longitude", document.getElementById("longitude").value);
+
+  const imageInput = document.getElementById("updateImage");
+  if (imageInput && imageInput.files.length > 0) {
+    formData.set("profile_image", imageInput.files[0]);
+  }
+
+  fetch("/profile/update-profile", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.text())
+  .then(() => {
+    alert("✅ Profile updated successfully!");
+    location.reload();
+  })
+  .catch(err => {
+    console.error("Profile update error:", err);
+    alert("❌ Something went wrong.");
+  });
+}
+</script>
+
+<script>
+// 🔃 Sortable Card Setup
+const sortable = new Sortable(document.getElementById('sortable'), {
+  animation: 150,
+  onStart(evt) {
+    localStorage.removeItem('cardOrder');
+  },
+  onEnd(evt) {
+    const newOrder = Array.from(document.querySelectorAll('#sortable .card'))
+                           .map(card => card.innerHTML);
+    localStorage.setItem('cardOrder', JSON.stringify(newOrder));
+  },
+});
+
+let isSortingEnabled = false;
+
+document.getElementById('toggleSort').addEventListener('click', function() {
+  isSortingEnabled = !isSortingEnabled;
+  sortable.option('disabled', !isSortingEnabled);
+  document.body.style.overflow = isSortingEnabled ? 'hidden' : 'auto';
+  this.innerText = isSortingEnabled ? 'Switch to Scroll' : 'Switch to Sort';
+});
+
+window.onload = function() {
+  const savedOrder = localStorage.getItem('cardOrder');
+  if (savedOrder) {
+    const order = JSON.parse(savedOrder);
+    const cards = document.querySelectorAll('#sortable .card');
+
+    if (order.length === cards.length) {
+      order.forEach((cardHtml, index) => {
+        cards[index].innerHTML = cardHtml;
+      });
+    }
+  }
+  document.getElementById('toggleSort').innerText = 'Switch to Sort';
+  document.body.style.overflow = 'auto';
+  sortable.option('disabled', true);
+};
+</script>
+
+<script>
+// 📧 Email Verification Logic
+let otpTimerInterval;
+
+function sendEmailOTP() {
+  // send current email value so backend can save it temporarily
+  const emailValue = document.getElementById('updateEmail').value.trim();
+  fetch('/profile/send-otp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: emailValue })
+  })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.status === 'success'
+        ? 'OTP sent successfully.'
+        : data.message
+      );
+      if (data.status === 'success') {
+        // OK दबाते ही बटन छुपेगा और OTP इनपुट दिखेगा
+        document.getElementById('sendOTPButton').style.display = 'none';
+        document.getElementById('otpSection').style.display    = 'flex';
+        startOTPTimer(60);
+      }
+    })
+    .catch(() => alert('Error sending OTP.'));
+}
+
+function startOTPTimer(seconds) {
+  let remaining = seconds;
+  const timerEl = document.getElementById('otpTimer');
+  timerEl.textContent = `${remaining}s`;
+  otpTimerInterval = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) {
+      clearInterval(otpTimerInterval);
+      timerEl.textContent = 'Expired';
+      document.getElementById('sendOTPButton').disabled = false;
+    } else {
+      timerEl.textContent = `${remaining}s`;
+    }
+  }, 1000);
+}
+
+function verifyEmailOTP() {
+  const otp = document.getElementById('otpInput').value;
+  fetch('/profile/verify-otp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ otp })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+    if (data.status === 'success') {
+      // सफल वेरिफिकेशन पर OTP सेक्शन छुपा दें, सिर्फ ✅ दिखे
+      clearInterval(otpTimerInterval);
+      document.getElementById('otpSection').style.display = 'none';
+      document.getElementById('emailBadge').textContent     = '✅';
+    }
+  })
+  .catch(() => alert('Error verifying OTP.'));
+}
+</script>
+<script>
+// Enable dynamic show/hide of Verify-button for no-email users
+document.addEventListener('DOMContentLoaded', function() {
+  const emailInput = document.getElementById('updateEmail');
+  const sendBtn    = document.getElementById('sendOTPButton');
+  
+  // अगर अभी तक कोई email नहीं, तो इनपुट फील्ड खोलें और टाइप पर बटन दिखाएँ
+  if (!emailInput.value) {
+    emailInput.readOnly = false;
+    emailInput.addEventListener('input', function() {
+      if (emailInput.value.includes('@')) {
+        sendBtn.style.display = 'inline-block';
+      } else {
+        sendBtn.style.display = 'none';
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

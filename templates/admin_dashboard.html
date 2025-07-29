@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen p-6 bg-gradient-135">
+  <div class="max-w-6xl mx-auto grid gap-6">
+
+    <!-- Welcome -->
+    <div class="glass-box p-6 rounded-2xl shadow-lg">
+      <h1 class="text-2xl font-bold">📊 Admin Dashboard</h1>
+      <p>Monitor system stats, flags and user distribution.</p>
+    </div>
+
+    <!-- User Summary -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="glass-box p-4 rounded-2xl">
+        <h2 class="text-xl font-semibold mb-2">👥 User Summary</h2>
+        <ul class="space-y-2 text-sm">
+          {% for u in user_summary %}
+          <li class="bg-white/20 p-2 rounded-xl">{{ u.user_type }} — {{ u.total_count }}</li>
+          {% else %}
+          <li>No user data found.</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- System Health -->
+      <div class="glass-box p-4 rounded-2xl">
+        <h2 class="text-xl font-semibold mb-2">🧬 System Health</h2>
+        <ul class="space-y-2 text-sm">
+          {% for h in system_health %}
+          <li class="bg-white/20 p-2 rounded-xl flex justify-between">
+            <span>{{ h.component }}</span>
+            <span>{{ h.health }} ({{ h.last_updated }})</span>
+          </li>
+          {% else %}
+          <li>No health checks available.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Runtime Flags -->
+    <div class="glass-box p-4 rounded-2xl">
+      <h2 class="text-xl font-semibold mb-2">🚩 Runtime Flags</h2>
+      <ul class="space-y-2 text-sm">
+        {% for f in flag_summary %}
+        <li class="bg-white/20 p-2 rounded-xl flex justify-between">
+          <span>{{ f.key }}</span>
+          <span>{{ f.value }}</span>
+        </li>
+        {% else %}
+        <li>No flags set.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Swasthya Seva - Signup{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white/50 backdrop-blur-md p-6 mt-16 rounded-2xl shadow-lg border border-cyan-100 glass-box">
+  <div class="flex justify-center mb-6">
+    <img src="/static/images/logo.png" alt="Smart Swasthya Logo" class="w-24 h-24 rounded-full">
+  </div>
+
+  <form id="signup-form" method="POST" action="/signup/" class="space-y-4">
+    <input type="hidden" name="user_type" value="smartuser">
+    <div>
+      <label for="name" class="block font-semibold mb-1">🧑‍💼 Full Name</label>
+      <input type="text" id="name" name="full_name" class="input" placeholder="Enter your full name" required autocomplete="name">
+      <small id="nameError" class="text-red-500 text-sm hidden">Only alphabets (A-Z, a-z) are allowed.</small>
+    </div>
+
+    <div>
+      <label for="mobile" class="block font-semibold mb-1">📱 Mobile Number</label>
+      <input type="tel" id="mobile" name="mobile_number" class="input" placeholder="Enter 10-digit mobile number" required autocomplete="tel" maxlength="10">
+      <small id="mobileError" class="text-red-500 text-sm hidden">Enter exactly 10 digits (0–9 only).</small>
+    </div>
+
+    <div>
+      <label for="email" class="block font-semibold mb-1">📧 Email Address</label>
+      <input type="email" id="email" name="email" class="input" placeholder="Enter email (optional)" autocomplete="email">
+      <small id="emailError" class="text-red-500 text-sm hidden">Please enter a valid email address.</small>
+    </div>
+
+    <div>
+      <label for="gender" class="block font-semibold mb-1">👫 Gender</label>
+      <select id="gender" name="gender" class="input" required>
+        <option value="" disabled selected>Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="user_type" class="block font-semibold mb-1">🧠 Be a Smart User First</label>
+      <select id="user_type" name="user_type" class="input" required>
+        <option value="smartuser">Smart User</option>
+      </select>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <button type="button" id="sendBtn" class="btn-primary">📨 Send OTP</button>
+      <span id="timer" class="text-sm text-gray-500"></span>
+    </div>
+
+    <div id="otpSection" class="hidden mt-4">
+      <label for="otpInput" class="block text-sm font-medium">🔢 Enter OTP</label>
+      <input type="text" id="otpInput" name="otp" placeholder="6-digit OTP" class="input mt-1" maxlength="6">
+    </div>
+
+    <div id="passwordSection" class="hidden mt-4 relative">
+      <label for="passwordInput" class="block text-sm font-medium">🔐 Create Password</label>
+      <input type="password" id="passwordInput" name="password" placeholder="Create a strong password" class="input mt-1 pr-10" required autocomplete="new-password">
+      <button type="button" class="absolute right-3 top-9 text-gray-400">👁️</button>
+    </div>
+
+    <div class="mt-4">
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="termsCheckbox" required class="form-checkbox text-blue-600">
+        <span class="ml-2 text-sm">I accept the <a href="#" class="text-blue-600 underline">terms and conditions</a></span>
+      </label>
+    </div>
+
+    <div id="submitSection" class="hidden mt-4">
+      <button type="submit" class="btn-primary w-full">✅ Verify & Signup</button>
+    </div>
+
+    <p class="text-center text-sm text-gray-600 mt-2">
+      Already registered?
+      <a href="/login" class="text-cyan-600 hover:underline">Login here</a>
+    </p>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/pages/signup.js') }}"></script>
+{% endblock %}

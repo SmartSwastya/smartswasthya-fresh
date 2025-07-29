@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% block js %}{{ js }}{% endblock %}
+<div class="glass-box p-8 max-w-lg w-full text-center mx-auto my-12">
+  <h2 class="text-2xl font-bold text-cyan-700 mb-2">🎯 Smart Partner Awareness</h2>
+  <p class="text-gray-700 mb-4">Welcome! You are about to enter the <strong>Smart User Dashboard</strong>.</p>
+
+  <div class="text-left text-sm text-gray-700 mb-4">
+    <p class="mb-2">Did you know? You can also manage your profession via dedicated dashboards:</p>
+    <ul class="list-disc pl-5 space-y-1">
+      <li>👨‍⚕️ Doctor Dashboard</li>
+      <li>🏥 Hospital Panel</li>
+      <li>💊 Pharmacy Access</li>
+      <li>🧪 Lab Results Manager</li>
+      <li>🩸 Blood Bank Interface</li>
+    </ul>
+  </div>
+
+  <div class="text-left text-sm text-gray-600 mb-3 flex items-start gap-2">
+    <input type="checkbox" id="dontShowAgain" class="mt-1">
+    <label for="dontShowAgain">
+      <span class="font-medium">Don't show this again</span><br>
+      <span class="text-xs text-gray-500">
+        You can join as a partner anytime later from <strong>Profile Settings</strong>.<br>
+        To re-enable this awareness window, go to <strong>Dashboard Settings</strong> inside your profile.
+      </span>
+    </label>
+  </div>
+
+  <div class="flex justify-center gap-4 mt-4">
+    <button onclick="skipAndRedirect()" class="bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-md font-semibold shadow-md">
+      🙌 Skip & Continue
+    </button>
+    <a href="/profile/settings" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md font-semibold shadow-md">
+      🧑‍💼 Become a Partner
+    </a>
+  </div>
+</div>
+
+<script>
+  window.onload = function () {
+    const skip = localStorage.getItem("hideAwarenessWindow");
+    const justSignedUp = sessionStorage.getItem("fromSignup");
+
+    if (skip === "true" && !justSignedUp) {
+      redirectWithToken();
+    }
+  };
+
+  function skipAndRedirect() {
+    const checkbox = document.getElementById("dontShowAgain");
+    if (checkbox.checked) {
+      localStorage.setItem("hideAwarenessWindow", "true");
+    }
+
+    sessionStorage.removeItem("fromSignup");
+    redirectWithToken();
+  }
+
+  function redirectWithToken() {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      alert("❌ Missing token. Please login again.");
+      return;
+    }
+
+    // ✅ Store token in cookie for automatic Flask recognition
+    document.cookie = `Authorization=Bearer ${token}; path=/`;
+
+    // ✅ Safe redirect — Flask will receive token from cookie
+    setTimeout(() => {
+      window.location.href = "/smart";
+    }, 200);  // wait 200ms before redirect
+  }
+</script>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+<!-- popups.html -->
+
+<!-- Profile Popup -->
+<div id="profileModal" class="modal">
+  <div class="glass-box">
+    <h2 class="text-2xl font-semibold">User Profile</h2>
+    <p>Name: {{ profile.name }}</p>
+    <p>Age: {{ profile.age }}</p>
+    <p>Last Visit: {{ profile.last_visit }}</p>
+    <button class="btn-primary" onclick="closeModal('profileModal')">Close</button>
+  </div>
+</div>
+
+<!-- Prescription Popup -->
+<div id="prescriptionModal" class="modal">
+  <div class="glass-box">
+    <h2 class="text-2xl font-semibold">Prescriptions</h2>
+    <ul>
+      {% for prescription in prescriptions %}
+        <li>{{ prescription.name }} - {{ prescription.date }}</li>
+      {% endfor %}
+    </ul>
+    <button class="btn-primary" onclick="closeModal('prescriptionModal')">Close</button>
+  </div>
+</div>
+
+<!-- Lab Reports Popup -->
+<div id="labReportModal" class="modal">
+  <div class="glass-box">
+    <h2 class="text-2xl font-semibold">Lab Reports</h2>
+    <ul>
+      {% for report in reports %}
+        <li>{{ report.name }} - <a href="{{ report.link }}">View</a></li>
+      {% endfor %}
+    </ul>
+    <button class="btn-primary" onclick="closeModal('labReportModal')">Close</button>
+  </div>
+</div>
+
+<!-- Orders/Service Tracking Popup -->
+<div id="orderServiceModal" class="modal">
+  <div class="glass-box">
+    <h2 class="text-2xl font-semibold">Order/Service Tracking</h2>
+    <ul>
+      {% for order in orders %}
+        <li>Order ID: {{ order.id }} - Status: {{ order.status }}</li>
+      {% endfor %}
+    </ul>
+    <button class="btn-primary" onclick="closeModal('orderServiceModal')">Close</button>
+  </div>
+</div>
+
+<!-- Appointments Popup -->
+<div id="appointmentsModal" class="modal">
+  <div class="glass-box">
+    <h2 class="text-2xl font-semibold">Upcoming Appointments</h2>
+    <ul>
+      {% for appointment in appointments %}
+        <li>{{ appointment.doctor }} - {{ appointment.date }}</li>
+      {% endfor %}
+    </ul>
+    <button class="btn-primary" onclick="closeModal('appointmentsModal')">Close</button>
+  </div>
+</div>
+
+<!-- Add other modals for new suggestions here (e.g., Billing, Medical History, etc.) -->

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Smart Swasthya Seva{% endblock %}</title>
+  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+
+  <!-- ✅ Tailwind CDN with plugins -->
+  <script src="https://cdn.tailwindcss.com/3.4.1?plugins=forms,typography,aspect-ratio"></script>
+
+  <!-- External CSS: Global core styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
+
+  {% block head %}{% endblock %}
+</head>
+<body class="relative bg-gradient-135">
+
+  <!-- 🔷 HEADER -->
+  <header class="bg-white/70 backdrop-blur-md shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold text-cyan-700 flex items-center gap-2">
+        <img src="{{ url_for('static', filename='images/logo.png') }}"
+             alt="Logo"
+             class="h-8 drop-shadow-md">
+        Smart Swasthya Seva
+      </a>
+      <button id="menu-toggle"
+              class="md:hidden text-gray-700 text-3xl focus:outline-none"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        ☰
+      </button>
+
+      <nav class="hidden md:flex space-x-6 items-center">
+        <!-- Common links -->
+        <a href="/about" class="text-gray-700 hover:text-cyan-700">About</a>
+        <a href="/search" class="text-gray-700 hover:text-cyan-700">Search</a>
+
+        {% if current_user.is_authenticated %}
+          <button
+            onclick="openProfileModal({{ current_user.id }})"
+            class="btn-primary px-4 py-1 rounded shadow"
+          >
+            Edit Profile
+          </button>
+          <a href="/logout" class="text-red-500 hover:text-red-700">Logout</a>
+        {% else %}
+          <a href="/login" class="text-gray-700 hover:text-cyan-700">Login</a>
+          <a href="/signup" class="btn-primary px-4 py-1 rounded shadow">Sign Up</a>
+        {% endif %}
+      </nav>
+    </div>
+
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-3">
+      <!-- Common links -->
+      <a href="/about" class="block text-gray-700 hover:text-cyan-700">About</a>
+      <a href="/search" class="block text-gray-700 hover:text-cyan-700">Search</a>
+
+      {% if current_user.is_authenticated %}
+        <button
+          onclick="openProfileModal({{ current_user.id }})"
+          class="btn-primary w-full text-center px-4 py-1 rounded shadow"
+        >
+          Edit Profile
+        </button>
+        <a href="/logout" class="block text-red-500 hover:text-red-700">Logout</a>
+      {% else %}
+        <a href="/login" class="block text-gray-700 hover:text-cyan-700">Login</a>
+        <a href="/signup" class="block btn-primary px-4 py-1 rounded shadow w-fit">Sign Up</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- 🔷 MAIN CONTENT -->
+  <main>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <!-- 🔷 FOOTER -->
+  <footer class="bg-white/60 backdrop-blur-sm shadow-inner mt-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-gray-500 text-sm">
+      &copy; 2025 Smart Swasthya Seva. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- 🔷 MODAL (Popped Window) -->
+  <div id="myModal" class="modal">
+    <div class="glass-box">
+      <h2 class="text-2xl font-semibold text-gray-800">This is a Popup Modal</h2>
+      <p class="mt-4 text-gray-600">Here is some content for the modal window. You can add anything like forms or information here.</p>
+      <button id="close-modal" class="btn-primary mt-4 px-4 py-2 rounded" onclick="closeModal('myModal')">Close</button>
+    </div>
+  </div>
+
+  <!-- External JS: Common utilities (Tailwind config, warnings, menu toggle, closeModal) -->
+  <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

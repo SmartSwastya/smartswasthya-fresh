@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Smart Swasthya Seva</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon" />
+
+  <!-- Tailwind CDN with safe override -->
+  <script>
+    console.warn = new Proxy(console.warn, {
+      apply(target, thisArg, args) {
+        if (args[0]?.includes?.('cdn.tailwindcss.com should not be used')) return;
+        if (args[0]?.includes?.('@tailwindcss/line-clamp')) return;
+        return target.apply(thisArg, args);
+      }
+    });
+  </script>
+
+  <script src="https://cdn.tailwindcss.com/3.4.1?plugins=forms,typography,aspect-ratio"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#d8e850',
+            secondary: '#99e3f9',
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/index.css') }}">
+</head>
+
+<body class="relative bg-gradient-135">
+
+  <!-- HEADER -->
+  <header class="bg-white/70 backdrop-blur-md shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="/" class="text-xl font-bold text-cyan-700 flex items-center gap-2">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="h-8 drop-shadow-md">
+        Smart Swasthya Seva
+      </a>
+      <button id="menu-toggle" class="md:hidden text-gray-700 text-3xl focus:outline-none">☰</button>
+      <nav class="hidden md:flex space-x-6 items-center">
+        <a href="/about" class="text-gray-700 hover:text-cyan-700">About</a>
+        <a href="/search" class="text-gray-700 hover:text-cyan-700">Search</a>
+        <a href="/login" class="text-gray-700 hover:text-cyan-700">Login</a>
+        <a href="/signup" class="btn-primary px-4 py-1 rounded shadow">Sign Up</a>
+      </nav>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 space-y-3">
+      <a href="/about" class="block text-gray-700 hover:text-cyan-700">About</a>
+      <a href="/search" class="block text-gray-700 hover:text-cyan-700">Search</a>
+      <a href="/login" class="block text-gray-700 hover:text-cyan-700">Login</a>
+      <a href="/signup" class="block btn-primary px-4 py-1 rounded shadow w-fit">Sign Up</a>
+    </div>
+  </header>
+
+  <!-- Desktop Slider -->
+  <div class="desktop-slider slider-container overflow-hidden relative w-full h-screen">
+    <div class="slider flex">
+      <img src="{{ url_for('static', filename='images/img1.png') }}" alt="Slide 1" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/img2.png') }}" alt="Slide 2" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/img3.png') }}" alt="Slide 3" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/img4.png') }}" alt="Slide 4" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/img5.png') }}" alt="Slide 5" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/img6.png') }}" alt="Slide 6" class="slider-item w-full h-full object-cover">
+    </div>
+  </div>
+
+  <!-- Mobile Slider -->
+  <div class="mobile-slider slider-container overflow-hidden relative w-full h-screen">
+    <div class="slider flex transition-transform duration-1000 ease-in-out">
+      <img src="{{ url_for('static', filename='images/image1.png') }}" alt="Slide 1" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/image2.png') }}" alt="Slide 2" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/image3.png') }}" alt="Slide 3" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/image4.png') }}" alt="Slide 4" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/image5.png') }}" alt="Slide 5" class="slider-item w-full h-full object-cover">
+      <img src="{{ url_for('static', filename='images/image6.png') }}" alt="Slide 6" class="slider-item w-full h-full object-cover">
+    </div>
+  </div>
+
+  <!-- Overlay Elements -->
+  <div class="overlay-elements absolute bottom-[210px] md:bottom-[90px] w-full" >
+    <h1 class="headline text-xl sm:text-2xl md:text-5xl font-bold mb-6 px-4" style="line-height: 1.3; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">
+      Bringing Quality Health Services to You
+    </h1>
+    <div class="flex justify-center items-center w-full">
+      <div class="flex items-center w-full max-w-xl bg-white border border-blue-500 rounded-full overflow-hidden shadow-md">
+        <input type="text" placeholder="AI Driven Healthcare Marketplace..." class="flex-grow px-4 py-2 sm:px-5 sm:py-3 text-gray-700 text-base focus:outline-none bg-transparent" />
+        <button class="bg-blue-600 px-5 py-3 flex items-center justify-center rounded-r-full hover:bg-blue-700" style="padding:14px;">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.387a1 1 0 01-1.414 1.414l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <a href="tel:102" class="cta-button mt-4 inline-block bg-red-500 text-white px-4 py-2 rounded-full shadow hover:bg-red-600 text-sm sm:text-base md:text-lg" style="background-color:#2563eb;">
+      Call An Ambulance
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-white/60 backdrop-blur-sm shadow-inner">
+    <div class="max-w-7xl mx-auto px-4 py-4 text-center text-gray-500 text-sm">
+      &copy; 2025 Smart Swasthya Seva. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/pages/index.js') }}"></script>
+</body>
+</html>

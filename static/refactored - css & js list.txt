@@ -1,0 +1,12 @@
+static\css\core.css
+static\css\pages\index.css
+static\css\pages\smartuser_dashboard.css
+
+static\js\common.js
+static\js\otp.js
+static\js\pages\signup.js
+static\js\pages\login.js
+static\js\pages\index.js
+static\js\pages\smartuser_dashboard.js
+static\js\pages\forgot_password.js
+static\js\pages\awareness_window.js"

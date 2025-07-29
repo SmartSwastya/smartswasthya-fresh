@@ -1,0 +1,214 @@
+/* Custom 135° Signature Gradient */
+.bg-gradient-135 {
+  background-image: linear-gradient(135deg, #d8e850, #b8eecb, #99e3f9);
+}
+
+/* Custom styles */
+.slider-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Slider styles */
+.slider {
+  display: flex;
+  transition: transform 1s ease-in-out;
+}
+
+.slider-item {
+  min-width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+/* Mobile Slider: Visible on Mobile Only */
+@media (max-width: 767px) {
+  .desktop-slider {
+    display: none;
+  }
+
+  .mobile-slider {
+    display: block;
+    height: 100vh;
+    width: 100%;
+  }
+}
+
+/* Hide mobile slider on desktop */
+@media (min-width: 768px) {
+  .mobile-slider {
+    display: none;
+  }
+}
+
+/* Glassmorphism style for modals and popups */
+.glass-box {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 2rem;
+}
+
+/* Popped-Up Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+/* Button Styling */
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 1000;
+  visibility: visible;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px #4CAF50;
+}
+
+/* Responsive Layout */
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #d8e850 0%, #99e3f9 100%);
+  min-height: 100vh;
+}
+
+.btn-primary {
+  background: linear-gradient(to right, #4dc0b5, #38a1db);
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to right, #38a1db, #4dc0b5);
+}
+
+/* Custom styles */
+.slider-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+/* Slider styles */
+.slider {
+  display: flex;
+  transition: transform 1s ease-in-out;
+}
+
+.slider-item {
+  min-width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+/* Overlay styling */
+.overlay-elements {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  z-index: 100;
+  padding: 20px;
+}
+
+.headline {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-bar {
+  background-color: white;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-bar input {
+  width: 100%;
+}
+
+.cta-button {
+  background-color: #38a1db;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #007bb5;
+}
+
+/* Footer styles */
+footer {
+  margin-top: 0;
+}
+
+/* Hide desktop slider on mobile */
+@media (max-width: 767px) {
+  .desktop-slider {
+    display: none;
+  }
+
+  .mobile-slider {
+    display: block;
+    height: 100vh;
+    width: 100%;
+  }
+
+  .overlay-elements {
+    position: absolute;
+    bottom: 40px;
+    padding: 20px;
+    z-index: 999;
+  }
+}
+
+/* Hide mobile slider on desktop */
+@media (min-width: 768px) {
+  .mobile-slider {
+    display: none;
+  }
+}

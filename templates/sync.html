@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen p-6 bg-gradient-to-br from-[#d8e850] to-[#99e3f9]">
+  <div class="max-w-6xl mx-auto grid gap-6">
+
+    <!-- Header -->
+    <div class="backdrop-blur-md bg-white/30 p-6 rounded-2xl shadow-lg border border-white/40">
+      <h1 class="text-2xl font-bold">🔄 Data Sync Dashboard</h1>
+      <p>Monitor the sync state of internal services.</p>
+    </div>
+
+    <!-- Sync Overview -->
+    <div class="backdrop-blur-md bg-white/30 p-4 rounded-2xl border border-white/40">
+      <p class="text-sm mb-2">Last Sync Time: {{ last_sync_time }}</p>
+      <ul class="space-y-2 text-sm">
+        {% for s in sync_status %}
+        <li class="bg-white/20 p-2 rounded-xl flex justify-between">
+          <span>{{ s.service }}</span>
+          <span>{{ s.status }} ({{ s.sync_time }})</span>
+        </li>
+        {% else %}
+        <li>No sync records found.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
